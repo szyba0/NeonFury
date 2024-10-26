@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd542kr1whdom"]
+
+[ext_resource type="Texture2D" uid="uid://5ukwq0royo85" path="res://assets/bullet1.png" id="1_62ts1"]
+[ext_resource type="Script" path="res://scripts/bullet_01.gd" id="1_i0k6e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gk5q3"]
+radius = 7.0
+
+[node name="Bullet01" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_i0k6e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_62ts1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gk5q3")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_gk5q3")
+
+[node name="Life" type="Timer" parent="."]
+wait_time = 1.02
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Life" to="." method="_on_life_timeout"]
