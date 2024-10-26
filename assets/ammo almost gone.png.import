@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ca8rr0xtr4uuw"
-path="res://.godot/imported/player.png-be2216fcaabb5c62aa2466cd9a5726a8.ctex"
+uid="uid://d3wgvxfwmrcj3"
+path="res://.godot/imported/ammo almost gone.png-c5751215e1c84741393bacccdb6ad439.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player.png"
-dest_files=["res://.godot/imported/player.png-be2216fcaabb5c62aa2466cd9a5726a8.ctex"]
+source_file="res://assets/ammo almost gone.png"
+dest_files=["res://.godot/imported/ammo almost gone.png-c5751215e1c84741393bacccdb6ad439.ctex"]
 
 [params]
 
