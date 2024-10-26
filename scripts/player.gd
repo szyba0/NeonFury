@@ -1,12 +1,14 @@
 extends CharacterBody2D
 
 @onready var main = get_tree().get_root().get_node("Main")
-@onready var bullet = load("res://scenes/bullet_01.tscn")
-@onready var ammo_bar = $"/root/Main/AmmoBar" 
+@onready var bullet = load("res://scenes/Bullet02.tscn")
+@onready var ammo_bar = $"/root/Main/Player/CharacterBody2D/AmmoUI/Control/AmmoBar" 
 
 @export var speed = 400
 var max_ammo: int
 var current_ammo: int
+var fire_rate = 0.5  # Czas (w sekundach) między strzałami
+var can_fire = true
 
 func _ready():
 	max_ammo = ammo_bar.max_value
@@ -27,17 +29,23 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func shoot():
-	if current_ammo > 0:
-		var instance = bullet.instantiate()
-		instance.direction = rotation
-		instance.spawnPos = global_position
-		instance.spawnRot = global_rotation
-		main.add_child(instance)
+	if can_fire:
+		if current_ammo > 0:
+			can_fire = false
+			var instance = bullet.instantiate()
+			instance.direction = Vector2.RIGHT.rotated(rotation)
+			instance.position = global_position
+			#instance.spawnRot = global_rotation
+			#main.add_child(instance)
+			get_tree().current_scene.add_child(instance)
+			
+			current_ammo -= 1
+			update_ammo_bar()
+			await get_tree().create_timer(fire_rate).timeout
+			can_fire = true
+		else:
+			print("Out of ammo!")
 		
-		current_ammo -= 1
-		update_ammo_bar()
-	else:
-		print("Out of ammo!")
 
 func update_ammo_bar():
 	ammo_bar.value = current_ammo

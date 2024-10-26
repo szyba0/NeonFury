@@ -14,7 +14,7 @@ func _physics_process(delta):
 	velocity = Vector2.RIGHT.rotated(direction) * speed
 	move_and_slide()
 
-func _on_Area2D_body_entered(body: Node):
+func _on_Area2D_body_entered(body):
 	print("HIT!")
 	queue_free()
 
