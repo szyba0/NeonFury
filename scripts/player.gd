@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var speed = 400
 var max_ammo: int
 var current_ammo: int
-var fire_rate = 0.5  # Czas (w sekundach) między strzałami
+var fire_rate = 0  # Czas (w sekundach) między strzałami
 var can_fire = true
 
 func _ready():
@@ -29,23 +29,28 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func shoot():
-	if can_fire:
-		if current_ammo > 0:
-			can_fire = false
-			var instance = bullet.instantiate()
-			instance.direction = Vector2.RIGHT.rotated(rotation)
-			instance.position = global_position
-			#instance.spawnRot = global_rotation
-			#main.add_child(instance)
-			get_tree().current_scene.add_child(instance)
-			
-			current_ammo -= 1
-			update_ammo_bar()
-			await get_tree().create_timer(fire_rate).timeout
-			can_fire = true
-		else:
-			print("Out of ammo!")
+	if can_fire and current_ammo > 0:
+		can_fire = false
+		var instance = bullet.instantiate()
 		
+		# Ustawienie pocisku na pozycji gracza
+		instance.position = global_position
+		
+		# Przekazujemy pozycję kursora jako cel dla pocisku
+		instance.target_position = get_global_mouse_position()
+		
+		get_tree().current_scene.add_child(instance)
+
+		# Zmniejsz amunicję i zaktualizuj pasek
+		current_ammo -= 1
+		update_ammo_bar()
+		
+		# Oczekiwanie przed kolejnym strzałem
+		await get_tree().create_timer(fire_rate).timeout
+		can_fire = true
+	elif current_ammo <= 0:
+		print("Out of ammo!")
+
 
 func update_ammo_bar():
 	ammo_bar.value = current_ammo

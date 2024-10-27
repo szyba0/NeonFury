@@ -1,12 +1,17 @@
 extends Area2D
 
 # Parametry pocisku
-var speed = 800  # Prędkość pocisku
-var direction = Vector2.ZERO  # Kierunek pocisku
+var speed = 2000  # Prędkość pocisku
+var direction  # Kierunek pocisku
 var damage = 10  # Obrażenia
+# Cel, na który pocisk będzie skierowany
+var target_position: Vector2
 
 func _ready():
-	# Timer, aby automatycznie usunąć pocisk po 3 sekundach
+	#direction = Vector2.RIGHT.rotated(rotation).normalized()
+	# Ustawienie `direction` na wektor od pocisku do celu (np. kursor)
+	direction = (target_position - global_position).normalized()
+	# Timer, aby automatycznie usunąć pocisk po 5 sekundach
 	await get_tree().create_timer(5.0).timeout
 	queue_free()
 
