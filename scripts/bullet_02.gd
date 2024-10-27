@@ -1,7 +1,7 @@
 extends Area2D
 
 # Parametry pocisku
-var speed = 2000  # Prędkość pocisku
+var speed = 100  # Prędkość pocisku
 var direction  # Kierunek pocisku
 var damage = 10  # Obrażenia
 # Cel, na który pocisk będzie skierowany

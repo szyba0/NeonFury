@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://6d7wahx3n4ke"]
+[gd_scene load_steps=7 format=3 uid="uid://6d7wahx3n4ke"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_jnw0g"]
 [ext_resource type="Texture2D" uid="uid://ca8rr0xtr4uuw" path="res://assets/player.png" id="1_xauq6"]
+[ext_resource type="PackedScene" uid="uid://c1yktssoili7n" path="res://scenes/ghost.tscn" id="2_j4vfa"]
 [ext_resource type="Texture2D" uid="uid://c3txe4tam8f76" path="res://assets/ammo gone.png" id="3_no6hc"]
 [ext_resource type="Texture2D" uid="uid://8oc6prr1kyio" path="res://assets/ammo full.png" id="4_7hdbh"]
 
@@ -14,6 +15,7 @@ size = Vector2(16, 30)
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_jnw0g")
+ghost_node = ExtResource("2_j4vfa")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 rotation = 1.5708
@@ -51,3 +53,8 @@ max_value = 30.0
 value = 2.0
 texture_under = ExtResource("3_no6hc")
 texture_progress = ExtResource("4_7hdbh")
+
+[node name="GhostTimer" type="Timer" parent="CharacterBody2D"]
+wait_time = 0.05
+
+[connection signal="timeout" from="CharacterBody2D/GhostTimer" to="CharacterBody2D" method="_on_ghost_timer_timeout"]
