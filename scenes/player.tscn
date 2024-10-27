@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://6d7wahx3n4ke"]
+[gd_scene load_steps=6 format=3 uid="uid://6d7wahx3n4ke"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_jnw0g"]
 [ext_resource type="Texture2D" uid="uid://ca8rr0xtr4uuw" path="res://assets/player.png" id="1_xauq6"]
+[ext_resource type="Texture2D" uid="uid://c3txe4tam8f76" path="res://assets/ammo gone.png" id="3_no6hc"]
+[ext_resource type="Texture2D" uid="uid://8oc6prr1kyio" path="res://assets/ammo full.png" id="4_7hdbh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w538h"]
 size = Vector2(16, 30)
@@ -22,3 +24,29 @@ position = Vector2(-2, 0)
 shape = SubResource("RectangleShape2D_w538h")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+
+[node name="AmmoUI" type="CanvasLayer" parent="CharacterBody2D"]
+
+[node name="Control" type="Control" parent="CharacterBody2D/AmmoUI"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="AmmoBar" type="TextureProgressBar" parent="CharacterBody2D/AmmoUI/Control"]
+z_index = 100
+layout_direction = 2
+offset_right = 40.0
+offset_bottom = 32.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+max_value = 30.0
+value = 2.0
+texture_under = ExtResource("3_no6hc")
+texture_progress = ExtResource("4_7hdbh")
