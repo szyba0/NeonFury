@@ -80,7 +80,10 @@ func drop_weapon():
 	# Wczytaj scenę broni i stwórz jej instancję
 	var weapon_scene = load(weapon_scene_path)
 	var dropped_weapon = weapon_scene.instantiate()
-	dropped_weapon.position = global_position + Vector2(16, 16)  # Ustawienie pozycji obok gracza
+	# Ustaw pozycję broni na niewielką odległość przed graczem
+	var drop_offset = Vector2(10, 0).rotated(rotation)  # Przesunięcie 10 pikseli przed graczem
+	dropped_weapon.position = global_position + drop_offset
+	dropped_weapon.rotation = rotation  # Ustawienie rotacji zgodnej z rotacją gracza
 	dropped_weapon.weapon_type = current_weapon_data["type"]
 	dropped_weapon.damage = current_weapon_data["damage"]
 	dropped_weapon.ammo = current_weapon_data["ammo"]
