@@ -1,19 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://6d7wahx3n4ke"]
+[gd_scene load_steps=7 format=3 uid="uid://6d7wahx3n4ke"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_jnw0g"]
 [ext_resource type="Texture2D" uid="uid://ca8rr0xtr4uuw" path="res://assets/player.png" id="1_xauq6"]
 [ext_resource type="Texture2D" uid="uid://c3txe4tam8f76" path="res://assets/ammo gone.png" id="3_no6hc"]
+[ext_resource type="Texture2D" uid="uid://c52htd73vi8f8" path="res://assets/player_with_weapons/player_with_m16.png" id="3_tcffu"]
 [ext_resource type="Texture2D" uid="uid://8oc6prr1kyio" path="res://assets/ammo full.png" id="4_7hdbh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w538h"]
 size = Vector2(16, 30)
 
 [node name="Player" type="Node2D"]
+z_index = 1
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_layer = 2
-collision_mask = 5
+collision_mask = 21
 script = ExtResource("1_jnw0g")
+sprite_no_weapon = ExtResource("1_xauq6")
+sprite_rifle = ExtResource("3_tcffu")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 rotation = 1.5708
