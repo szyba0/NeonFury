@@ -85,6 +85,7 @@ position = Vector2(53, -33)
 
 [node name="Rifle2" parent="." instance=ExtResource("4_35ltv")]
 position = Vector2(-171, 97)
+damage = 5
 
 [node name="Puddle" parent="." instance=ExtResource("5_8lxwv")]
 position = Vector2(96, 102)
