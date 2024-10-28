@@ -77,7 +77,6 @@ func add_ghost():
 	get_tree().current_scene.add_child(ghost)
 
 func _on_ghost_timer_timeout() -> void:
-	print("added ghost")
 	add_ghost()
 
 func dash():
@@ -89,7 +88,6 @@ func dash():
 		ghost_timer.start()
 		dash_timer.start()
 		dash_cooldown.start()
-		set_process_input(false)
 	
 
 
@@ -97,7 +95,6 @@ func _on_dash_timer_timeout() -> void:
 	velocity = velocity/1.2
 	collision_mask = 5
 	dashing = false
-	set_process_input(true)
 	ghost_timer.stop()
 
 
