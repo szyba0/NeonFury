@@ -6,6 +6,8 @@ extends CharacterBody2D
 
 @export var ghost_node: PackedScene
 @onready var ghost_timer = $GhostTimer
+@onready var dash_timer = $DashTimer
+@onready var dash_cooldown = $DashCooldown
 
 @export var speed = 400
 var max_ammo: int
@@ -13,8 +15,8 @@ var current_ammo: int
 var fire_rate = 0  # Czas (w sekundach) między strzałami
 var can_fire = true
 
-var dash_speed = 500
 var dashing = false
+var can_dash = true
 
 
 
@@ -24,11 +26,13 @@ func _ready():
 	update_ammo_bar()
 
 func read_input():
-	var input_direction = Input.get_vector("Left", "Right", "Up", "Down")
-	velocity = input_direction * speed
-	look_at(get_global_mouse_position())
+	if not dashing:
+		var input_direction = Input.get_vector("Left", "Right", "Up", "Down")
+		velocity = input_direction * speed
+		look_at(get_global_mouse_position())
 
 func _input(_event):
+	
 	if Input.is_action_just_pressed("LMB"): 
 		shoot()
 	if Input.is_action_just_pressed("SPACE"):
@@ -73,13 +77,29 @@ func add_ghost():
 	get_tree().current_scene.add_child(ghost)
 
 func _on_ghost_timer_timeout() -> void:
+	print("added ghost")
 	add_ghost()
 
 func dash():
-	ghost_timer.start()
+	if not dashing and can_dash:
+		velocity = velocity*1.2
+		dashing = true
+		can_dash = false
+		collision_mask = 1
+		ghost_timer.start()
+		dash_timer.start()
+		dash_cooldown.start()
+		set_process_input(false)
 	
-	var tween = get_tree().create_tween()
-	tween.tween_property(self,"position", position+velocity*0.4, 0.25)
-	
-	await tween.finished
+
+
+func _on_dash_timer_timeout() -> void:
+	velocity = velocity/1.2
+	collision_mask = 5
+	dashing = false
+	set_process_input(true)
 	ghost_timer.stop()
+
+
+func _on_dash_cooldown_timeout() -> void:
+	can_dash = true

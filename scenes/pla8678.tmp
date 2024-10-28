@@ -16,6 +16,7 @@ collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_jnw0g")
 ghost_node = ExtResource("2_j4vfa")
+speed = null
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 rotation = 1.5708
@@ -56,13 +57,6 @@ texture_progress = ExtResource("4_7hdbh")
 
 [node name="GhostTimer" type="Timer" parent="CharacterBody2D"]
 wait_time = 0.05
-
-[node name="DashTimer" type="Timer" parent="CharacterBody2D"]
-wait_time = 0.4
-
-[node name="DashCooldown" type="Timer" parent="CharacterBody2D"]
-wait_time = 2.0
+autostart = true
 
 [connection signal="timeout" from="CharacterBody2D/GhostTimer" to="CharacterBody2D" method="_on_ghost_timer_timeout"]
-[connection signal="timeout" from="CharacterBody2D/DashTimer" to="CharacterBody2D" method="_on_dash_timer_timeout"]
-[connection signal="timeout" from="CharacterBody2D/DashCooldown" to="CharacterBody2D" method="_on_dash_cooldown_timeout"]
