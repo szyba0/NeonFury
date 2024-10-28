@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://6d7wahx3n4ke"]
+[gd_scene load_steps=8 format=3 uid="uid://6d7wahx3n4ke"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_jnw0g"]
 [ext_resource type="Texture2D" uid="uid://ca8rr0xtr4uuw" path="res://assets/player.png" id="1_xauq6"]
 [ext_resource type="Texture2D" uid="uid://c3txe4tam8f76" path="res://assets/ammo gone.png" id="3_no6hc"]
 [ext_resource type="Texture2D" uid="uid://c52htd73vi8f8" path="res://assets/player_with_weapons/player_with_m16.png" id="3_tcffu"]
 [ext_resource type="Texture2D" uid="uid://8oc6prr1kyio" path="res://assets/ammo full.png" id="4_7hdbh"]
+[ext_resource type="Texture2D" uid="uid://bfsvfeeaxf21d" path="res://assets/player_dead_32x64.png" id="4_8f7s1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w538h"]
 size = Vector2(16, 30)
@@ -18,6 +19,7 @@ collision_mask = 21
 script = ExtResource("1_jnw0g")
 sprite_no_weapon = ExtResource("1_xauq6")
 sprite_rifle = ExtResource("3_tcffu")
+death_sprite = ExtResource("4_8f7s1")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 rotation = 1.5708
@@ -55,3 +57,23 @@ max_value = 30.0
 value = 2.0
 texture_under = ExtResource("3_no6hc")
 texture_progress = ExtResource("4_7hdbh")
+
+[node name="DeathUI" type="CanvasLayer" parent="CharacterBody2D"]
+
+[node name="DeathLabel" type="Label" parent="CharacterBody2D/DeathUI"]
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DeathOverlay" type="ColorRect" parent="CharacterBody2D/DeathUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0.313726)

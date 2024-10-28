@@ -8,6 +8,14 @@ extends CharacterBody2D
 @export var speed = 400
 @export var sprite_no_weapon: Texture  # Sprite gracza bez broni
 @export var sprite_rifle: Texture      # Sprite gracza z karabinem
+@export var death_text: String = "Umarłeś, wciśnij R żeby zrestartować poziom"
+@export var reset_hold_time: float = 1.0  # Czas przytrzymania `R` w sekundach, aby zresetować poziom podczas gry
+@export var death_sprite: Texture  # Tekstura używana po śmierci gracza
+
+var is_dead = false
+@onready var death_label = $DeathUI/DeathLabel
+@onready var death_overlay = $DeathUI/DeathOverlay
+var reset_hold_timer = 0.0  # Zmienna do śledzenia czasu przytrzymania `R`
 #var max_ammo: int
 #var current_ammo: int
 #var fire_rate = 0  # Czas (w sekundach) między strzałami
@@ -22,6 +30,8 @@ func _ready():
 	#max_ammo = ammo_bar.max_value
 	#current_ammo = max_ammo
 	update_ammo_bar()
+	death_label.visible = false  # Ukryj DeathLabel na początku
+	death_overlay.visible = false  # Ukryj czerwony overlay na początku
 
 func read_input():
 	var input_direction = Input.get_vector("Left", "Right", "Up", "Down")
@@ -35,15 +45,15 @@ func _input(_event):
 		pickup_weapon(near_weapon)
 
 func _physics_process(_delta):
+	if is_dead:
+		return  # Jeśli gracz jest martwy, nie aktualizujemy fizyki
 	read_input()
 	move_and_slide()
 
 func pickup_weapon(weapon):
 	if has_weapon:
 		drop_weapon()  # Upuszczenie obecnej broni, jeśli gracz już ją posiada
-		# Oczekiwanie przed przypisaniem nowej broni do sprite’a gracza
-		await get_tree().create_timer(0.2).timeout  # Czas opóźnienia, np. 0.2 sekundy
-
+		
 	# Zapisujemy dane nowej broni
 	current_weapon_data = {
 		"type": weapon.weapon_type,
@@ -52,17 +62,17 @@ func pickup_weapon(weapon):
 		"fire_rate": weapon.fire_rate
 	}
 	has_weapon = true
-	
+	var weapon_name = weapon.weapon_type
+	# Wywołanie funkcji usunięcia broni z ziemi
+	weapon.on_pickup()
+	# Oczekiwanie przed przypisaniem nowej broni do sprite’a gracza
+	await get_tree().create_timer(0.2).timeout  # Czas opóźnienia, np. 0.2 sekundy
 	# Ustawiamy sprite gracza na podstawie podniesionej broni
-	match weapon.weapon_type:
+	match weapon_name:
 		"Rifle":
 			$Sprite2D.texture = sprite_rifle
 		_:
 			$Sprite2D.texture = sprite_no_weapon  # Domyślny sprite bez broni
-	
-	# Wywołanie funkcji usunięcia broni z ziemi
-	weapon.on_pickup()
-	
 	print("Picked up:", current_weapon_data["type"])
 	update_ammo_bar()
 
@@ -127,6 +137,41 @@ func shoot():
 	elif current_weapon_data["ammo"] <= 0:
 		print("Out of ammo!")
 
+# Funkcja wywoływana przy śmierci gracza
+func die():
+	if is_dead:
+		return  # Jeśli gracz już jest martwy, nic nie rób
+	is_dead = true
+	velocity = Vector2.ZERO  # Zatrzymujemy ruch gracza
+	# Zmieniamy sprite gracza na sprite śmierci
+	if death_sprite:
+		$Sprite2D.texture = death_sprite
+	death_label.text = death_text
+	death_label.visible = true  # Wyświetlamy ekran śmierci
+	death_overlay.visible = true  # Wyświetlamy czerwony overlay
+
+# Funkcja do sprawdzenia przytrzymania `R` oraz resetu po śmierci
+func _process(delta):
+	if is_dead:
+		# Po śmierci naciśnięcie `R` od razu resetuje poziom
+		if Input.is_action_just_pressed("Restart"):
+			restart_level()
+	else:
+		# Jeśli gracz żyje, przytrzymanie `R` przez `reset_hold_time` zresetuje poziom
+		reset_level_if_held(delta)
+
+# Funkcja do sprawdzenia, czy `R` jest przytrzymane odpowiednio długo
+func reset_level_if_held(delta):
+	if Input.is_action_pressed("Restart"):
+		reset_hold_timer += delta
+		if reset_hold_timer >= reset_hold_time:
+			restart_level()
+	else:
+		reset_hold_timer = 0.0  # Zresetuj licznik, jeśli `R` nie jest przytrzymane
+
+# Restart poziomu
+func restart_level():
+	get_tree().reload_current_scene()  # Przeładowanie bieżącej sceny
 
 func update_ammo_bar():
 	if has_weapon:

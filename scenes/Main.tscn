@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://b6ry3qq48yoa1"]
+[gd_scene load_steps=8 format=4 uid="uid://b6ry3qq48yoa1"]
 
 [ext_resource type="Texture2D" uid="uid://ct4dynggrfjgt" path="res://assets/tileset.png" id="1_ojotl"]
 [ext_resource type="PackedScene" uid="uid://6d7wahx3n4ke" path="res://scenes/player.tscn" id="2_ss88j"]
 [ext_resource type="PackedScene" uid="uid://bf6hk33cyqqae" path="res://scenes/Enemy01.tscn" id="3_42f6k"]
 [ext_resource type="PackedScene" uid="uid://c48emkv6c0n7t" path="res://scenes/Rifle.tscn" id="4_35ltv"]
+[ext_resource type="PackedScene" uid="uid://bjnj576bra2gh" path="res://scenes/Puddle.tscn" id="5_8lxwv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h5341"]
 texture = ExtResource("1_ojotl")
@@ -84,3 +85,6 @@ position = Vector2(53, -33)
 
 [node name="Rifle2" parent="." instance=ExtResource("4_35ltv")]
 position = Vector2(-171, 97)
+
+[node name="Puddle" parent="." instance=ExtResource("5_8lxwv")]
+position = Vector2(96, 102)
