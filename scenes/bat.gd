@@ -10,7 +10,8 @@ func _ready() -> void:
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "hit":
-		$CollisionShape2D.disabled = true
+		print("dupcia")
+		$CollisionShape2D.set_deferred("disabled",true)
 
 func _on_melee_weapon_base_body_entered(body: Node) -> void:
 	if body.has_method("take_damage"):
@@ -18,7 +19,7 @@ func _on_melee_weapon_base_body_entered(body: Node) -> void:
 
 func hit() -> void:
 	if can_attack:
-		$CollisionShape2D.disabled = false
+		$CollisionShape2D.set_deferred("disabled",false)
 		$AnimationPlayer.play("hit")
 		can_attack = false
 		await get_tree().create_timer(fire_rate).timeout
