@@ -34,18 +34,20 @@ func take_damage(damage: int):
 # Funkcja śmierci przeciwnika
 func die():
 	is_dead = true
-	sprite_node.texture = dead_sprite  # Ustawienie sprite'a martwego przeciwnika
-	collision_shape.disabled = true    # Wyłączenie CollisionShape2D
+	sprite_node.texture = dead_sprite  # Ustawienie sprite'a martwego przeciwnikaa
+	collision_shape.set_deferred("disabled",true)    # Wyłączenie CollisionShape2D
 	print("Enemy died.")
 
 # Funkcja knockdownu przeciwnika
 func knockdown():
-	sprite_node.texture = knocked_down_sprite  # Zmiana sprite'a na knockdown
+	sprite_node.texture = knocked_down_sprite
+	collision_shape.set_deferred("disabled",true)  # Zmiana sprite'a na knockdown
 	print("Enemy knocked down.")
 	knockdown_timer.start(knockdown_duration)  # Uruchomienie timera dla knockdownu
 
 # Funkcja wywoływana po zakończeniu timera (przeciwnik wstaje i zmienia się na damaged_sprite)
 func _on_KnockdownTimer_timeout():
 	if not is_dead:  # Tylko jeśli przeciwnik nie jest martwy
+		collision_shape.set_deferred("disabled",false)
 		sprite_node.texture = hurt_sprite  # Zmiana sprite'a na uszkodzony po powstaniu
 		print("Enemy stood up.")
