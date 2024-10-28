@@ -2,6 +2,7 @@ extends Area2D
 
 @onready var sprite_node = $Sprite2D
 @export var weapon_type: String = "BaseWeapon"  # Typ broni
+@export var is_melee: bool = false
 @export var damage: int = 10  # Obrażenia
 @export var ammo: int = 30  # Amunicja początkowa
 @export var fire_rate: float = 0.5  # Czas pomiędzy strzałami
@@ -9,6 +10,7 @@ extends Area2D
 
 # Funkcja wywoływana, gdy gracz podnosi broń
 func on_pickup():
+	$CollisionShape2D.disabled = true
 	queue_free()  # Usuń broń z ziemi po podniesieniu
 func _on_WeaponBase_body_entered(body):
 	# Sprawdza, czy ciało kolidujące jest `CharacterBody2D` i ma nadrzędny węzeł `Player`

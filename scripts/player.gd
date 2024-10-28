@@ -12,7 +12,7 @@ extends CharacterBody2D
 @export var speed = 400
 @export var sprite_no_weapon: Texture  # Sprite gracza bez broni
 @export var sprite_rifle: Texture      # Sprite gracza z karabinem
-@export var death_text: String = "Umarłeś, wciśnij R żeby zrestartować poziom"
+@export var death_text: String = "PRESS R TO RESTART"
 @export var reset_hold_time: float = 1.0  # Czas przytrzymania `R` w sekundach, aby zresetować poziom podczas gry
 @export var death_sprite: Texture  # Tekstura używana po śmierci gracza
 
@@ -20,7 +20,7 @@ var is_dead = false
 @onready var death_label = $DeathUI/DeathLabel
 @onready var death_overlay = $DeathUI/DeathOverlay
 var reset_hold_timer = 0.0  # Zmienna do śledzenia czasu przytrzymania `R`
-#var max_ammo: int
+#var max_ammo: ints
 #var current_ammo: int
 #var fire_rate = 0  # Czas (w sekundach) między strzałami
 var can_fire = true
@@ -31,7 +31,9 @@ var can_dash = true
 var current_weapon_data = null  # Dane aktualnej broni
 var has_weapon = false  # Czy gracz trzyma broń
 var near_weapon = null  # Broń, przy której gracz się znajduje
+var weapon_type = null
 
+var current_weapon :Node2D = null
 
 func _ready():
 	#max_ammo = ammo_bar.max_value
@@ -48,12 +50,21 @@ func read_input():
 
 func _input(_event):
 	
-	if Input.is_action_just_pressed("LMB"): 
-		shoot()
+	if Input.is_action_just_pressed("LMB") and has_weapon: 
+		if current_weapon_data["is_melee"]:
+			hit()
+		else:
+			shoot()
 	if Input.is_action_just_pressed("SPACE"):
 		dash()
+		
+	if Input.is_action_just_pressed("F"):
+		throw()
+		
 	if Input.is_action_pressed("RMB") and near_weapon:
 		pickup_weapon(near_weapon)
+	elif Input.is_action_pressed("RMB") and not near_weapon and has_weapon:
+		drop_weapon()
 
 func _physics_process(_delta):
 	if is_dead:
@@ -70,18 +81,23 @@ func pickup_weapon(weapon):
 		"type": weapon.weapon_type,
 		"damage": weapon.damage,
 		"ammo": weapon.ammo,
-		"fire_rate": weapon.fire_rate
+		"fire_rate": weapon.fire_rate,
+		"is_melee": weapon.is_melee
 	}
 	has_weapon = true
 	var weapon_name = weapon.weapon_type
+	current_weapon = weapon
 	# Wywołanie funkcji usunięcia broni z ziemi
 	weapon.on_pickup()
 	# Oczekiwanie przed przypisaniem nowej broni do sprite’a gracza
-	await get_tree().create_timer(0.2).timeout  # Czas opóźnienia, np. 0.2 sekundy
 	# Ustawiamy sprite gracza na podstawie podniesionej broni
 	match weapon_name:
 		"Rifle":
 			$Sprite2D.texture = sprite_rifle
+		"Bat":
+			$Sprite2D.texture = sprite_no_weapon
+			current_weapon = load("res://scenes/Bat.tscn").instantiate()
+			add_child(current_weapon)
 		_:
 			$Sprite2D.texture = sprite_no_weapon  # Domyślny sprite bez broni
 	print("Picked up:", current_weapon_data["type"])
@@ -95,6 +111,8 @@ func drop_weapon():
 	match current_weapon_data["type"]:
 		"Rifle":
 			weapon_scene_path = "res://scenes/Rifle.tscn"
+		"Bat":
+			weapon_scene_path = "res://scenes/Bat.tscn"
 		_:
 			weapon_scene_path = "res://scenes/WeaponBase.tscn"  # Domyślna scena, jeśli typ jest nieznany
 
@@ -109,17 +127,22 @@ func drop_weapon():
 	dropped_weapon.damage = current_weapon_data["damage"]
 	dropped_weapon.ammo = current_weapon_data["ammo"]
 	dropped_weapon.fire_rate = current_weapon_data["fire_rate"]
+	dropped_weapon.is_melee = current_weapon_data["is_melee"]
 	dropped_weapon.sprite = $Sprite2D.texture  # Przypisanie sprite’a obecnej broni
 
 	# Dodanie broni do obecnej sceny, aby pojawiła się na ziemi
+	if current_weapon_data["is_melee"]:
+		remove_child(current_weapon)
 	get_tree().current_scene.add_child(dropped_weapon)
 
 	# Zresetowanie obecnej broni w gracza
+	current_weapon = null
 	current_weapon_data = null
 	has_weapon = false
 	$Sprite2D.texture = sprite_no_weapon  # Reset na domyślny sprite bez broni
 
 	print("Broń została upuszczona:", dropped_weapon.weapon_type)
+	update_ammo_bar()
 
 func shoot():
 	# Najpierw sprawdzamy, czy gracz ma broń
@@ -148,18 +171,54 @@ func shoot():
 	elif current_weapon_data["ammo"] <= 0:
 		print("Out of ammo!")
 
+func throw():
+	# Najpierw sprawdzamy, czy gracz ma broń
+	if current_weapon_data == null:
+		print("You don't have a weapon!")
+		return  # Jeśli nie ma broni, kończymy funkcję
+	if has_weapon:
+		var instance = bullet.instantiate()
+		
+		match current_weapon_data["type"]:
+			"Rifle":
+				instance.change_sprite(preload("res://assets/m16.png"))
+			"Bat":
+				instance.change_sprite(preload("res://assets/baseball_bat.png"))
+			_:
+				pass
+		# Ustawienie pocisku na pozycji gracza
+		instance.position = global_position
+		instance.speed = 300
+		# Przekazujemy pozycję kursora jako cel dla pocisku
+		instance.target_position = get_global_mouse_position()
+		instance.damage = 5
+		if current_weapon_data["is_melee"]:
+			remove_child(current_weapon)
+		current_weapon = null
+		current_weapon_data = null
+		has_weapon = false
+		$Sprite2D.texture = sprite_no_weapon
+		get_tree().current_scene.add_child(instance)
+		update_ammo_bar()
+
+func hit():
+	current_weapon.hit()
+
 # Funkcja wywoływana przy śmierci gracza
 func die():
-	if is_dead:
-		return  # Jeśli gracz już jest martwy, nic nie rób
-	is_dead = true
-	velocity = Vector2.ZERO  # Zatrzymujemy ruch gracza
-	# Zmieniamy sprite gracza na sprite śmierci
-	if death_sprite:
-		$Sprite2D.texture = death_sprite
-	death_label.text = death_text
-	death_label.visible = true  # Wyświetlamy ekran śmierci
-	death_overlay.visible = true  # Wyświetlamy czerwony overlay
+	if dashing:
+		return
+	else:
+		if is_dead:
+			return  # Jeśli gracz już jest martwy, nic nie rób
+		is_dead = true
+		velocity = Vector2.ZERO  # Zatrzymujemy ruch gracza
+		# Zmieniamy sprite gracza na sprite śmierci
+		if death_sprite:
+			$Sprite2D.texture = death_sprite
+		death_label.text = death_text
+		death_label.visible = true  # Wyświetlamy ekran śmierci
+		death_overlay.visible = true  # Wyświetlamy czerwony overlay
 
 # Funkcja do sprawdzenia przytrzymania `R` oraz resetu po śmierci
 func _process(delta):
@@ -185,9 +244,11 @@ func restart_level():
 	get_tree().reload_current_scene()  # Przeładowanie bieżącej sceny
 
 func update_ammo_bar():
-	if has_weapon:
+	if has_weapon and not current_weapon_data["is_melee"]:
+		ammo_bar.visible = true
 		ammo_bar.value = current_weapon_data["ammo"]
 	else:
+		ammo_bar.visible = false
 		ammo_bar.value = 0
 
 
