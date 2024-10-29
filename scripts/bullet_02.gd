@@ -33,6 +33,7 @@ func _on_Bullet_body_entered(body):
 	# Sprawdź, czy obiekt ma metodę `take_damage`, aby zadać obrażenia
 	if body.has_method("take_damage"):
 		body.take_damage(damage)
+		print("hit")
 	# Usuń pocisk po kolizji
 	queue_free()
 

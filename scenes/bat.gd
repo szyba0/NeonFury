@@ -10,7 +10,6 @@ func _ready() -> void:
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "hit":
-		print("dupcia")
 		$CollisionShape2D.set_deferred("disabled",true)
 
 func _on_melee_weapon_base_body_entered(body: Node) -> void:

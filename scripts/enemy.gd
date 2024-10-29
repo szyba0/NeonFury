@@ -40,8 +40,8 @@ func die():
 
 # Funkcja knockdownu przeciwnika
 func knockdown():
-	sprite_node.texture = knocked_down_sprite
-	collision_shape.set_deferred("disabled",true)  # Zmiana sprite'a na knockdown
+	collision_shape.set_deferred("disabled",true)
+	sprite_node.texture = knocked_down_sprite # Zmiana sprite'a na knockdown
 	print("Enemy knocked down.")
 	knockdown_timer.start(knockdown_duration)  # Uruchomienie timera dla knockdownu
 
