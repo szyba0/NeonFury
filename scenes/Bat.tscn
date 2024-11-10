@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cp6631h72nexy"]
 
-[ext_resource type="PackedScene" uid="uid://bekv2botigfyg" path="res://scenes/WeaponBase.tscn" id="1_drwjw"]
+[ext_resource type="PackedScene" uid="uid://bekv2botigfyg" path="res://scenes/WeaponBase2.tscn" id="1_drwjw"]
 [ext_resource type="Script" path="res://scenes/bat.gd" id="2_lkvcx"]
 [ext_resource type="Texture2D" uid="uid://b2te3heeaf220" path="res://assets/baseball_bat.png" id="2_nj4tr"]
 

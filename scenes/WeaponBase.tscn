@@ -1,19 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://bekv2botigfyg"]
+[gd_scene load_steps=2 format=3 uid="uid://b30ao55e70h7a"]
 
-[ext_resource type="Script" path="res://scenes/weapon_base.gd" id="1_cb2mh"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_bwoio"]
-radius = 9.0
+[ext_resource type="Script" path="res://scripts/weapon_base.gd" id="1_xobto"]
 
 [node name="WeaponBase" type="Area2D"]
-collision_layer = 16
-collision_mask = 2
-script = ExtResource("1_cb2mh")
+script = ExtResource("1_xobto")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_bwoio")
 
-[connection signal="body_entered" from="." to="." method="_on_WeaponBase_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_WeaponBase_body_exited"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
+
+[node name="PickupSound" type="AudioStreamPlayer2D" parent="."]
+
+[node name="ThrowSound" type="AudioStreamPlayer2D" parent="."]
