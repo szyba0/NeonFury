@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b30ao55e70h7a"]
+[gd_scene load_steps=4 format=3 uid="uid://b30ao55e70h7a"]
 
 [ext_resource type="Script" path="res://scripts/weapon_base.gd" id="1_xobto"]
+[ext_resource type="AudioStream" uid="uid://cvhakkktm4hng" path="res://audio/PickupWeapon.wav" id="2_b1ins"]
+[ext_resource type="AudioStream" uid="uid://bvhdvjk44o377" path="res://audio/Throw.wav" id="3_nikic"]
 
 [node name="WeaponBase" type="Area2D"]
 script = ExtResource("1_xobto")
@@ -14,5 +16,7 @@ script = ExtResource("1_xobto")
 [node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
 
 [node name="PickupSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_b1ins")
 
 [node name="ThrowSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_nikic")
