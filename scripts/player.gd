@@ -191,10 +191,10 @@ func restart_level():
 func update_ammo_bar():
 	if has_weapon and current_weapon.is_ranged:
 		ammo_bar.visible = true
-		ammo_bar.value = current_weapon.current_ammo
+		ammo_bar.text = str(current_weapon.current_ammo) + " / " + str(current_weapon.max_ammo)
 	else:
 		ammo_bar.visible = false
-		ammo_bar.value = 0
+		ammo_bar.text = ""
 
 
 func add_ghost():
