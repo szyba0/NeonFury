@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 window/stretch/mode="viewport"
 window/stretch/scale=2.0
 
+[global_group]
+
+Player=""
+
 [input]
 
 Up={
