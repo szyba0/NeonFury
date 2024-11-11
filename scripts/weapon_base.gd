@@ -14,6 +14,8 @@ extends Area2D
 var can_pickup: bool = true
 var can_attack: bool = true
 
+var can_harm = false
+
 var bullet = load("res://scenes/Bullet02.tscn")
 
 @onready var attack_sound = $AttackSound
@@ -35,6 +37,8 @@ func _process(delta: float) -> void:
 	if self.get_parent().name == "Player":
 		global_position = get_parent().global_position
 		self.rotation = (get_global_mouse_position() - global_position).normalized().angle()		
+	if can_harm:
+		position = Vector2(1,1)*delta
 
 func attack():
 	attack_sound.play()
@@ -46,6 +50,12 @@ func _on_WeaponBase_body_entered(body):
 	if body is CharacterBody2D and body.get_parent().name == "Player":
 		body.near_weapon = self  # Ustawia broń jako `near_weapon` w `Player.gd`
 	print("Gracz w pobliżu broni:")
+	if can_harm and body.get_parent().name == "Enemy" and body.has_method("take_damage"):
+		if is_throwable:
+			body.take_damage(damage)
+		else:
+			body.take_damage(damage/2)
+			
 func _on_WeaponBase_body_exited(body):
 	if body is CharacterBody2D and body.get_parent().name == "Player":
 		body.near_weapon = null  # Resetuje broń, gdy gracz się oddala
@@ -56,3 +66,12 @@ func _on_tree_entered() -> void:
 		$CollisionShape2D.set_deferred("disabled",true)
 	if is_ranged and self.get_parent().name == "CharacterBody2D":
 		$Sprite2D.texture = held_weapon_sprite
+
+func launch():
+	can_harm = true
+	can_pickup = false
+	
+	await get_tree().create_timer(1.5).timeout
+	can_harm = false
+	can_pickup = true
+	pass
