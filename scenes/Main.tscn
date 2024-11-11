@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://b6ry3qq48yoa1"]
+[gd_scene load_steps=16 format=4 uid="uid://b6ry3qq48yoa1"]
 
 [ext_resource type="Texture2D" uid="uid://dtjw37syj8vug" path="res://assets/tileset4.png" id="1_h55fg"]
 [ext_resource type="Texture2D" uid="uid://cj13x64j7me4w" path="res://assets/window.png" id="2_8y13k"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://d1q1qe0o3y5di" path="res://scenes/door.tscn" id="6_yohap"]
 [ext_resource type="PackedScene" uid="uid://c6bl7s386fkip" path="res://scenes/Knife.tscn" id="7_lx0by"]
 [ext_resource type="PackedScene" uid="uid://cwe8vstcq4smo" path="res://scenes/M16.tscn" id="8_dmyfy"]
+[ext_resource type="PackedScene" uid="uid://bf6hk33cyqqae" path="res://scenes/Enemy01.tscn" id="10_1ayil"]
+[ext_resource type="PackedScene" uid="uid://bxrl0rg8fmene" path="res://scenes/Shotgun.tscn" id="11_qr1r6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tgmj6"]
 texture = ExtResource("1_h55fg")
@@ -68,3 +70,9 @@ position = Vector2(72, -46)
 
 [node name="Door" parent="." instance=ExtResource("6_yohap")]
 position = Vector2(4, -136)
+
+[node name="Enemy01" parent="." instance=ExtResource("10_1ayil")]
+position = Vector2(150, -146)
+
+[node name="Shotgun" parent="." instance=ExtResource("11_qr1r6")]
+position = Vector2(176, -72)
