@@ -4,6 +4,8 @@ extends CharacterBody2D
 @onready var bullet = load("res://scenes/Bullet02.tscn")
 @onready var ammo_bar = $"/root/Main/Player/CharacterBody2D/AmmoUI/Control/AmmoBar" 
 
+var paused
+
 @export var ghost_node: PackedScene
 @onready var ghost_timer = $GhostTimer
 @onready var dash_timer = $DashTimer
@@ -64,6 +66,13 @@ func _input(_event):
 	elif Input.is_action_pressed("RMB") and not near_weapon and has_weapon:
 		#throw_weapon(current_weapon)
 		pass
+		
+	if Input.is_action_just_pressed("PAUSE"):
+		get_viewport().set_input_as_handled()
+		if(!get_tree().paused):
+			paused = true
+			$"/root/Main/Player/PauseNode/PauseMenu/Control".show()
+			get_tree().paused = true
 
 func _physics_process(_delta):
 	if is_dead:
@@ -243,14 +252,14 @@ func die():
 		death_overlay.visible = true  # Wyświetlamy czerwony overlay
 
 # Funkcja do sprawdzenia przytrzymania `R` oraz resetu po śmierci
-func _process(delta):
+func _process(_delta):
 	if is_dead:
 		# Po śmierci naciśnięcie `R` od razu resetuje poziom
 		if Input.is_action_just_pressed("Restart"):
 			restart_level()
 	else:
 		# Jeśli gracz żyje, przytrzymanie `R` przez `reset_hold_time` zresetuje poziom
-		reset_level_if_held(delta)
+		reset_level_if_held(_delta)
 
 # Funkcja do sprawdzenia, czy `R` jest przytrzymane odpowiednio długo
 func reset_level_if_held(delta):
@@ -277,7 +286,7 @@ func update_ammo_bar():
 func add_ghost():
 	var ghost = ghost_node.instantiate()
 	
-	ghost.set_property(position, $Sprite2D.scale, $".".rotation)
+	ghost.set_property(global_position, $Sprite2D.scale, $".".rotation)
 	ghost.look_at(get_global_mouse_position().rotated(PI/2))
 	get_tree().current_scene.add_child(ghost)
 
