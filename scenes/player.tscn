@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://6d7wahx3n4ke"]
+[gd_scene load_steps=14 format=3 uid="uid://6d7wahx3n4ke"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_jnw0g"]
 [ext_resource type="Texture2D" uid="uid://ca8rr0xtr4uuw" path="res://assets/player/player.png" id="1_xauq6"]
@@ -9,11 +9,15 @@
 [ext_resource type="Texture2D" uid="uid://rae7p16dvmpy" path="res://assets/player/2h_player.png" id="4_t0mj1"]
 [ext_resource type="Texture2D" uid="uid://bfoqe8ycg7bdu" path="res://assets/player/1h_player.png" id="5_8trr3"]
 [ext_resource type="FontFile" uid="uid://bgdi76ycjyl4q" path="res://assets/GlitchGoblin-2O87v.ttf" id="8_451qe"]
+[ext_resource type="Script" path="res://scenes/Pause.gd" id="10_5pasa"]
+[ext_resource type="PackedScene" uid="uid://05nfevs3nst" path="res://scenes/pause_menu.tscn" id="10_py4w4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w538h"]
 size = Vector2(16, 30)
 
-[node name="Player" type="Node2D" groups=["Player"]]
+[sub_resource type="GDScript" id="GDScript_npi3m"]
+
+[node name="Player" type="Node2D"]
 z_index = 1
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
@@ -98,6 +102,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0, 0, 0.313726)
+
+[node name="PauseNode" type="Node" parent="."]
+process_mode = 2
+script = ExtResource("10_5pasa")
+
+[node name="PauseMenu" type="CanvasLayer" parent="PauseNode"]
+process_mode = 2
+
+[node name="Control" parent="PauseNode/PauseMenu" instance=ExtResource("10_py4w4")]
+process_mode = 0
+script = SubResource("GDScript_npi3m")
 
 [connection signal="timeout" from="CharacterBody2D/GhostTimer" to="CharacterBody2D" method="_on_ghost_timer_timeout"]
 [connection signal="timeout" from="CharacterBody2D/DashTimer" to="CharacterBody2D" method="_on_dash_timer_timeout"]
