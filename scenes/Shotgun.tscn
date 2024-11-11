@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxrl0rg8fmene"]
+
+[ext_resource type="PackedScene" uid="uid://b30ao55e70h7a" path="res://scenes/WeaponBase.tscn" id="1_0q14c"]
+[ext_resource type="Script" path="res://scenes/shotgun.gd" id="2_mswce"]
+[ext_resource type="Texture2D" uid="uid://idrjwrvltfrx" path="res://assets/weapons/shotgun.png" id="3_2yqlq"]
+[ext_resource type="Texture2D" uid="uid://dx3id4cc7d7t8" path="res://assets/weapons/shotgun_held.png" id="4_c0lqa"]
+[ext_resource type="AudioStream" uid="uid://bfpjbyr5oqu22" path="res://assets/audio/Shotgun.wav" id="5_ugif2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iak5n"]
+radius = 19.0
+
+[node name="Shotgun" instance=ExtResource("1_0q14c")]
+collision_layer = 9
+script = ExtResource("2_mswce")
+is_ranged = true
+damage = 10
+current_ammo = 6
+max_ammo = 6
+fire_rate = 1.5
+weapon_sprite = ExtResource("3_2yqlq")
+held_weapon_sprite = ExtResource("4_c0lqa")
+scene_path = "res://scenes/Shotgun.tscn"
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(4, -1)
+rotation = 1.5708
+texture = ExtResource("3_2yqlq")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(4, 0)
+shape = SubResource("CircleShape2D_iak5n")
+
+[node name="AttackSound" parent="." index="3"]
+stream = ExtResource("5_ugif2")
+
+[node name="RayCast2D" parent="." index="6"]
+position = Vector2(4, 0)
+target_position = Vector2(0, 19)

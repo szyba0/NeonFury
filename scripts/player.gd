@@ -113,41 +113,12 @@ func throw_weapon(weapon):
 	get_tree().current_scene.add_child(dropped_weapon)
 	dropped_weapon.launch()
 	$Sprite2D.texture = sprite_no_weapon  # Reset na domyślny sprite bez broni
-
+	dropped_weapon.throw_sound.play()
 	current_weapon = null
 	has_weapon = false
 	print("Broń została upuszczona:", dropped_weapon.get_parent().name)
 	update_ammo_bar()
 	
-func throw():
-	# Najpierw sprawdzamy, czy gracz ma broń
-	if current_weapon_data == null:
-		print("You don't have a weapon!")
-		return  # Jeśli nie ma broni, kończymy funkcję
-	if has_weapon:
-		var instance = bullet.instantiate()
-		
-		match current_weapon_data["type"]:
-			"Rifle":
-				instance.change_sprite(preload("res://assets/weapons/m16.png"))
-			"Bat":
-				instance.change_sprite(preload("res://assets/weapons/baseball_bat.png"))
-			_:
-				pass
-		# Ustawienie pocisku na pozycji gracza
-		instance.position = global_position
-		instance.speed = 300
-		# Przekazujemy pozycję kursora jako cel dla pocisku
-		instance.target_position = get_global_mouse_position()
-		instance.damage = 5
-	#	if current_weapon_data["is_melee"]:
-	#		remove_child(current_weapon)
-		current_weapon = null
-		current_weapon_data = null
-		has_weapon = false
-		$Sprite2D.texture = sprite_no_weapon
-		get_tree().current_scene.add_child(instance)
-		update_ammo_bar()
 
 # Funkcja wywoływana przy śmierci gracza
 func die():
@@ -191,6 +162,7 @@ func restart_level():
 func update_ammo_bar():
 	if has_weapon and current_weapon.is_ranged:
 		ammo_bar.visible = true
+		ammo_bar.max_value = current_weapon.max_ammo
 		ammo_bar.value = current_weapon.current_ammo
 	else:
 		ammo_bar.visible = false
