@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6bl7s386fkip"]
+
+[ext_resource type="PackedScene" uid="uid://b30ao55e70h7a" path="res://scenes/WeaponBase.tscn" id="1_tngw6"]
+[ext_resource type="Texture2D" uid="uid://tatwswv8q7ll" path="res://assets/weapons/knife.png" id="2_5whmd"]
+[ext_resource type="Script" path="res://scripts/knife.gd" id="2_s4fi8"]
+[ext_resource type="AudioStream" uid="uid://cec110j6tifte" path="res://assets/audio/Cut1.wav" id="4_vu4j3"]
+[ext_resource type="AudioStream" uid="uid://d2smh3viaaiq1" path="res://assets/audio/DrawKnife.wav" id="5_cwsp1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xpm8g"]
+radius = 7.0
+
+[node name="Knife" instance=ExtResource("1_tngw6")]
+collision_layer = 9
+collision_mask = 6
+script = ExtResource("2_s4fi8")
+is_melee = true
+is_throwable = true
+is_one_handed = true
+damage = 10
+current_ammo = -1
+max_ammo = -1
+fire_rate = 0.3
+weapon_sprite = ExtResource("2_5whmd")
+held_weapon_sprite = ExtResource("2_5whmd")
+scene_path = "res://scenes/Knife.tscn"
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(15, 8)
+rotation = 0.785398
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_5whmd")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(13, 9)
+shape = SubResource("CircleShape2D_xpm8g")
+
+[node name="AttackSound" parent="." index="3"]
+stream = ExtResource("4_vu4j3")
+
+[node name="PickupSound" parent="." index="4"]
+stream = ExtResource("5_cwsp1")

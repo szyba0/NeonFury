@@ -10,6 +10,9 @@ extends Area2D
 @export var weapon_sprite: Texture  # Sprite broni
 @export var held_weapon_sprite: Texture  # Sprite trzymanej broni
 @export var sound_range: float  # Zasięg dźwięku broni
+@export var scene_path : String
+var can_pickup: bool = true
+var can_fire: bool = true
 
 @onready var attack_sound = $AttackSound
 @onready var pickup_sound = $PickupSound
@@ -21,6 +24,9 @@ signal sound_emitted(position: Vector2, range: float)
 func _ready() -> void:
 	pass # Replace with function body.
 
+func on_pickup():
+	$CollisionShape2D.disabled = true
+	queue_free()  # Usuń broń z ziemi po podniesieniu
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

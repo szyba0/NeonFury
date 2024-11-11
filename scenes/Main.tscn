@@ -1,11 +1,12 @@
-[gd_scene load_steps=9 format=4 uid="uid://b6ry3qq48yoa1"]
+[gd_scene load_steps=10 format=4 uid="uid://b6ry3qq48yoa1"]
 
 [ext_resource type="Texture2D" uid="uid://ct4dynggrfjgt" path="res://assets/tileset.png" id="1_ojotl"]
 [ext_resource type="PackedScene" uid="uid://6d7wahx3n4ke" path="res://scenes/player.tscn" id="2_ss88j"]
 [ext_resource type="PackedScene" uid="uid://bf6hk33cyqqae" path="res://scenes/Enemy01.tscn" id="3_42f6k"]
 [ext_resource type="PackedScene" uid="uid://bdb78gi61nbqp" path="res://scenes/Rifle.tscn" id="4_35ltv"]
 [ext_resource type="PackedScene" uid="uid://buljrpyvy6h3n" path="res://scenes/Puddle.tscn" id="5_8lxwv"]
-[ext_resource type="PackedScene" uid="uid://cp6631h72nexy" path="res://scenes/Bat2.tscn" id="6_g3qlt"]
+[ext_resource type="PackedScene" uid="uid://bvt8l0cq5dr1v" path="res://scenes/Bat.tscn" id="6_ps6lb"]
+[ext_resource type="PackedScene" uid="uid://c6bl7s386fkip" path="res://scenes/Knife.tscn" id="7_lx0by"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h5341"]
 texture = ExtResource("1_ojotl")
@@ -91,4 +92,7 @@ damage = 5
 [node name="Puddle" parent="." instance=ExtResource("5_8lxwv")]
 position = Vector2(96, 102)
 
-[node name="Bat" parent="." instance=ExtResource("6_g3qlt")]
+[node name="Bat" parent="." instance=ExtResource("6_ps6lb")]
+
+[node name="Knife" parent="." instance=ExtResource("7_lx0by")]
+position = Vector2(-114, -21)
