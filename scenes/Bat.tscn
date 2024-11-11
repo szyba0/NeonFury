@@ -10,7 +10,6 @@ radius = 13.0
 
 [node name="Bat" instance=ExtResource("1_inbj1")]
 collision_layer = 9
-collision_mask = 6
 script = ExtResource("2_lkvcx")
 is_melee = true
 damage = 10
@@ -33,3 +32,7 @@ shape = SubResource("CircleShape2D_5bnwa")
 
 [node name="AttackSound" parent="." index="3"]
 stream = ExtResource("4_07fwn")
+
+[node name="RayCast2D" parent="." index="6"]
+position = Vector2(6, 17)
+target_position = Vector2(13, 0)

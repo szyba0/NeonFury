@@ -11,7 +11,6 @@ radius = 7.0
 
 [node name="Knife" instance=ExtResource("1_tngw6")]
 collision_layer = 9
-collision_mask = 6
 script = ExtResource("2_s4fi8")
 is_melee = true
 is_throwable = true
@@ -39,3 +38,7 @@ stream = ExtResource("4_vu4j3")
 
 [node name="PickupSound" parent="." index="4"]
 stream = ExtResource("5_cwsp1")
+
+[node name="RayCast2D" parent="." index="6"]
+position = Vector2(13, 9)
+target_position = Vector2(0, 7)

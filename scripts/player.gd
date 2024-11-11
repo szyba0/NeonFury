@@ -23,6 +23,8 @@ var is_dead = false
 @onready var death_label = $DeathUI/DeathLabel
 @onready var death_overlay = $DeathUI/DeathOverlay
 var reset_hold_timer = 0.0  # Zmienna do śledzenia czasu przytrzymania `R`
+
+var bullet_collision_position
 #var max_ammo: ints
 #var current_ammo: int
 #var fire_rate = 0  # Czas (w sekundach) między strzałami
@@ -46,25 +48,26 @@ func _ready():
 	death_overlay.visible = false  # Ukryj czerwony overlay na początku
 
 func read_input():
-	if not dashing:
+	if not dashing and not is_dead:
 		var input_direction = Input.get_vector("Left", "Right", "Up", "Down")
 		velocity = input_direction * speed
 		look_at(get_global_mouse_position())
 
 func _input(_event):
-	
-	if Input.is_action_just_pressed("LMB") and has_weapon: 
+	if is_dead:
+		return  
+	if Input.is_action_pressed("LMB") and has_weapon: 
 		current_weapon.attack()
 		update_ammo_bar()
 	if Input.is_action_just_pressed("SPACE"):
 		dash()
 		
-	if Input.is_action_pressed("RMB") and near_weapon and not has_weapon and near_weapon.can_pickup:
+	if Input.is_action_just_pressed("RMB") and near_weapon and not has_weapon and near_weapon.can_pickup:
 		pickup_weapon(near_weapon)
-	elif Input.is_action_pressed("RMB") and near_weapon and has_weapon and near_weapon.can_pickup:
+	elif Input.is_action_just_pressed("RMB") and near_weapon and has_weapon and near_weapon.can_pickup:
 		throw_weapon(current_weapon)
 		pickup_weapon(near_weapon)
-	elif Input.is_action_pressed("RMB") and not near_weapon and has_weapon:
+	elif Input.is_action_just_pressed("RMB") and not near_weapon and has_weapon:
 		throw_weapon(current_weapon)
 
 	if Input.is_action_just_pressed("PAUSE"):
@@ -102,21 +105,18 @@ func pickup_weapon(weapon):
 func throw_weapon(weapon):
 	# Wczytaj scenę broni i stwórz jej instancję
 	var dropped_weapon = load(weapon.scene_path).instantiate()
-	dropped_weapon.launch()
-	var drop_offset = Vector2(10, 0).rotated(rotation)  # Przesunięcie 10 pikseli przed graczem
-	dropped_weapon.position = global_position + drop_offset
-
 	dropped_weapon.rotation = rotation  # Ustawienie rotacji zgodnej z rotacją gracza
 	dropped_weapon.current_ammo = weapon.current_ammo
-
 	remove_child(weapon)
+	dropped_weapon.position = global_position
+	dropped_weapon.target_position = get_global_mouse_position()
 	get_tree().current_scene.add_child(dropped_weapon)
-	# Zresetowanie obecnej broni w gracza
+	dropped_weapon.launch()
+	$Sprite2D.texture = sprite_no_weapon  # Reset na domyślny sprite bez broni
+
 	current_weapon = null
 	has_weapon = false
-	$Sprite2D.texture = sprite_no_weapon  # Reset na domyślny sprite bez broni
 	print("Broń została upuszczona:", dropped_weapon.get_parent().name)
-	
 	update_ammo_bar()
 	
 func throw():
@@ -229,3 +229,8 @@ func _on_dash_timer_timeout() -> void:
 func _on_dash_cooldown_timeout() -> void:
 	can_dash = true
 	
+
+
+func _on_collision_detector(position: Variant) -> void:
+	print("signal received")
+	bullet_collision_position = position
