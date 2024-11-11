@@ -38,7 +38,8 @@ func _process(delta: float) -> void:
 		global_position = get_parent().global_position
 		self.rotation = (get_global_mouse_position() - global_position).normalized().angle()		
 	if can_harm:
-		position = Vector2(1,1)*delta
+		position+=Vector2(1,0).rotated(45)*400*delta
+		
 
 func attack():
 	attack_sound.play()
@@ -74,4 +75,3 @@ func launch():
 	await get_tree().create_timer(1.5).timeout
 	can_harm = false
 	can_pickup = true
-	pass

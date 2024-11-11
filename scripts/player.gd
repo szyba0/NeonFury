@@ -93,7 +93,7 @@ func pickup_weapon(weapon):
 func throw_weapon(weapon):
 	# Wczytaj scenę broni i stwórz jej instancję
 	var dropped_weapon = load(weapon.scene_path).instantiate()
-	dropped_weapon.launch()
+	
 	var drop_offset = Vector2(10, 0).rotated(rotation)  # Przesunięcie 10 pikseli przed graczem
 	dropped_weapon.position = global_position + drop_offset
 
@@ -102,6 +102,7 @@ func throw_weapon(weapon):
 
 	remove_child(weapon)
 	get_tree().current_scene.add_child(dropped_weapon)
+	dropped_weapon.launch(get_global_mouse_position())
 	# Zresetowanie obecnej broni w gracza
 	current_weapon = null
 	has_weapon = false
