@@ -53,11 +53,12 @@ func _input(_event):
 	
 	if Input.is_action_just_pressed("LMB") and has_weapon: 
 		current_weapon.attack()
+		update_ammo_bar()
 	if Input.is_action_just_pressed("SPACE"):
 		dash()
 		
 	if Input.is_action_pressed("RMB") and near_weapon and not has_weapon:
-		pickup_weapon2(near_weapon)
+		pickup_weapon(near_weapon)
 	elif Input.is_action_pressed("RMB") and near_weapon and has_weapon:
 		#throw_weapon(current_weapon)
 		pickup_weapon(near_weapon)
@@ -71,7 +72,7 @@ func _physics_process(_delta):
 	read_input()
 	move_and_slide()
 
-func pickup_weapon2(weapon):
+func pickup_weapon(weapon):
 	has_weapon = true
 	current_weapon = load(weapon.scene_path).instantiate()
 	
@@ -88,42 +89,9 @@ func pickup_weapon2(weapon):
 	current_weapon.pickup_sound.play()
 	print("Picked up:", current_weapon.get_parent().name)
 	update_ammo_bar()
-		
-func pickup_weapon(weapon):
-	if has_weapon:
-		drop_weapon()  # Upuszczenie obecnej broni, jeśli gracz już ją posiada
-		
-	# Zapisujemy dane nowej broni
-	current_weapon_data = {
-		"type": weapon.weapon_type,
-		"damage": weapon.damage,
-		"ammo": weapon.ammo,
-		"fire_rate": weapon.fire_rate,
-		"is_melee": weapon.is_melee
-	}
-	has_weapon = true
-	var weapon_name = weapon.weapon_type
-	current_weapon = weapon
-	# Wywołanie funkcji usunięcia broni z ziemi
-	weapon.on_pickup()
-	# Oczekiwanie przed przypisaniem nowej broni do sprite’a gracza
-	# Ustawiamy sprite gracza na podstawie podniesionej broni
-	if current_weapon.is_onehanded:
-		pass
-	else:
-		pass
-	match weapon_name:
-		"Rifle":
-			pass
-		"Bat":
-			$Sprite2D.texture = sprite_no_weapon
-			#current_weapon = load("res://scenes/Bat.tscn").instantiate()
-			#add_child(current_weapon)
-		_:
-			$Sprite2D.texture = sprite_no_weapon  # Domyślny sprite bez broni
-	print("Picked up:", current_weapon_data["type"])
-	update_ammo_bar()
-
+	
+#func throw_weapon():
+	
 func drop_weapon():
 	if current_weapon_data == null:
 		return  # Jeśli gracz nie ma broni, nie trzeba nic robić
@@ -266,9 +234,9 @@ func restart_level():
 	get_tree().reload_current_scene()  # Przeładowanie bieżącej sceny
 
 func update_ammo_bar():
-	if has_weapon and not current_weapon.is_melee:
+	if has_weapon and current_weapon.is_ranged:
 		ammo_bar.visible = true
-		ammo_bar.value = current_weapon.max_ammo
+		ammo_bar.value = current_weapon.current_ammo
 	else:
 		ammo_bar.visible = false
 		ammo_bar.value = 0

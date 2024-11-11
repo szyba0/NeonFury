@@ -12,7 +12,9 @@ extends Area2D
 @export var sound_range: float  # Zasięg dźwięku broni
 @export var scene_path : String
 var can_pickup: bool = true
-var can_fire: bool = true
+var can_attack: bool = true
+
+var bullet = load("res://scenes/Bullet02.tscn")
 
 @onready var attack_sound = $AttackSound
 @onready var pickup_sound = $PickupSound
@@ -52,3 +54,5 @@ func _on_WeaponBase_body_exited(body):
 func _on_tree_entered() -> void:
 	if self.get_parent().name == "CharacterBody2D":
 		$CollisionShape2D.set_deferred("disabled",true)
+	if is_ranged and self.get_parent().name == "CharacterBody2D":
+		$Sprite2D.texture = held_weapon_sprite
