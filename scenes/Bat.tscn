@@ -1,138 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://cp6631h72nexy"]
+[gd_scene load_steps=6 format=3 uid="uid://bvt8l0cq5dr1v"]
 
-[ext_resource type="PackedScene" uid="uid://bekv2botigfyg" path="res://scenes/WeaponBase2.tscn" id="1_drwjw"]
-[ext_resource type="Script" path="res://scenes/bat.gd" id="2_lkvcx"]
+[ext_resource type="PackedScene" uid="uid://b30ao55e70h7a" path="res://scenes/WeaponBase.tscn" id="1_inbj1"]
+[ext_resource type="Script" path="res://scripts/bat.gd" id="2_lkvcx"]
 [ext_resource type="Texture2D" uid="uid://b2te3heeaf220" path="res://assets/baseball_bat.png" id="2_nj4tr"]
+[ext_resource type="AudioStream" uid="uid://c0smsy4hm7t24" path="res://audio/Swing1.wav" id="4_07fwn"]
 
-[sub_resource type="Animation" id="Animation_s2t4s"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 16)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [2.71399]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2D:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 21)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CollisionShape2D:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
+[sub_resource type="CircleShape2D" id="CircleShape2D_5bnwa"]
 
-[sub_resource type="Animation" id="Animation_7irif"]
-resource_name = "hit"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 16), Vector2(16, 0), Vector2(0, -16)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [2.71399, 1.13446, -0.436332]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2D:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 21), Vector2(24, 0), Vector2(0, -22)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CollisionShape2D:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 0.0, 0.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rrg1a"]
-_data = {
-"RESET": SubResource("Animation_s2t4s"),
-"hit": SubResource("Animation_7irif")
-}
-
-[node name="Bat" instance=ExtResource("1_drwjw")]
-collision_layer = 9
-collision_mask = 6
-priority = 1
+[node name="Bat" instance=ExtResource("1_inbj1")]
 script = ExtResource("2_lkvcx")
 is_melee = true
+damage = 10
+current_ammo = -1
+max_ammo = -1
+fire_rate = 0.5
 
 [node name="Sprite2D" parent="." index="0"]
-position = Vector2(0, 16)
-rotation = 2.71399
+position = Vector2(6, 16)
+rotation = 2.79253
 texture = ExtResource("2_nj4tr")
-offset = Vector2(2.03, -5.685)
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(0, 21)
+position = Vector2(6, 17)
+shape = SubResource("CircleShape2D_5bnwa")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
-libraries = {
-"": SubResource("AnimationLibrary_rrg1a")
-}
-
-[connection signal="body_entered" from="." to="." method="_on_melee_weapon_base_body_entered"]
-[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[node name="AttackSound" parent="." index="3"]
+stream = ExtResource("4_07fwn")
