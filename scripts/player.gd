@@ -55,18 +55,18 @@ func _input(_event):
 	
 	if Input.is_action_just_pressed("LMB") and has_weapon: 
 		current_weapon.attack()
+		update_ammo_bar()
 	if Input.is_action_just_pressed("SPACE"):
 		dash()
 		
-	if Input.is_action_pressed("RMB") and near_weapon and not has_weapon:
-		pickup_weapon2(near_weapon)
-	elif Input.is_action_pressed("RMB") and near_weapon and has_weapon:
-		#throw_weapon(current_weapon)
+	if Input.is_action_pressed("RMB") and near_weapon and not has_weapon and near_weapon.can_pickup:
+		pickup_weapon(near_weapon)
+	elif Input.is_action_pressed("RMB") and near_weapon and has_weapon and near_weapon.can_pickup:
+		throw_weapon(current_weapon)
 		pickup_weapon(near_weapon)
 	elif Input.is_action_pressed("RMB") and not near_weapon and has_weapon:
-		#throw_weapon(current_weapon)
-		pass
-		
+		throw_weapon(current_weapon)
+
 	if Input.is_action_just_pressed("PAUSE"):
 		get_viewport().set_input_as_handled()
 		if(!get_tree().paused):
@@ -80,9 +80,10 @@ func _physics_process(_delta):
 	read_input()
 	move_and_slide()
 
-func pickup_weapon2(weapon):
+func pickup_weapon(weapon):
 	has_weapon = true
 	current_weapon = load(weapon.scene_path).instantiate()
+	current_weapon.current_ammo = weapon.current_ammo
 	
 	weapon.on_pickup()
 	
@@ -97,111 +98,27 @@ func pickup_weapon2(weapon):
 	current_weapon.pickup_sound.play()
 	print("Picked up:", current_weapon.get_parent().name)
 	update_ammo_bar()
-		
-func pickup_weapon(weapon):
-	if has_weapon:
-		drop_weapon()  # Upuszczenie obecnej broni, jeśli gracz już ją posiada
-		
-	# Zapisujemy dane nowej broni
-	current_weapon_data = {
-		"type": weapon.weapon_type,
-		"damage": weapon.damage,
-		"ammo": weapon.ammo,
-		"fire_rate": weapon.fire_rate,
-		"is_melee": weapon.is_melee
-	}
-	has_weapon = true
-	var weapon_name = weapon.weapon_type
-	current_weapon = weapon
-	# Wywołanie funkcji usunięcia broni z ziemi
-	weapon.on_pickup()
-	# Oczekiwanie przed przypisaniem nowej broni do sprite’a gracza
-	# Ustawiamy sprite gracza na podstawie podniesionej broni
-	if current_weapon.is_onehanded:
-		pass
-	else:
-		pass
-	match weapon_name:
-		"Rifle":
-			pass
-		"Bat":
-			$Sprite2D.texture = sprite_no_weapon
-			#current_weapon = load("res://scenes/Bat.tscn").instantiate()
-			#add_child(current_weapon)
-		_:
-			$Sprite2D.texture = sprite_no_weapon  # Domyślny sprite bez broni
-	print("Picked up:", current_weapon_data["type"])
-	update_ammo_bar()
-
-func drop_weapon():
-	if current_weapon_data == null:
-		return  # Jeśli gracz nie ma broni, nie trzeba nic robić
-	# Tworzenie nowej instancji `WeaponBase`, która reprezentuje obecną broń
-	var weapon_scene_path = ""
-	match current_weapon_data["type"]:
-		"Rifle":
-			weapon_scene_path = "res://scenes/Rifle.tscn"
-		"Bat":
-			weapon_scene_path = "res://scenes/Bat.tscn"
-		_:
-			weapon_scene_path = "res://scenes/WeaponBase.tscn"  # Domyślna scena, jeśli typ jest nieznany
-
+	
+func throw_weapon(weapon):
 	# Wczytaj scenę broni i stwórz jej instancję
-	var weapon_scene = load(weapon_scene_path)
-	var dropped_weapon = weapon_scene.instantiate()
-	# Ustaw pozycję broni na niewielką odległość przed graczem
+	var dropped_weapon = load(weapon.scene_path).instantiate()
+	dropped_weapon.launch()
 	var drop_offset = Vector2(10, 0).rotated(rotation)  # Przesunięcie 10 pikseli przed graczem
 	dropped_weapon.position = global_position + drop_offset
+
 	dropped_weapon.rotation = rotation  # Ustawienie rotacji zgodnej z rotacją gracza
-	dropped_weapon.weapon_type = current_weapon_data["type"]
-	dropped_weapon.damage = current_weapon_data["damage"]
-	dropped_weapon.ammo = current_weapon_data["ammo"]
-	dropped_weapon.fire_rate = current_weapon_data["fire_rate"]
-	dropped_weapon.is_melee = current_weapon_data["is_melee"]
-	dropped_weapon.sprite = $Sprite2D.texture  # Przypisanie sprite’a obecnej broni
+	dropped_weapon.current_ammo = weapon.current_ammo
 
-	# Dodanie broni do obecnej sceny, aby pojawiła się na ziemi
-	#if current_weapon_data["is_melee"]:
-		#remove_child(current_weapon)
-		
+	remove_child(weapon)
 	get_tree().current_scene.add_child(dropped_weapon)
-
 	# Zresetowanie obecnej broni w gracza
 	current_weapon = null
-	current_weapon_data = null
 	has_weapon = false
 	$Sprite2D.texture = sprite_no_weapon  # Reset na domyślny sprite bez broni
-
-	print("Broń została upuszczona:", dropped_weapon.weapon_type)
+	print("Broń została upuszczona:", dropped_weapon.get_parent().name)
+	
 	update_ammo_bar()
-
-func shoot():
-	# Najpierw sprawdzamy, czy gracz ma broń
-	if current_weapon_data == null:
-		print("You don't have a weapon!")
-		return  # Jeśli nie ma broni, kończymy funkcję
-	if has_weapon and can_fire and current_weapon_data["ammo"] > 0:
-		can_fire = false
-		var instance = bullet.instantiate()
-		
-		# Ustawienie pocisku na pozycji gracza
-		instance.position = global_position
-		
-		# Przekazujemy pozycję kursora jako cel dla pocisku
-		instance.target_position = get_global_mouse_position()
-		instance.damage = current_weapon_data["damage"]
-		get_tree().current_scene.add_child(instance)
-
-		# Zmniejsz amunicję i zaktualizuj pasek
-		current_weapon_data["ammo"] -= 1
-		update_ammo_bar()
-		
-		# Oczekiwanie przed kolejnym strzałem
-		await get_tree().create_timer(current_weapon_data["fire_rate"]).timeout
-		can_fire = true
-	elif current_weapon_data["ammo"] <= 0:
-		print("Out of ammo!")
-
+	
 func throw():
 	# Najpierw sprawdzamy, czy gracz ma broń
 	if current_weapon_data == null:
@@ -231,9 +148,6 @@ func throw():
 		$Sprite2D.texture = sprite_no_weapon
 		get_tree().current_scene.add_child(instance)
 		update_ammo_bar()
-
-func hit():
-	current_weapon.hit()
 
 # Funkcja wywoływana przy śmierci gracza
 func die():
@@ -275,9 +189,9 @@ func restart_level():
 	get_tree().reload_current_scene()  # Przeładowanie bieżącej sceny
 
 func update_ammo_bar():
-	if has_weapon and not current_weapon.is_melee:
+	if has_weapon and current_weapon.is_ranged:
 		ammo_bar.visible = true
-		ammo_bar.value = current_weapon.max_ammo
+		ammo_bar.value = current_weapon.current_ammo
 	else:
 		ammo_bar.visible = false
 		ammo_bar.value = 0
