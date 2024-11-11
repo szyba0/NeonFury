@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://bbc225kpyoafa"
-path="res://.godot/imported/DoorOpen.wav-2e56c0599d77776047d9904100f8abcc.sample"
+uid="uid://clvrho2kq03d7"
+path="res://.godot/imported/Silencer.wav-463956b36cf53b330cc613a1a6adb679.sample"
 
 [deps]
 
-source_file="res://audio/DoorOpen.wav"
-dest_files=["res://.godot/imported/DoorOpen.wav-2e56c0599d77776047d9904100f8abcc.sample"]
+source_file="res://assets/audio/Silencer.wav"
+dest_files=["res://.godot/imported/Silencer.wav-463956b36cf53b330cc613a1a6adb679.sample"]
 
 [params]
 

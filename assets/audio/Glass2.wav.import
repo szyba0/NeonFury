@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://m3hvvmdf277y"
-path="res://.godot/imported/Punch.wav-f4722c93d3b5e98572ced940da8f448b.sample"
+uid="uid://db5f2kgmhg0a"
+path="res://.godot/imported/Glass2.wav-2fb833f929e47500ee8aea952b85a6b4.sample"
 
 [deps]
 
-source_file="res://audio/Punch.wav"
-dest_files=["res://.godot/imported/Punch.wav-f4722c93d3b5e98572ced940da8f448b.sample"]
+source_file="res://assets/audio/Glass2.wav"
+dest_files=["res://.godot/imported/Glass2.wav-2fb833f929e47500ee8aea952b85a6b4.sample"]
 
 [params]
 

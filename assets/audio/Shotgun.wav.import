@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://clvrho2kq03d7"
-path="res://.godot/imported/Silencer.wav-8110e488771aad7118668582e2234979.sample"
+uid="uid://bfpjbyr5oqu22"
+path="res://.godot/imported/Shotgun.wav-df4af301ecfcce96ef4fc9a38f211d2b.sample"
 
 [deps]
 
-source_file="res://audio/Silencer.wav"
-dest_files=["res://.godot/imported/Silencer.wav-8110e488771aad7118668582e2234979.sample"]
+source_file="res://assets/audio/Shotgun.wav"
+dest_files=["res://.godot/imported/Shotgun.wav-df4af301ecfcce96ef4fc9a38f211d2b.sample"]
 
 [params]
 

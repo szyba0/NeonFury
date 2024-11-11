@@ -2,13 +2,13 @@ extends Area2D
 @export var is_ranged: bool = false
 @export var is_melee: bool = false
 @export var is_throwable: bool = false
+@export var is_one_handed: bool = false
 @export var damage: int  # Obrażenia
 @export var current_ammo: int  # Ilośc amunicji w magazynku
 @export var max_ammo: int  # Amunicja początkowa
 @export var fire_rate: float  # Czas pomiędzy strzałami
 @export var weapon_sprite: Texture  # Sprite broni
 @export var held_weapon_sprite: Texture  # Sprite trzymanej broni
-@export var player_sprite: Texture  # Sprite playera trzymajacego broń
 @export var sound_range: float  # Zasięg dźwięku broni
 
 @onready var attack_sound = $AttackSound

@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://doiq603qv5t7b"
-path="res://.godot/imported/HitWall.wav-5c08088e31fbe0256bb202cd7957d24c.sample"
+uid="uid://btxdpo6ge7aou"
+path="res://.godot/imported/KnifeWall.wav-5a78bf46cce3804420148b036864cfc3.sample"
 
 [deps]
 
-source_file="res://audio/HitWall.wav"
-dest_files=["res://.godot/imported/HitWall.wav-5c08088e31fbe0256bb202cd7957d24c.sample"]
+source_file="res://assets/audio/KnifeWall.wav"
+dest_files=["res://.godot/imported/KnifeWall.wav-5a78bf46cce3804420148b036864cfc3.sample"]
 
 [params]
 

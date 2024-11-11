@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://s3818ow64kdr"
-path="res://.godot/imported/DoorHit.wav-9ebc88af415336cc953b1e92a481ae1c.sample"
+uid="uid://dauh1d735gqw"
+path="res://.godot/imported/Hit.wav-22c6b2c2eb812f0866a6ffdc15cb8485.sample"
 
 [deps]
 
-source_file="res://audio/DoorHit.wav"
-dest_files=["res://.godot/imported/DoorHit.wav-9ebc88af415336cc953b1e92a481ae1c.sample"]
+source_file="res://assets/audio/Hit.wav"
+dest_files=["res://.godot/imported/Hit.wav-22c6b2c2eb812f0866a6ffdc15cb8485.sample"]
 
 [params]
 

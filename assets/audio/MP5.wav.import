@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://3juui2yoyyk6"
-path="res://.godot/imported/Scorpion.wav-d46995a903d09faed94d997575d310ef.sample"
+uid="uid://dp44613l1qw6r"
+path="res://.godot/imported/MP5.wav-6609f16f792c26ca1e4739cec74ad343.sample"
 
 [deps]
 
-source_file="res://audio/Scorpion.wav"
-dest_files=["res://.godot/imported/Scorpion.wav-d46995a903d09faed94d997575d310ef.sample"]
+source_file="res://assets/audio/MP5.wav"
+dest_files=["res://.godot/imported/MP5.wav-6609f16f792c26ca1e4739cec74ad343.sample"]
 
 [params]
 

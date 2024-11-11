@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://vtjmiuqw1dt3"
-path="res://.godot/imported/Pump.wav-acd569d97d161ac61fcde023f5330b3a.sample"
+uid="uid://d2smh3viaaiq1"
+path="res://.godot/imported/DrawKnife.wav-6df14c2fc35cdb836dcb5dbfff4a731d.sample"
 
 [deps]
 
-source_file="res://audio/Pump.wav"
-dest_files=["res://.godot/imported/Pump.wav-acd569d97d161ac61fcde023f5330b3a.sample"]
+source_file="res://assets/audio/DrawKnife.wav"
+dest_files=["res://.godot/imported/DrawKnife.wav-6df14c2fc35cdb836dcb5dbfff4a731d.sample"]
 
 [params]
 

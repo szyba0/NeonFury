@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://b30ao55e70h7a"]
+[gd_scene load_steps=6 format=3 uid="uid://b30ao55e70h7a"]
 
 [ext_resource type="Script" path="res://scripts/weapon_base.gd" id="1_xobto"]
-[ext_resource type="AudioStream" uid="uid://cvhakkktm4hng" path="res://audio/PickupWeapon.wav" id="2_b1ins"]
-[ext_resource type="AudioStream" uid="uid://bvhdvjk44o377" path="res://audio/Throw.wav" id="3_nikic"]
+[ext_resource type="AudioStream" uid="uid://cvhakkktm4hng" path="res://assets/audio/PickupWeapon.wav" id="2_b1ins"]
+[ext_resource type="AudioStream" uid="uid://bvhdvjk44o377" path="res://assets/audio/Throw.wav" id="3_nikic"]
+
+[sub_resource type="Animation" id="Animation_gb0fo"]
+resource_name = "new_animation"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bv0l0"]
+_data = {
+"new_animation": SubResource("Animation_gb0fo")
+}
 
 [node name="WeaponBase" type="Area2D"]
 script = ExtResource("1_xobto")
@@ -12,6 +20,9 @@ script = ExtResource("1_xobto")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bv0l0")
+}
 
 [node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
 

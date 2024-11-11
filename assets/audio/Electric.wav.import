@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://cw0e3tl51u2br"
-path="res://.godot/imported/Glass1.wav-19ca89850eccf983fcf90001686ba08e.sample"
+uid="uid://bhwlxpsf801dq"
+path="res://.godot/imported/Electric.wav-c45dc83249911ffdb17252e2509c3331.sample"
 
 [deps]
 
-source_file="res://audio/Glass1.wav"
-dest_files=["res://.godot/imported/Glass1.wav-19ca89850eccf983fcf90001686ba08e.sample"]
+source_file="res://assets/audio/Electric.wav"
+dest_files=["res://.godot/imported/Electric.wav-c45dc83249911ffdb17252e2509c3331.sample"]
 
 [params]
 

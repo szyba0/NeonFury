@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://b30ao55e70h7a" path="res://scenes/WeaponBase.tscn" id="1_inbj1"]
 [ext_resource type="Script" path="res://scripts/bat.gd" id="2_lkvcx"]
-[ext_resource type="Texture2D" uid="uid://b2te3heeaf220" path="res://assets/baseball_bat.png" id="2_nj4tr"]
-[ext_resource type="AudioStream" uid="uid://c0smsy4hm7t24" path="res://audio/Swing1.wav" id="4_07fwn"]
+[ext_resource type="Texture2D" uid="uid://b2te3heeaf220" path="res://assets/weapons/baseball_bat.png" id="2_nj4tr"]
+[ext_resource type="AudioStream" uid="uid://c0smsy4hm7t24" path="res://assets/audio/Swing1.wav" id="4_07fwn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5bnwa"]
 

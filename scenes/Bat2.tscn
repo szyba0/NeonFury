@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bekv2botigfyg" path="res://scenes/WeaponBase2.tscn" id="1_drwjw"]
 [ext_resource type="Script" path="res://scenes/bat2.gd" id="2_lkvcx"]
-[ext_resource type="Texture2D" uid="uid://b2te3heeaf220" path="res://assets/baseball_bat.png" id="2_nj4tr"]
+[ext_resource type="Texture2D" uid="uid://b2te3heeaf220" path="res://assets/weapons/baseball_bat.png" id="2_nj4tr"]
 
 [sub_resource type="Animation" id="Animation_s2t4s"]
 length = 0.001
