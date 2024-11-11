@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1yktssoili7n"]
+
+[ext_resource type="Texture2D" uid="uid://ca8rr0xtr4uuw" path="res://assets/player/player.png" id="1_dkp23"]
+[ext_resource type="Script" path="res://scripts/ghost.gd" id="2_yejkk"]
+
+[node name="Ghost" type="Sprite2D"]
+modulate = Color(1.34766e-06, 0.82746, 0.82991, 1)
+show_behind_parent = true
+z_index = 1
+rotation = 1.5708
+texture = ExtResource("1_dkp23")
+script = ExtResource("2_yejkk")

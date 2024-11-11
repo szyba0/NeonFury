@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://b30ao55e70h7a"]
+
+[ext_resource type="Script" path="res://scripts/weapon_base.gd" id="1_xobto"]
+[ext_resource type="AudioStream" uid="uid://cvhakkktm4hng" path="res://assets/audio/PickupWeapon.wav" id="2_b1ins"]
+[ext_resource type="Texture2D" uid="uid://b0qapexd6114w" path="res://assets/weapons/error.png" id="2_j755g"]
+[ext_resource type="AudioStream" uid="uid://bvhdvjk44o377" path="res://assets/audio/Throw.wav" id="3_nikic"]
+
+[sub_resource type="Animation" id="Animation_gb0fo"]
+resource_name = "new_animation"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bv0l0"]
+_data = {
+"new_animation": SubResource("Animation_gb0fo")
+}
+
+[node name="WeaponBase" type="Area2D"]
+script = ExtResource("1_xobto")
+weapon_sprite = ExtResource("2_j755g")
+held_weapon_sprite = ExtResource("2_j755g")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_j755g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bv0l0")
+}
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
+
+[node name="PickupSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_b1ins")
+
+[node name="ThrowSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_nikic")
+
+[connection signal="body_entered" from="." to="." method="_on_WeaponBase_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_WeaponBase_body_exited"]
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]

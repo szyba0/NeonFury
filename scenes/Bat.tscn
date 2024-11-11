@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvt8l0cq5dr1v"]
+
+[ext_resource type="PackedScene" uid="uid://b30ao55e70h7a" path="res://scenes/WeaponBase.tscn" id="1_inbj1"]
+[ext_resource type="Script" path="res://scripts/bat.gd" id="2_lkvcx"]
+[ext_resource type="Texture2D" uid="uid://b2te3heeaf220" path="res://assets/weapons/baseball_bat.png" id="2_nj4tr"]
+[ext_resource type="AudioStream" uid="uid://c0smsy4hm7t24" path="res://assets/audio/Swing1.wav" id="4_07fwn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5bnwa"]
+radius = 13.0
+
+[node name="Bat" instance=ExtResource("1_inbj1")]
+collision_layer = 9
+collision_mask = 6
+script = ExtResource("2_lkvcx")
+is_melee = true
+damage = 10
+current_ammo = -1
+max_ammo = -1
+fire_rate = 0.5
+weapon_sprite = ExtResource("2_nj4tr")
+held_weapon_sprite = ExtResource("2_nj4tr")
+scene_path = "res://scenes/Bat.tscn"
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(6, 16)
+rotation = 2.79253
+scale = Vector2(1, 1.4)
+texture = ExtResource("2_nj4tr")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(6, 17)
+shape = SubResource("CircleShape2D_5bnwa")
+
+[node name="AttackSound" parent="." index="3"]
+stream = ExtResource("4_07fwn")
