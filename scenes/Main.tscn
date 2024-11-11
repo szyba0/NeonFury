@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=4 uid="uid://b6ry3qq48yoa1"]
+[gd_scene load_steps=10 format=4 uid="uid://b6ry3qq48yoa1"]
 
 [ext_resource type="Texture2D" uid="uid://dtjw37syj8vug" path="res://assets/tileset4.png" id="1_h55fg"]
 [ext_resource type="Texture2D" uid="uid://cj13x64j7me4w" path="res://assets/window.png" id="2_8y13k"]
 [ext_resource type="PackedScene" uid="uid://6d7wahx3n4ke" path="res://scenes/player.tscn" id="2_ss88j"]
+[ext_resource type="PackedScene" uid="uid://bf6hk33cyqqae" path="res://scenes/Enemy01.tscn" id="3_42f6k"]
 [ext_resource type="Texture2D" uid="uid://drioufos822rw" path="res://assets/broken_window.png" id="3_80s3g"]
 [ext_resource type="PackedScene" uid="uid://bdb78gi61nbqp" path="res://scenes/Rifle.tscn" id="4_35ltv"]
 
@@ -57,10 +58,6 @@ tile_set = SubResource("TileSet_sf1id")
 [node name="Player" parent="." instance=ExtResource("2_ss88j")]
 position = Vector2(-138, -101)
 
-
-[node name="Rifle2" parent="." instance=ExtResource("4_35ltv")]
-position = Vector2(-171, 97)
-damage = 5
 
 [node name="Puddle" parent="." instance=ExtResource("5_8lxwv")]
 position = Vector2(96, 102)

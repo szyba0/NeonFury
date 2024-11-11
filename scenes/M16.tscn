@@ -11,7 +11,6 @@ radius = 16.0
 
 [node name="M16" instance=ExtResource("1_bdqqj")]
 collision_layer = 9
-collision_mask = 6
 script = ExtResource("2_s58os")
 is_ranged = true
 damage = 10
@@ -33,3 +32,6 @@ shape = SubResource("CircleShape2D_1ykak")
 
 [node name="AttackSound" parent="." index="3"]
 stream = ExtResource("4_t7o1w")
+
+[node name="RayCast2D" parent="." index="6"]
+target_position = Vector2(0, 18)

@@ -6,7 +6,6 @@ var direction  # Kierunek pocisku
 var damage = 10  # Obrażenia
 # Cel, na który pocisk będzie skierowany
 var target_position: Vector2
-var collide_position
 
 func _ready():
 	#direction = Vector2.RIGHT.rotated(rotation).normalized()
@@ -29,14 +28,14 @@ func _physics_process(delta):
 	if $RayCast2D.is_colliding():
 		var collider = $RayCast2D.get_collider()
 		_on_Bullet_body_entered(collider)
-		collide_position = collider.get_position()
-	
+		$RayCast2D.get_collision_point()
 
 func _on_Bullet_body_entered(body):
 	# Sprawdź, czy obiekt ma metodę `take_damage`, aby zadać obrażenia
 	if body.has_method("take_damage"):
 		body.take_damage(damage)
 		print("hit")
+
 	# Usuń pocisk po kolizji
 	queue_free()
 
