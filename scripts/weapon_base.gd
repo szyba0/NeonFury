@@ -45,7 +45,10 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta):
 	if can_harm:
-		$Sprite2D.rotate(0.2)
+		if is_throwable and not is_melee:
+			pass
+		else:
+			$Sprite2D.rotate(0.2)
 		$RayCast2D.target_position = direction * speed * delta
 		if $RayCast2D.is_colliding():
 			var collider = $RayCast2D.get_collider()
@@ -71,6 +74,7 @@ func _on_WeaponBase_body_entered(body):
 		body.near_weapon = self  # Ustawia broń jako `near_weapon` w `Player.gd`
 	print("Gracz w pobliżu broni:")
 	if can_harm and not body.get_parent().name == "Player":
+		print(body.get_parent().name)
 		can_harm = false
 		if body.has_method("take_damage"):
 			if is_throwable:

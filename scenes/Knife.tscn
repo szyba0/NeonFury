@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c6bl7s386fkip"]
+[gd_scene load_steps=11 format=3 uid="uid://c6bl7s386fkip"]
 
 [ext_resource type="PackedScene" uid="uid://b30ao55e70h7a" path="res://scenes/WeaponBase.tscn" id="1_tngw6"]
 [ext_resource type="Texture2D" uid="uid://tatwswv8q7ll" path="res://assets/weapons/knife.png" id="2_5whmd"]
@@ -8,6 +8,167 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xpm8g"]
 radius = 7.0
+
+[sub_resource type="Animation" id="Animation_0xng2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RayCast2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(15, 9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RayCast2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(17, 8)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.785398]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(15, 9)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CollisionShape2D:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_trx25"]
+_data = {
+"RESET": SubResource("Animation_0xng2")
+}
+
+[sub_resource type="Animation" id="Animation_cbjvm"]
+resource_name = "attack_knife"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(17.07, 8.3), Vector2(21, 3), Vector2(20, -5.13), Vector2(11.126, -14.274)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.785398, 0.0, -0.785398, -1.42244]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RayCast2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(15, 9), Vector2(20, 4), Vector2(20, -3), Vector2(12.9706, -11.8994)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RayCast2D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(15, 8), Vector2(19.9006, 3.67056), Vector2(19.9006, -3.32944), Vector2(12.8711, -12.2289)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CollisionShape2D:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_edhha"]
+_data = {
+"attack_knife": SubResource("Animation_cbjvm")
+}
 
 [node name="Knife" instance=ExtResource("1_tngw6")]
 collision_layer = 9
@@ -24,14 +185,20 @@ held_weapon_sprite = ExtResource("2_5whmd")
 scene_path = "res://scenes/Knife.tscn"
 
 [node name="Sprite2D" parent="." index="0"]
-position = Vector2(15, 8)
+position = Vector2(17, 8)
 rotation = 0.785398
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_5whmd")
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(13, 9)
+position = Vector2(15, 9)
 shape = SubResource("CircleShape2D_xpm8g")
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_trx25"),
+"attack_animations": SubResource("AnimationLibrary_edhha")
+}
 
 [node name="AttackSound" parent="." index="3"]
 stream = ExtResource("4_vu4j3")
@@ -40,5 +207,8 @@ stream = ExtResource("4_vu4j3")
 stream = ExtResource("5_cwsp1")
 
 [node name="RayCast2D" parent="." index="6"]
-position = Vector2(13, 9)
+position = Vector2(15, 9)
 target_position = Vector2(0, 7)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
