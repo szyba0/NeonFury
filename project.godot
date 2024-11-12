@@ -23,6 +23,7 @@ window/stretch/scale=2.0
 [global_group]
 
 Player=""
+Enemies=""
 
 [input]
 
