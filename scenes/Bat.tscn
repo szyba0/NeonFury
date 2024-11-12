@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvt8l0cq5dr1v"]
+[gd_scene load_steps=11 format=3 uid="uid://bvt8l0cq5dr1v"]
 
 [ext_resource type="PackedScene" uid="uid://b30ao55e70h7a" path="res://scenes/WeaponBase.tscn" id="1_inbj1"]
 [ext_resource type="Script" path="res://scripts/bat.gd" id="2_lkvcx"]
@@ -8,6 +8,171 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_5bnwa"]
 radius = 13.0
 
+[sub_resource type="Animation" id="Animation_gb0fo"]
+resource_name = "new_animation"
+
+[sub_resource type="Animation" id="Animation_wi4c3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(6, 16)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.79253]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(6, 15)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RayCast2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(6, 15)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RayCast2D:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bv0l0"]
+_data = {
+"RESET": SubResource("Animation_wi4c3"),
+"new_animation": SubResource("Animation_gb0fo")
+}
+
+[sub_resource type="Animation" id="Animation_l1ycc"]
+resource_name = "attack_bat"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(6, 16), Vector2(17.3579, 9.86843), Vector2(16.5699, 3.8813), Vector2(20.5004, -8.38136), Vector2(15.7227, -16.4883), Vector2(7.07903, -23.8991)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [2.79253, 2.13803, 1.81165, 0.994838, 0.586431, 0.197222]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(6, 17), Vector2(12.6963, 13.5214), Vector2(16.5699, 4.8813), Vector2(19.5004, -8.38136), Vector2(15.7227, -15.4883), Vector2(8.07903, -23.8991)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RayCast2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(6, 17), Vector2(12.6963, 13.5214), Vector2(22.212, 4.01287), Vector2(14.0704, -3.50006), Vector2(15.7227, -15.4883), Vector2(7.07903, -23.8991)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RayCast2D:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s5g8r"]
+_data = {
+"attack_bat": SubResource("Animation_l1ycc")
+}
+
 [node name="Bat" instance=ExtResource("1_inbj1")]
 collision_layer = 9
 script = ExtResource("2_lkvcx")
@@ -15,7 +180,7 @@ is_melee = true
 damage = 10
 current_ammo = -1
 max_ammo = -1
-fire_rate = 0.5
+fire_rate = 0.9
 weapon_sprite = ExtResource("2_nj4tr")
 held_weapon_sprite = ExtResource("2_nj4tr")
 scene_path = "res://scenes/Bat.tscn"
@@ -27,12 +192,21 @@ scale = Vector2(1, 1.4)
 texture = ExtResource("2_nj4tr")
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(6, 17)
+position = Vector2(6, 15)
 shape = SubResource("CircleShape2D_5bnwa")
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_bv0l0"),
+"attack_animations": SubResource("AnimationLibrary_s5g8r")
+}
 
 [node name="AttackSound" parent="." index="3"]
 stream = ExtResource("4_07fwn")
 
 [node name="RayCast2D" parent="." index="6"]
-position = Vector2(6, 17)
+position = Vector2(6, 15)
 target_position = Vector2(13, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

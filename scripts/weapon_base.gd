@@ -45,7 +45,10 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta):
 	if can_harm:
-		$Sprite2D.rotate(0.2)
+		if is_throwable and not is_melee:
+			pass
+		else:
+			$Sprite2D.rotate(0.2)
 		$RayCast2D.target_position = direction * speed * delta
 		if $RayCast2D.is_colliding():
 			var collider = $RayCast2D.get_collider()

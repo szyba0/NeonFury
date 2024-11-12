@@ -55,10 +55,15 @@ func read_input():
 
 func _input(_event):
 	if is_dead:
-		return  
-	if Input.is_action_pressed("LMB") and has_weapon: 
-		current_weapon.attack()
-		update_ammo_bar()
+		return 
+	if current_weapon:
+		if Input.is_action_pressed("LMB") and current_weapon.is_throwable and not current_weapon.is_melee and has_weapon:
+			throw_weapon(current_weapon)
+		elif Input.is_action_pressed("LMB") and has_weapon: 
+			current_weapon.attack()
+			update_ammo_bar()
+	 
+	
 	if Input.is_action_just_pressed("SPACE"):
 		dash()
 		

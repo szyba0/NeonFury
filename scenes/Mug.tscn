@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://c0femxc68jr18"]
+
+[ext_resource type="PackedScene" uid="uid://b30ao55e70h7a" path="res://scenes/WeaponBase.tscn" id="1_jhdir"]
+[ext_resource type="Script" path="res://scripts/mug.gd" id="2_65b4i"]
+[ext_resource type="Texture2D" uid="uid://pqt6tih8lusj" path="res://assets/weapons/mug.png" id="3_jslrw"]
+[ext_resource type="Texture2D" uid="uid://13mljqgvokqk" path="res://assets/weapons/mug_held.png" id="4_tflbn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ojt8x"]
+radius = 8.0
+
+[node name="Mug" instance=ExtResource("1_jhdir")]
+script = ExtResource("2_65b4i")
+is_throwable = true
+is_one_handed = true
+damage = 5
+current_ammo = -1
+max_ammo = -1
+weapon_sprite = ExtResource("3_jslrw")
+held_weapon_sprite = ExtResource("4_tflbn")
+scene_path = "res://scenes/Mug.tscn"
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(-0.115, 1)
+rotation = 1.5708
+texture = ExtResource("4_tflbn")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(8, 5)
+shape = SubResource("CircleShape2D_ojt8x")
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {}
+
+[node name="RayCast2D" parent="." index="6"]
+position = Vector2(8, 5)
+target_position = Vector2(0, 14)
