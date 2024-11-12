@@ -74,6 +74,7 @@ func _on_WeaponBase_body_entered(body):
 		body.near_weapon = self  # Ustawia broń jako `near_weapon` w `Player.gd`
 	print("Gracz w pobliżu broni:")
 	if can_harm and not body.get_parent().name == "Player":
+		print(body.get_parent().name)
 		can_harm = false
 		if body.has_method("take_damage"):
 			if is_throwable:

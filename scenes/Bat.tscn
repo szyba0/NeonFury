@@ -8,9 +8,6 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_5bnwa"]
 radius = 13.0
 
-[sub_resource type="Animation" id="Animation_gb0fo"]
-resource_name = "new_animation"
-
 [sub_resource type="Animation" id="Animation_wi4c3"]
 length = 0.001
 tracks/0/type = "value"
@@ -85,6 +82,9 @@ tracks/5/keys = {
 "update": 0,
 "values": [0.0]
 }
+
+[sub_resource type="Animation" id="Animation_gb0fo"]
+resource_name = "new_animation"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bv0l0"]
 _data = {
@@ -186,13 +186,10 @@ held_weapon_sprite = ExtResource("2_nj4tr")
 scene_path = "res://scenes/Bat.tscn"
 
 [node name="Sprite2D" parent="." index="0"]
-position = Vector2(6, 16)
-rotation = 2.79253
 scale = Vector2(1, 1.4)
 texture = ExtResource("2_nj4tr")
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(6, 15)
 shape = SubResource("CircleShape2D_5bnwa")
 
 [node name="AnimationPlayer" parent="." index="2"]
@@ -205,7 +202,6 @@ libraries = {
 stream = ExtResource("4_07fwn")
 
 [node name="RayCast2D" parent="." index="6"]
-position = Vector2(6, 15)
 target_position = Vector2(13, 0)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

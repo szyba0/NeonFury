@@ -5,9 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://b0qapexd6114w" path="res://assets/weapons/error.png" id="2_j755g"]
 [ext_resource type="AudioStream" uid="uid://bvhdvjk44o377" path="res://assets/audio/Throw.wav" id="3_nikic"]
 
-[sub_resource type="Animation" id="Animation_gb0fo"]
-resource_name = "new_animation"
-
 [sub_resource type="Animation" id="Animation_wi4c3"]
 length = 0.001
 tracks/0/type = "value"
@@ -82,6 +79,9 @@ tracks/5/keys = {
 "update": 0,
 "values": [0.0]
 }
+
+[sub_resource type="Animation" id="Animation_gb0fo"]
+resource_name = "new_animation"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bv0l0"]
 _data = {
