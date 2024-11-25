@@ -9,6 +9,7 @@ max_health = 5
 patrol_speed = 150.0
 chase_speed = 200.0
 is_patroling = true
+points = 150
 normal_head_sprite = ExtResource("2_8a8pb")
 dead_sprite = ExtResource("3_ix2w5")
 

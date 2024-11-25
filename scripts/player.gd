@@ -3,6 +3,8 @@ extends CharacterBody2D
 @onready var main = get_tree().get_root().get_node("Main")
 @onready var bullet = load("res://scenes/Bullet02.tscn")
 @onready var ammo_bar = $"/root/Main/Player/CharacterBody2D/AmmoUI/Control/AmmoBar" 
+@onready var points_counter = $"/root/Main/Player/CharacterBody2D/PointsUI/Control/PointsCounter"
+@onready var combo_counter = $"/root/Main/Player/CharacterBody2D/ComboUI/Control/ComboCounter"
 
 var paused
 
@@ -37,6 +39,10 @@ var current_weapon_data = null  # Dane aktualnej broni
 var has_weapon = false  # Czy gracz trzyma broń
 var near_weapon = null  # Broń, przy której gracz się znajduje
 var weapon_type = null
+
+var points: int = 0
+var combo_count: int = 0
+var combo_points_multiplier = 1
 
 var current_weapon : Area2D = null
 
@@ -172,6 +178,16 @@ func update_ammo_bar():
 		ammo_bar.visible = false
 		ammo_bar.text = ""
 
+func update_points():
+	points_counter.text = "Pts: " + str(points)
+
+func update_combo():
+	if combo_count > 0:
+		combo_counter.visible = true
+		combo_counter.text = "Combo: " +str(combo_count)
+	else:
+		combo_counter.visible = false
+		combo_counter.text = ""
 
 func add_ghost():
 	var ghost = ghost_node.instantiate()
@@ -210,3 +226,21 @@ func _on_dash_cooldown_timeout() -> void:
 func _on_collision_detector(position: Variant) -> void:
 	print("signal received")
 	bullet_collision_position = position
+
+func combo(pts):
+	$ComboTimer.start()
+	points = points + pts*combo_points_multiplier
+	update_points()
+	combo_count += 1
+	combo_points_multiplier += 1
+	update_combo()
+	print(combo_counter)
+
+
+func _on_combo_timer_timeout() -> void:
+	print("Combo coutner ended on ", combo_counter)
+	combo_count = 0
+	combo_points_multiplier = 1
+	update_combo()
+	
+	

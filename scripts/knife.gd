@@ -20,7 +20,7 @@ func attack():
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "attack_animations/attack_bat":
+	if anim_name == "attack_animations/attack_knife":
 		$CollisionShape2D.set_deferred("disabled",true)
 
 
