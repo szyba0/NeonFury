@@ -9,25 +9,33 @@ font_size = 86
 
 [node name="PauseMenu" type="Control"]
 process_mode = 2
-visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_awp1v")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-offset_right = 1920.0
-offset_bottom = 1080.0
+layout_mode = 0
+offset_right = 1149.0
+offset_bottom = 648.0
 color = Color(0, 0.0166669, 1, 0.294118)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_left = 423.0
-offset_top = 234.0
-offset_right = 737.0
-offset_bottom = 403.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.342
+anchor_top = 0.312
+anchor_right = 0.637
+anchor_bottom = 0.585
+offset_left = 0.0159912
+offset_top = -0.17601
+offset_right = 0.175964
+offset_bottom = -0.0800171
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -47,6 +55,3 @@ text = "Resume
 [node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Exit"
-
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

@@ -4,8 +4,6 @@ extends CharacterBody2D
 @onready var bullet = load("res://scenes/Bullet02.tscn")
 @onready var ammo_bar = $"/root/Main/Player/CharacterBody2D/AmmoUI/Control/AmmoBar" 
 
-var paused
-
 @export var ghost_node: PackedScene
 @onready var ghost_timer = $GhostTimer
 @onready var dash_timer = $DashTimer
@@ -63,6 +61,7 @@ func _input(_event):
 	elif Input.is_action_pressed("RMB") and near_weapon and has_weapon:
 		#throw_weapon(current_weapon)
 		pickup_weapon(near_weapon)
+<<<<<<< Updated upstream
 	elif Input.is_action_pressed("RMB") and not near_weapon and has_weapon:
 		#throw_weapon(current_weapon)
 		pass
@@ -73,6 +72,14 @@ func _input(_event):
 			paused = true
 			$"/root/Main/Player/PauseNode/PauseMenu/Control".show()
 			get_tree().paused = true
+=======
+	elif Input.is_action_just_pressed("RMB") and near_weapon and has_weapon and near_weapon.can_pickup:
+		throw_weapon(current_weapon)
+		pickup_weapon(near_weapon)
+	elif Input.is_action_just_pressed("RMB") and not near_weapon and has_weapon:
+		throw_weapon(current_weapon)
+
+>>>>>>> Stashed changes
 
 func _physics_process(_delta):
 	if is_dead:
