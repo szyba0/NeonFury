@@ -8,9 +8,7 @@ var is_paused = false
 func _ready():
 	randomize()  # Ustaw losowy seed dla generatora liczb losowych
 	# Dodaj wszystkie ścieżki patrolowe do tablicy ręcznie lub automatycznie
-	patrol_paths = [$Path_Room1, $Path_Room2]
-	$FastEnemy.connect("died",enemy_died)
-	$TankEnemy.connect("died",enemy_died)
+
 	
 	# Przekaż ścieżki patrolowe do każdego przeciwnika w poziomie
 	for enemy in get_tree().get_nodes_in_group("Enemies"):

@@ -5,7 +5,6 @@ extends Node2D
 var is_open = false
 var detected = 0
 
-
 func _on_open_range_body_entered(body: Node2D) -> void:
 	print(body)
 	if body == Player or body == Enemy:
@@ -30,11 +29,6 @@ func close_door():
 	if($StaticBody2D/AnimationPlayer.is_playing()):
 		await $StaticBody2D/AnimationPlayer.animation_finished
 	$StaticBody2D/AnimationPlayer.play("close")
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
