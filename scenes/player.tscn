@@ -7,13 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://rae7p16dvmpy" path="res://assets/player/2h_player.png" id="4_t0mj1"]
 [ext_resource type="Texture2D" uid="uid://bfoqe8ycg7bdu" path="res://assets/player/1h_player.png" id="5_8trr3"]
 [ext_resource type="FontFile" uid="uid://bgdi76ycjyl4q" path="res://assets/GlitchGoblin-2O87v.ttf" id="8_451qe"]
-[ext_resource type="Script" path="res://scenes/Pause.gd" id="10_5pasa"]
+[ext_resource type="Script" path="res://scenes/LevelTimer.gd" id="9_67lky"]
 [ext_resource type="PackedScene" uid="uid://05nfevs3nst" path="res://scenes/pause_menu.tscn" id="10_py4w4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w538h"]
 size = Vector2(16, 30)
 
-[sub_resource type="GDScript" id="GDScript_npi3m"]
+[sub_resource type="LabelSettings" id="LabelSettings_yyjib"]
+font = ExtResource("8_451qe")
 
 [node name="Player" type="Node2D"]
 z_index = 1
@@ -77,6 +78,7 @@ wait_time = 0.4
 wait_time = 2.0
 
 [node name="DeathUI" type="CanvasLayer" parent="CharacterBody2D"]
+visible = false
 
 [node name="DeathLabel" type="Label" parent="CharacterBody2D/DeathUI"]
 z_index = 1
@@ -97,17 +99,95 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0, 0, 0.313726)
 
-[node name="PauseNode" type="Node" parent="."]
-process_mode = 2
-script = ExtResource("10_5pasa")
+[node name="ComboTimer" type="Timer" parent="CharacterBody2D"]
+wait_time = 3.0
 
-[node name="PauseMenu" type="CanvasLayer" parent="PauseNode"]
-process_mode = 2
+[node name="PointsUI" type="CanvasLayer" parent="CharacterBody2D"]
 
-[node name="Control" parent="PauseNode/PauseMenu" instance=ExtResource("10_py4w4")]
-process_mode = 0
-script = SubResource("GDScript_npi3m")
+[node name="Control" type="Control" parent="CharacterBody2D/PointsUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PointsCounter" type="Label" parent="CharacterBody2D/PointsUI/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Pts: 0"
+label_settings = SubResource("LabelSettings_yyjib")
+
+[node name="ComboUI" type="CanvasLayer" parent="CharacterBody2D"]
+offset = Vector2(0, 18)
+transform = Transform2D(1, 0, 0, 1, 0, 18)
+
+[node name="Control" type="Control" parent="CharacterBody2D/ComboUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ComboCounter" type="Label" parent="CharacterBody2D/ComboUI/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_yyjib")
+
+[node name="PauseUI" type="CanvasLayer" parent="CharacterBody2D"]
+
+[node name="PauseMenu" parent="CharacterBody2D/PauseUI" instance=ExtResource("10_py4w4")]
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="TimerUI" type="CanvasLayer" parent="CharacterBody2D"]
+
+[node name="Panel" type="Panel" parent="CharacterBody2D/TimerUI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -72.0
+offset_bottom = 25.0
+grow_horizontal = 0
+script = ExtResource("9_67lky")
+
+[node name="Minutes" type="Label" parent="CharacterBody2D/TimerUI/Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -86.0
+offset_right = -46.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "00:"
+horizontal_alignment = 2
+
+[node name="Seconds" type="Label" parent="CharacterBody2D/TimerUI/Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -61.0
+offset_right = -21.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "00."
+horizontal_alignment = 2
+
+[node name="Msecs" type="Label" parent="CharacterBody2D/TimerUI/Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -41.0
+offset_right = -1.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "00
+"
+horizontal_alignment = 2
 
 [connection signal="timeout" from="CharacterBody2D/GhostTimer" to="CharacterBody2D" method="_on_ghost_timer_timeout"]
 [connection signal="timeout" from="CharacterBody2D/DashTimer" to="CharacterBody2D" method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="CharacterBody2D/DashCooldown" to="CharacterBody2D" method="_on_dash_cooldown_timeout"]
+[connection signal="timeout" from="CharacterBody2D/ComboTimer" to="CharacterBody2D" method="_on_combo_timer_timeout"]
