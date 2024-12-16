@@ -6,7 +6,12 @@ extends CharacterBody2D
 @onready var points_counter = $"/root/Main/Player/CharacterBody2D/PointsUI/Control/PointsCounter"
 @onready var combo_counter = $"/root/Main/Player/CharacterBody2D/ComboUI/Control/ComboCounter"
 
+@onready var animator = $AnimationPlayer
+
 var paused
+
+var save_path = "res://score.json"
+var file
 
 @export var ghost_node: PackedScene
 @onready var ghost_timer = $GhostTimer
@@ -49,6 +54,10 @@ var current_weapon : Area2D = null
 func _ready():
 	#max_ammo = ammo_bar.max_value
 	#current_ammo = max_ammo
+	if FileAccess.file_exists(save_path):
+		var file = FileAccess.open(save_path,FileAccess.READ)
+		points = file.get_var(points)
+	update_points()
 	update_ammo_bar()
 	death_label.visible = false  # Ukryj DeathLabel na początku
 	death_overlay.visible = false  # Ukryj czerwony overlay na początku
@@ -168,7 +177,11 @@ func reset_level_if_held(delta):
 
 # Restart poziomu
 func restart_level():
+	var file = FileAccess.open(save_path, FileAccess.WRITE)
+	file.store_var(points)
+	file.close()
 	get_tree().reload_current_scene()  # Przeładowanie bieżącej sceny
+
 
 func update_ammo_bar():
 	if has_weapon and current_weapon.is_ranged:
@@ -242,5 +255,12 @@ func _on_combo_timer_timeout() -> void:
 	combo_count = 0
 	combo_points_multiplier = 1
 	update_combo()
+	
+	
+func next_level():
+	animator.play("fade_in")
+	await get_tree().create_timer(2).timeout
+	animator.play_backwards("fade_in")
+	restart_level()
 	
 	

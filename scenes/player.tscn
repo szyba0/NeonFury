@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://6d7wahx3n4ke"]
+[gd_scene load_steps=16 format=3 uid="uid://6d7wahx3n4ke"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_jnw0g"]
 [ext_resource type="Texture2D" uid="uid://ca8rr0xtr4uuw" path="res://assets/player/player.png" id="1_xauq6"]
@@ -15,6 +15,90 @@ size = Vector2(16, 30)
 
 [sub_resource type="LabelSettings" id="LabelSettings_yyjib"]
 font = ExtResource("8_451qe")
+
+[sub_resource type="Animation" id="Animation_dwal1"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeUI/Control/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FadeUI/Control/ColorRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FadeUI/Control/ColorRect:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4uup7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeUI/Control/ColorRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FadeUI/Control/ColorRect:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FadeUI/Control/ColorRect:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v85f2"]
+_data = {
+"RESET": SubResource("Animation_4uup7"),
+"fade_in": SubResource("Animation_dwal1")
+}
 
 [sub_resource type="GDScript" id="GDScript_npi3m"]
 
@@ -102,6 +186,7 @@ color = Color(1, 0, 0, 0.313726)
 
 [node name="ComboTimer" type="Timer" parent="CharacterBody2D"]
 wait_time = 3.0
+one_shot = true
 
 [node name="PointsUI" type="CanvasLayer" parent="CharacterBody2D"]
 
@@ -133,6 +218,25 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 label_settings = SubResource("LabelSettings_yyjib")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
+libraries = {
+"": SubResource("AnimationLibrary_v85f2")
+}
+
+[node name="FadeUI" type="CanvasLayer" parent="CharacterBody2D"]
+
+[node name="Control" type="Control" parent="CharacterBody2D/FadeUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="CharacterBody2D/FadeUI/Control"]
+layout_mode = 0
+offset_right = 1156.0
+offset_bottom = 651.0
+color = Color(0, 0, 0, 0)
 
 [node name="PauseNode" type="Node" parent="."]
 process_mode = 2
