@@ -80,8 +80,6 @@ wait_time = 2.0
 [node name="PauseUI" type="CanvasLayer" parent="CharacterBody2D"]
 
 [node name="PauseMenu" parent="CharacterBody2D/PauseUI" instance=ExtResource("10_py4w4")]
-offset_right = 0.0
-offset_bottom = 0.0
 
 [node name="DeathUI" type="CanvasLayer" parent="CharacterBody2D"]
 visible = false

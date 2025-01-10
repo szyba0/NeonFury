@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bw5nahow3xlj2"
-path="res://.godot/imported/background-ezgif.com-gif-to-sprite-converter.png-487286ff9fec5dc73f2a943817ae0e99.ctex"
+uid="uid://bgso27t8bt6bl"
+path="res://.godot/imported/Budynki_0054.png-fefbd64fa8f9cca545b385cb5acba285.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/MainMenu/background-ezgif.com-gif-to-sprite-converter.png"
-dest_files=["res://.godot/imported/background-ezgif.com-gif-to-sprite-converter.png-487286ff9fec5dc73f2a943817ae0e99.ctex"]
+source_file="res://assets/MainMenu/Menu Główne Animacja/Budynki_0054.png"
+dest_files=["res://.godot/imported/Budynki_0054.png-fefbd64fa8f9cca545b385cb5acba285.ctex"]
 
 [params]
 

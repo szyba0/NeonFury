@@ -1,179 +1,325 @@
-[gd_scene load_steps=24 format=3 uid="uid://b2sx8t1jq4lg"]
+[gd_scene load_steps=71 format=3 uid="uid://b2sx8t1jq4lg"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_yyewm"]
-[ext_resource type="Texture2D" uid="uid://bw5nahow3xlj2" path="res://assets/MainMenu/background-ezgif.com-gif-to-sprite-converter.png" id="2_etvg2"]
+[ext_resource type="Texture2D" uid="uid://pjrvo1essof5" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0000.png" id="2_b8ljh"]
 [ext_resource type="Texture2D" uid="uid://cae74dubgc3w6" path="res://assets/MainMenu/logo.png" id="3_r63ln"]
+[ext_resource type="Texture2D" uid="uid://m7wqhgk3uktb" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0001.png" id="3_xxxd4"]
+[ext_resource type="Texture2D" uid="uid://bjl4ppu8gc07k" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0002.png" id="4_ofrmj"]
 [ext_resource type="FontFile" uid="uid://bgdi76ycjyl4q" path="res://assets/GlitchGoblin-2O87v.ttf" id="4_ve0i0"]
+[ext_resource type="Texture2D" uid="uid://yuk5nwb56flk" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0003.png" id="5_j7xmy"]
+[ext_resource type="Texture2D" uid="uid://brjl0tvbeo0ni" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0004.png" id="6_ei108"]
+[ext_resource type="Texture2D" uid="uid://byjp4h3a6kc6f" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0005.png" id="7_sf1b5"]
+[ext_resource type="Texture2D" uid="uid://b2c758eq0rk3b" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0006.png" id="8_vfghf"]
+[ext_resource type="Texture2D" uid="uid://koylcnfprhlx" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0007.png" id="9_c0vgf"]
+[ext_resource type="Texture2D" uid="uid://bncw6ymxlccb3" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0008.png" id="10_ivjrx"]
+[ext_resource type="Texture2D" uid="uid://2sl1adbaxo7i" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0009.png" id="11_ecqfw"]
+[ext_resource type="Texture2D" uid="uid://bdajo5mqpc6hp" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0010.png" id="12_4w3d1"]
+[ext_resource type="Texture2D" uid="uid://dhb14y740t35c" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0011.png" id="13_qvnwx"]
+[ext_resource type="Texture2D" uid="uid://cohrdq62a06n" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0012.png" id="14_ul5wr"]
+[ext_resource type="Texture2D" uid="uid://dv485o2aww3tp" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0013.png" id="15_4cp0r"]
+[ext_resource type="Texture2D" uid="uid://clhdn4c8h60qc" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0014.png" id="16_eq5n2"]
+[ext_resource type="Texture2D" uid="uid://dvvly2wblghiu" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0015.png" id="17_bruvd"]
+[ext_resource type="Texture2D" uid="uid://dmp533xdevgai" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0016.png" id="18_tmgex"]
+[ext_resource type="Texture2D" uid="uid://cv1ysull24l67" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0017.png" id="19_ccan5"]
+[ext_resource type="Texture2D" uid="uid://dfnf41g2xotfy" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0018.png" id="20_a6gma"]
+[ext_resource type="Texture2D" uid="uid://bs7ru1etd7f6c" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0019.png" id="21_krtgt"]
+[ext_resource type="Texture2D" uid="uid://bdstkjo1476n1" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0020.png" id="22_ptdvr"]
+[ext_resource type="Texture2D" uid="uid://k45epksyuf18" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0021.png" id="23_y0ovn"]
+[ext_resource type="Texture2D" uid="uid://dma5vouv7olvg" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0022.png" id="24_smty1"]
+[ext_resource type="Texture2D" uid="uid://cybhx1bm5oq0" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0023.png" id="25_18rte"]
+[ext_resource type="Texture2D" uid="uid://bfqpdwnf2t8fb" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0024.png" id="26_emuck"]
+[ext_resource type="Texture2D" uid="uid://cailjtx74q1c1" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0025.png" id="27_kyqa1"]
+[ext_resource type="Texture2D" uid="uid://iblqv84cd2ir" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0026.png" id="28_ljtm5"]
+[ext_resource type="Texture2D" uid="uid://cfnhkhb8452f0" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0027.png" id="29_apt62"]
+[ext_resource type="Texture2D" uid="uid://rfcvoe01lukq" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0028.png" id="30_6w5jf"]
+[ext_resource type="Texture2D" uid="uid://5rcwerk81k5v" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0029.png" id="31_ugorb"]
+[ext_resource type="Texture2D" uid="uid://b5mh33ea4sxg8" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0030.png" id="32_ksagd"]
+[ext_resource type="Texture2D" uid="uid://3q2tor77l08" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0031.png" id="33_10dl6"]
+[ext_resource type="Texture2D" uid="uid://cps8f36lcvn32" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0032.png" id="34_ccry7"]
+[ext_resource type="Texture2D" uid="uid://d2d0eoeokyful" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0033.png" id="35_gluhg"]
+[ext_resource type="Texture2D" uid="uid://dvtljr8oj5e3l" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0034.png" id="36_lwj0g"]
+[ext_resource type="Texture2D" uid="uid://o71is0iwlut6" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0035.png" id="37_753j5"]
+[ext_resource type="Texture2D" uid="uid://sy52dvqodfyr" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0036.png" id="38_rd2v1"]
+[ext_resource type="Texture2D" uid="uid://7skl5834q5pd" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0037.png" id="39_mdcgs"]
+[ext_resource type="Texture2D" uid="uid://bjmbqrdmuj8wm" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0038.png" id="40_1erja"]
+[ext_resource type="Texture2D" uid="uid://cg6lsn6pvb64d" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0039.png" id="41_pmqhl"]
+[ext_resource type="Texture2D" uid="uid://bbra3w1d7pqsq" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0040.png" id="42_knlk2"]
+[ext_resource type="Texture2D" uid="uid://ddnsxmu02x85y" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0041.png" id="43_h5myk"]
+[ext_resource type="Texture2D" uid="uid://ceol5gmpp438k" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0042.png" id="44_xibna"]
+[ext_resource type="Texture2D" uid="uid://b1am32of2lujs" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0043.png" id="45_ob4qa"]
+[ext_resource type="Texture2D" uid="uid://d3thj71s4keld" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0044.png" id="46_co5ej"]
+[ext_resource type="Texture2D" uid="uid://bcg8mxtq0wuvw" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0045.png" id="47_vimwa"]
+[ext_resource type="Texture2D" uid="uid://bya7ld4ji4urc" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0046.png" id="48_ie805"]
+[ext_resource type="Texture2D" uid="uid://buy1jftiidh0r" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0047.png" id="49_0pgat"]
+[ext_resource type="Texture2D" uid="uid://8b84wmganbnf" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0048.png" id="50_1b0ry"]
+[ext_resource type="Texture2D" uid="uid://dtbuxki2xluue" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0049.png" id="51_2mwbw"]
+[ext_resource type="Texture2D" uid="uid://bovsga7a80h10" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0050.png" id="52_yhl2s"]
+[ext_resource type="Texture2D" uid="uid://ck65uhq24e6g" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0051.png" id="53_xypxt"]
+[ext_resource type="Texture2D" uid="uid://ca4l6apfgr0hn" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0052.png" id="54_be27u"]
+[ext_resource type="Texture2D" uid="uid://cnu4v8fwaf3lb" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0053.png" id="55_r3cj8"]
+[ext_resource type="Texture2D" uid="uid://bgso27t8bt6bl" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0054.png" id="56_cwper"]
+[ext_resource type="Texture2D" uid="uid://cg27slo2tv8ny" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0055.png" id="57_q6crb"]
+[ext_resource type="Texture2D" uid="uid://bnhr12fmk5pk2" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0056.png" id="58_tio8m"]
+[ext_resource type="Texture2D" uid="uid://b8r0aq0o6yiep" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0057.png" id="59_4c4wl"]
+[ext_resource type="Texture2D" uid="uid://cqcnn8succ1i0" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0058.png" id="60_ly2x5"]
+[ext_resource type="Texture2D" uid="uid://vdi6hitfp2ju" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0059.png" id="61_a5eug"]
+[ext_resource type="Texture2D" uid="uid://bh78ffj3u270f" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0060.png" id="62_p0eob"]
+[ext_resource type="Texture2D" uid="uid://c8xkwlqgtmfm4" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0061.png" id="63_5ly8r"]
+[ext_resource type="Texture2D" uid="uid://bjy246montcex" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0062.png" id="64_t533t"]
+[ext_resource type="Texture2D" uid="uid://be1txy3ctj2gd" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0063.png" id="65_xq5es"]
+[ext_resource type="Texture2D" uid="uid://cowwkhq6mxgum" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0064.png" id="66_pxk8a"]
+[ext_resource type="Texture2D" uid="uid://73qfqoyyjdem" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0065.png" id="67_sxw8v"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hpdb7"]
-atlas = ExtResource("2_etvg2")
-region = Rect2(0, 0, 560, 305)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m82lu"]
-atlas = ExtResource("2_etvg2")
-region = Rect2(560, 0, 560, 305)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6fpna"]
-atlas = ExtResource("2_etvg2")
-region = Rect2(1120, 0, 560, 305)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4emen"]
-atlas = ExtResource("2_etvg2")
-region = Rect2(1680, 0, 560, 305)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c8vww"]
-atlas = ExtResource("2_etvg2")
-region = Rect2(2240, 0, 560, 305)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s16mw"]
-atlas = ExtResource("2_etvg2")
-region = Rect2(0, 305, 560, 305)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lwj2e"]
-atlas = ExtResource("2_etvg2")
-region = Rect2(560, 305, 560, 305)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mnrrf"]
-atlas = ExtResource("2_etvg2")
-region = Rect2(1120, 305, 560, 305)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_28k3a"]
-atlas = ExtResource("2_etvg2")
-region = Rect2(1680, 305, 560, 305)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_545x2"]
-atlas = ExtResource("2_etvg2")
-region = Rect2(2240, 305, 560, 305)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2yxda"]
-atlas = ExtResource("2_etvg2")
-region = Rect2(0, 610, 560, 305)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dl1rk"]
-atlas = ExtResource("2_etvg2")
-region = Rect2(560, 610, 560, 305)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hcjbh"]
-atlas = ExtResource("2_etvg2")
-region = Rect2(1120, 610, 560, 305)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_54gk1"]
-atlas = ExtResource("2_etvg2")
-region = Rect2(1680, 610, 560, 305)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xeqfs"]
-atlas = ExtResource("2_etvg2")
-region = Rect2(2240, 610, 560, 305)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4p88f"]
-atlas = ExtResource("2_etvg2")
-region = Rect2(0, 915, 560, 305)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bp22i"]
-atlas = ExtResource("2_etvg2")
-region = Rect2(560, 915, 560, 305)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hgcde"]
-atlas = ExtResource("2_etvg2")
-region = Rect2(1120, 915, 560, 305)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_hjqlc"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_huqyk"]
 animations = [{
 "frames": [{
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_hpdb7")
+"duration": 1.0,
+"texture": ExtResource("2_b8ljh")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_m82lu")
+"duration": 1.0,
+"texture": ExtResource("3_xxxd4")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_6fpna")
+"duration": 1.0,
+"texture": ExtResource("4_ofrmj")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_4emen")
+"duration": 1.0,
+"texture": ExtResource("5_j7xmy")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_c8vww")
+"duration": 1.0,
+"texture": ExtResource("6_ei108")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_s16mw")
+"duration": 1.0,
+"texture": ExtResource("7_sf1b5")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_lwj2e")
+"duration": 1.0,
+"texture": ExtResource("8_vfghf")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_mnrrf")
+"duration": 1.0,
+"texture": ExtResource("9_c0vgf")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_28k3a")
+"duration": 1.0,
+"texture": ExtResource("10_ivjrx")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_545x2")
+"duration": 1.0,
+"texture": ExtResource("11_ecqfw")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_2yxda")
+"duration": 1.0,
+"texture": ExtResource("12_4w3d1")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_dl1rk")
+"duration": 1.0,
+"texture": ExtResource("13_qvnwx")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_hcjbh")
+"duration": 1.0,
+"texture": ExtResource("14_ul5wr")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_54gk1")
+"duration": 1.0,
+"texture": ExtResource("15_4cp0r")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_xeqfs")
+"duration": 1.0,
+"texture": ExtResource("16_eq5n2")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_4p88f")
+"duration": 1.0,
+"texture": ExtResource("17_bruvd")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_bp22i")
+"duration": 1.0,
+"texture": ExtResource("18_tmgex")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_hgcde")
+"duration": 1.0,
+"texture": ExtResource("19_ccan5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_a6gma")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_krtgt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_ptdvr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_y0ovn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_smty1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_18rte")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_emuck")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_kyqa1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_ljtm5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_apt62")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_6w5jf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_ugorb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_ksagd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_10dl6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_ccry7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_gluhg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_lwj0g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_753j5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_rd2v1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_mdcgs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_1erja")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_pmqhl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_knlk2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_h5myk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_xibna")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_ob4qa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_co5ej")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_vimwa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_ie805")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_0pgat")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_1b0ry")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_2mwbw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_yhl2s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_xypxt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_be27u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_r3cj8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_cwper")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_q6crb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_tio8m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_4c4wl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_ly2x5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_a5eug")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_p0eob")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_5ly8r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_t533t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_xq5es")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_pxk8a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_sxw8v")
 }],
 "loop": true,
 "name": &"default",
-"speed": 30.0
+"speed": 5.0
 }]
 
 [node name="MainMenuNode" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yyewm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(973, 542)
-scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_hjqlc")
+sprite_frames = SubResource("SpriteFrames_huqyk")
 autoplay = "default"
-frame_progress = 0.264961
+frame_progress = 0.00193061
 
 [node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 1980.0
-offset_bottom = 1080.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 1020.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("3_r63ln")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -134.5
-offset_top = -280.0
-offset_right = 134.5
-offset_bottom = -26.0
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = 250.0
+offset_right = 215.0
+offset_bottom = 504.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2

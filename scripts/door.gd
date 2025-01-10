@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var Player = $"/root/Main/Player/CharacterBody2D"
+@onready var Player = $"../../Player/CharacterBody2D"
 var is_open = false
 var detected = 0
 
