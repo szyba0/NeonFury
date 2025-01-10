@@ -1,20 +1,19 @@
 extends Node2D
 
 @onready var Player = $"/root/Main/Player/CharacterBody2D"
-@onready var Enemy = $"/root/Main/Enemy01/CharacterBody2D"
 var is_open = false
 var detected = 0
 
 func _on_open_range_body_entered(body: Node2D) -> void:
 	print(body)
-	if body == Player or body == Enemy:
+	if body == Player:
 		print("Gracz otwiera drzwi.")
 		detected += 1
 		open_door()
 
 
 func _on_open_range_body_exited(body: Node2D) -> void:
-	if body == Player or body == Enemy:
+	if body == Player:
 		detected -= 1
 		close_door()
 

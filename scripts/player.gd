@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var main = get_tree().get_root().get_node("Main")
 @onready var bullet = load("res://scenes/Bullet02.tscn")
-@onready var ammo_bar = $"/root/Main/Player/CharacterBody2D/AmmoUI/Control/AmmoBar" 
+@onready var ammo_bar = $AmmoUI/Control/AmmoBar
 @onready var points_counter = $"/root/Main/Player/CharacterBody2D/PointsUI/Control/PointsCounter"
 @onready var combo_counter = $"/root/Main/Player/CharacterBody2D/ComboUI/Control/ComboCounter"
 
