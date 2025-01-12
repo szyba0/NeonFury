@@ -4,8 +4,12 @@ extends Node2D
 @onready var pause_menu = $Player/CharacterBody2D/PauseUI/PauseMenu
 var is_paused = false
 
+signal change_scene_signal(target_scene)
 
 func _ready():
+	$AnimationPlayer.play("fade_out")
+	await $AnimationPlayer.animation_finished
+	
 	randomize()  # Ustaw losowy seed dla generatora liczb losowych
 	# Dodaj wszystkie ścieżki patrolowe do tablicy ręcznie lub automatycznie
 
@@ -28,3 +32,9 @@ func toggle_pause():
 func enemy_died(pts):
 	print("signal received")
 	$Player.get_child(0).combo(pts)
+
+
+func _on_change_scene_signal(target_scene: Variant) -> void:
+	$AnimationPlayer.play("fade_in")
+	await $AnimationPlayer.animation_finished
+	get_tree().change_scene_to_file(target_scene)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://b2sx8t1jq4lg"]
+[gd_scene load_steps=75 format=3 uid="uid://b2sx8t1jq4lg"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_yyewm"]
 [ext_resource type="Texture2D" uid="uid://pjrvo1essof5" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0000.png" id="2_b8ljh"]
@@ -276,6 +276,60 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_3e88v"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Overlay:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_f0vjx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Overlay:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qf2ce"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Overlay:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rd1u2"]
+_data = {
+"RESET": SubResource("Animation_f0vjx"),
+"fade_in": SubResource("Animation_3e88v"),
+"fade_out": SubResource("Animation_qf2ce")
+}
+
 [node name="MainMenuNode" type="Control"]
 layout_mode = 3
 anchors_preset = 8
@@ -348,6 +402,19 @@ theme_override_font_sizes/font_size = 64
 text = "Quit
 "
 icon_alignment = 1
+
+[node name="Overlay" type="ColorRect" parent="."]
+offset_left = -1046.0
+offset_top = -604.0
+offset_right = 1047.0
+offset_bottom = 641.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rd1u2")
+}
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
