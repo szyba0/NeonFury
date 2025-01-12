@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvurvcucd71mm"]
+
+[ext_resource type="Texture2D" uid="uid://d0xmct24wibg1" path="res://assets/furniture/materac.png" id="1_qn5cs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crl8n"]
+size = Vector2(59, 70)
+
+[node name="Matress" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 128
+collision_mask = 30
+
+[node name="Materac" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("1_qn5cs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_crl8n")

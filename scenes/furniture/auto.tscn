@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://duoe0r1bfv8fw"]
+
+[ext_resource type="Texture2D" uid="uid://bb055ikq32u7e" path="res://assets/furniture/auto.png" id="1_36sin"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crl8n"]
+size = Vector2(97, 47)
+
+[node name="Auto" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 64
+collision_mask = 30
+
+[node name="Auto" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("1_36sin")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_crl8n")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://rtlj8yhtdwg0"]
+
+[ext_resource type="Texture2D" uid="uid://bsoq4oaixkonp" path="res://assets/furniture/stol_bilard.png" id="1_im76j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crl8n"]
+size = Vector2(41, 62)
+
+[node name="BillardTable" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 128
+collision_mask = 31
+
+[node name="StolBilard" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("1_im76j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(7.5, -5)
+shape = SubResource("RectangleShape2D_crl8n")

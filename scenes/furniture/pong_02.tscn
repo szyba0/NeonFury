@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl54mhspfan8x"]
+
+[ext_resource type="Texture2D" uid="uid://ca0y84fblkuki" path="res://assets/furniture/pong_konsolaTD.png" id="1_lcss8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crl8n"]
+size = Vector2(27, 34)
+
+[node name="Pong02" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 64
+collision_mask = 30
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_crl8n")
+
+[node name="PongKonsolaTd" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("1_lcss8")
