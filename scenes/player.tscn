@@ -38,6 +38,7 @@ position = Vector2(-2, 0)
 shape = SubResource("RectangleShape2D_w538h")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+zoom = Vector2(2, 2)
 
 [node name="AmmoUI" type="CanvasLayer" parent="CharacterBody2D"]
 
