@@ -2,13 +2,9 @@ extends CharacterBody2D
 
 @onready var main = get_tree().get_root().get_node("Main")
 @onready var bullet = load("res://scenes/Bullet02.tscn")
-@onready var ammo_bar = $"/root/Main/Player/CharacterBody2D/AmmoUI/Control/AmmoBar" 
+@onready var ammo_bar = $AmmoUI/Control/AmmoBar
 @onready var points_counter = $"/root/Main/Player/CharacterBody2D/PointsUI/Control/PointsCounter"
 @onready var combo_counter = $"/root/Main/Player/CharacterBody2D/ComboUI/Control/ComboCounter"
-
-@onready var animator = $AnimationPlayer
-
-var paused
 
 var save_path = "res://score.json"
 var file
@@ -90,12 +86,6 @@ func _input(_event):
 	elif Input.is_action_just_pressed("RMB") and not near_weapon and has_weapon:
 		throw_weapon(current_weapon)
 
-	if Input.is_action_just_pressed("PAUSE"):
-		get_viewport().set_input_as_handled()
-		if(!get_tree().paused):
-			paused = true
-			$"/root/Main/Player/PauseNode/PauseMenu/Control".show()
-			get_tree().paused = true
 
 func _physics_process(_delta):
 	if is_dead:
@@ -255,12 +245,5 @@ func _on_combo_timer_timeout() -> void:
 	combo_count = 0
 	combo_points_multiplier = 1
 	update_combo()
-	
-	
-func next_level():
-	animator.play("fade_in")
-	await get_tree().create_timer(2).timeout
-	animator.play_backwards("fade_in")
-	restart_level()
 	
 	
