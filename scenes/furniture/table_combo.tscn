@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl55ti1n54rps"]
+
+[ext_resource type="Texture2D" uid="uid://ctf542r4d45i8" path="res://assets/furniture/stoliki i stol.png" id="1_03by1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crl8n"]
+size = Vector2(57, 82)
+
+[node name="TableCombo" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 128
+collision_mask = 31
+
+[node name="StolikiIStol" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("1_03by1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-0.5, 1)
+shape = SubResource("RectangleShape2D_crl8n")

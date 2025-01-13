@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cr60nuj8byboy"]
+
+[ext_resource type="Texture2D" uid="uid://cbqn6r2tb6nlc" path="res://assets/furniture/stol_z_kwiatkami.png" id="1_1iyqf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crl8n"]
+size = Vector2(60, 113)
+
+[node name="TableFlower" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 128
+collision_mask = 31
+
+[node name="StolZKwiatkami" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("1_1iyqf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_crl8n")

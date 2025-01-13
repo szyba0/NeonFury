@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cglk32d0q3peg"]
+
+[ext_resource type="Texture2D" uid="uid://bdynudbw40obb" path="res://assets/furniture/stol gamingowu.png" id="1_t5uc3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crl8n"]
+size = Vector2(70, 31)
+
+[node name="GamingTable" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 128
+collision_mask = 31
+
+[node name="StolGamingowu" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("1_t5uc3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_crl8n")

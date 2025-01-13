@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7jdu7edgq1qq"]
+
+[ext_resource type="Texture2D" uid="uid://b35k6x1swppfu" path="res://assets/furniture/kwiatek1.png" id="1_0jlv5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crl8n"]
+size = Vector2(16, 16)
+
+[node name="Plant01" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 128
+collision_mask = 30
+
+[node name="Kwiatek1" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("1_0jlv5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_crl8n")

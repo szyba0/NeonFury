@@ -1,19 +1,75 @@
-[gd_scene load_steps=4 format=3 uid="uid://05nfevs3nst"]
+[gd_scene load_steps=8 format=3 uid="uid://05nfevs3nst"]
 
 [ext_resource type="FontFile" uid="uid://bgdi76ycjyl4q" path="res://assets/GlitchGoblin-2O87v.ttf" id="1_667uh"]
 [ext_resource type="Script" path="res://scenes/Pause.gd" id="1_awp1v"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wvf7f"]
 font = ExtResource("1_667uh")
-font_size = 86
+font_size = 150
+
+[sub_resource type="Animation" id="Animation_f0vjx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Overlay:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3e88v"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Overlay:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qf2ce"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Overlay:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rd1u2"]
+_data = {
+"RESET": SubResource("Animation_f0vjx"),
+"fade_in": SubResource("Animation_3e88v"),
+"fade_out": SubResource("Animation_qf2ce")
+}
 
 [node name="PauseMenu" type="Control"]
 process_mode = 2
 visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_awp1v")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -22,31 +78,87 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0.0166669, 1, 0.294118)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_left = 423.0
-offset_top = 234.0
-offset_right = 737.0
-offset_bottom = 403.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -274.0
+offset_top = -86.0
+offset_right = 274.0
+offset_bottom = 86.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
 text = "PAUSED"
 label_settings = SubResource("LabelSettings_wvf7f")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -241.0
+offset_top = -381.0
+offset_right = 241.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
 [node name="ResumeButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../ExitButton")
+focus_neighbor_bottom = NodePath("../RestartButton")
+theme_override_fonts/font = ExtResource("1_667uh")
+theme_override_font_sizes/font_size = 32
 text = "Resume
 "
 
+[node name="RestartButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../ResumeButton")
+focus_neighbor_bottom = NodePath("../ExitButton")
+theme_override_fonts/font = ExtResource("1_667uh")
+theme_override_font_sizes/font_size = 32
+text = "Restart"
+
 [node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../RestartButton")
+focus_neighbor_bottom = NodePath("../ResumeButton")
+theme_override_fonts/font = ExtResource("1_667uh")
+theme_override_font_sizes/font_size = 32
 text = "Exit"
 
+[node name="Overlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1046.5
+offset_top = -622.5
+offset_right = 1046.5
+offset_bottom = 622.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rd1u2")
+}
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
