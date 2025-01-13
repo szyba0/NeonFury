@@ -29,8 +29,8 @@ var bullet = load("res://scenes/Bullet02.tscn")
 signal sound_emitted(position: Vector2, range: float)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	if self.get_parent().name == "WeaponHolder":
+		$Sprite2D.texture = held_weapon_sprite
 func on_pickup():
 	$CollisionShape2D.disabled = true
 	queue_free()  # Usuń broń z ziemi po podniesieniu
@@ -39,8 +39,11 @@ func on_pickup():
 func _process(delta: float) -> void:
 	if self.get_parent().name == "Player":
 		global_position = get_parent().global_position
-		self.rotation = (get_global_mouse_position() - global_position).normalized().angle()		
-	
+		self.rotation = (get_global_mouse_position() - global_position).normalized().angle()
+	elif self.get_parent().name == "WeaponHolder":
+		var enemy = get_parent().get_parent()
+		global_position = enemy.global_position
+		self.rotation = enemy.rotation
 		
 
 func _physics_process(delta):

@@ -2,8 +2,6 @@ extends "res://scripts/weapon_base.gd"
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
 func attack():
 	if can_attack and current_ammo > 0:

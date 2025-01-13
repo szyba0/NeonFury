@@ -5,6 +5,8 @@ extends CharacterBody2D
 @onready var ammo_bar = $AmmoUI/Control/AmmoBar
 @onready var points_counter = $"/root/Main/Player/CharacterBody2D/PointsUI/Control/PointsCounter"
 @onready var combo_counter = $"/root/Main/Player/CharacterBody2D/ComboUI/Control/ComboCounter"
+@onready var legs = $Legs
+@onready var shoulders = $Shoulders
 
 @export var ghost_node: PackedScene
 @onready var ghost_timer = $GhostTimer
@@ -85,6 +87,14 @@ func _physics_process(_delta):
 		return  # Jeśli gracz jest martwy, nie aktualizujemy fizyki
 	read_input()
 	move_and_slide()
+	if velocity.length() > 0:
+		legs.play("walk")  
+		shoulders.play("walk")
+	else:
+		legs.stop()
+		legs.frame = 0
+		shoulders.stop()
+		shoulders.frame = 0
 
 func pickup_weapon(weapon):
 	has_weapon = true

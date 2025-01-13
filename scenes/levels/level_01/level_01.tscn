@@ -478,7 +478,7 @@ position = Vector2(-57, -167)
 
 [node name="Enemy" type="Node2D" parent="."]
 
-[node name="FastEnemy" parent="Enemy" instance=ExtResource("29_s5186")]
+[node name="FastEnemy01" parent="Enemy" instance=ExtResource("29_s5186")]
 position = Vector2(-43, -55)
 
 [connection signal="change_scene_signal" from="." to="." method="_on_change_scene_signal"]
