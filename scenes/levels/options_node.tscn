@@ -157,9 +157,9 @@ libraries = {
 
 [node name="HSlider_sfx" type="HSlider" parent="."]
 layout_mode = 0
-offset_left = -314.0
+offset_left = -330.0
 offset_top = 82.0
-offset_right = 310.0
+offset_right = 294.0
 offset_bottom = 98.0
 max_value = 1.0
 step = 0.01
