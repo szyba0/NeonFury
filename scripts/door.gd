@@ -5,9 +5,7 @@ var is_open = false
 var detected = 0
 
 func _on_open_range_body_entered(body: Node2D) -> void:
-	print(body)
 	if body == Player:
-		print("Gracz otwiera drzwi.")
 		detected += 1
 		open_door()
 

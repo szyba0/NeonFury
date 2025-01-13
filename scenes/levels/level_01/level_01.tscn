@@ -29,16 +29,14 @@
 [ext_resource type="PackedScene" uid="uid://cr60nuj8byboy" path="res://scenes/furniture/table_flower.tscn" id="22_yljm8"]
 [ext_resource type="PackedScene" uid="uid://b7vthqbbc2hl6" path="res://scenes/furniture/table_small.tscn" id="24_1rh02"]
 
-[sub_resource type="Gradient" id="Gradient_m753o"]
-offsets = PackedFloat32Array(0.00649351, 1)
-colors = PackedColorArray(0.788208, 0.529752, 0, 1, 0.442451, 0.621759, 0.330969, 1)
+[sub_resource type="Gradient" id="Gradient_hoajq"]
+colors = PackedColorArray(0.808006, 0.403613, 0.711951, 1, 0.451577, 0.793074, 1, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_m4uo0"]
-gradient = SubResource("Gradient_m753o")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ef21t"]
+gradient = SubResource("Gradient_hoajq")
 width = 1024
 height = 1024
-fill_from = Vector2(1, 1)
-fill_to = Vector2(0, 0)
+fill_from = Vector2(0, 1)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_er1vi"]
 texture = ExtResource("2_4e08f")
@@ -312,7 +310,7 @@ offset_right = 2103.0
 offset_bottom = 1692.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture2D_m4uo0")
+texture = SubResource("GradientTexture2D_ef21t")
 metadata/_edit_use_anchors_ = true
 
 [node name="CanvasGroup" type="CanvasGroup" parent="Layout"]
@@ -380,7 +378,7 @@ position = Vector2(101, -49)
 [node name="BillardTable" parent="Layout/Furniture" instance=ExtResource("12_8ptj0")]
 position = Vector2(363, -14)
 
-[node name="Auto" parent="Layout/Furniture" instance=ExtResource("13_n2wa7")]
+[node name="KitchenTable" parent="Layout/Furniture" instance=ExtResource("13_n2wa7")]
 position = Vector2(19, 271)
 
 [node name="Matress" parent="Layout/Furniture" instance=ExtResource("14_nb1le")]
