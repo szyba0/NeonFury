@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://qkgs7o5njh8a"]
+[gd_scene load_steps=41 format=4 uid="uid://qkgs7o5njh8a"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6ts33"]
 [ext_resource type="Texture2D" uid="uid://dtjw37syj8vug" path="res://assets/tileset4.png" id="2_4e08f"]
@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://cl55ti1n54rps" path="res://scenes/furniture/table_combo.tscn" id="21_lqb74"]
 [ext_resource type="PackedScene" uid="uid://cr60nuj8byboy" path="res://scenes/furniture/table_flower.tscn" id="22_yljm8"]
 [ext_resource type="PackedScene" uid="uid://b7vthqbbc2hl6" path="res://scenes/furniture/table_small.tscn" id="24_1rh02"]
+[ext_resource type="PackedScene" uid="uid://cebku4djcjc8f" path="res://scenes/FastEnemy.tscn" id="29_s5186"]
 
 [sub_resource type="Gradient" id="Gradient_m753o"]
 offsets = PackedFloat32Array(0.00649351, 1)
@@ -474,5 +475,10 @@ libraries = {
 
 [node name="Auto" parent="." instance=ExtResource("8_3a1sn")]
 position = Vector2(-57, -167)
+
+[node name="Enemy" type="Node2D" parent="."]
+
+[node name="FastEnemy" parent="Enemy" instance=ExtResource("29_s5186")]
+position = Vector2(-43, -55)
 
 [connection signal="change_scene_signal" from="." to="." method="_on_change_scene_signal"]
