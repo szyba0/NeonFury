@@ -386,7 +386,6 @@ offset_right = 1274.0
 offset_bottom = 655.0
 
 [node name="HSlider_music" parent="OptionsNode" index="6"]
-layout_mode = 0
 offset_left = 636.0
 offset_top = 395.0
 offset_right = 1260.0

@@ -6,6 +6,7 @@ var is_paused = false
 
 signal change_scene_signal(target_scene)
 
+
 func _ready():
 	$AnimationPlayer.play("fade_out")
 	await $AnimationPlayer.animation_finished
@@ -16,6 +17,7 @@ func _ready():
 	
 	# Przekaż ścieżki patrolowe do każdego przeciwnika w poziomie
 	for enemy in get_tree().get_nodes_in_group("Enemies"):
+		enemy.connect("died",enemy_died)
 		enemy.set_patrol_paths(patrol_paths)
 
 	
@@ -30,7 +32,6 @@ func toggle_pause():
 
 
 func enemy_died(pts):
-	print("signal received")
 	$Player.get_child(0).combo(pts)
 
 
