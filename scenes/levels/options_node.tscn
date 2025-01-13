@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://48f1kg3i181n"]
+[gd_scene load_steps=7 format=3 uid="uid://cfr7vhfrxo8lk"]
 
-[ext_resource type="Script" path="res://scripts/level_selection_node.gd" id="1_4bqtl"]
-[ext_resource type="FontFile" uid="uid://bgdi76ycjyl4q" path="res://assets/GlitchGoblin-2O87v.ttf" id="3_nscxd"]
+[ext_resource type="Script" path="res://scenes/levels/options_node.gd" id="1_bs7ts"]
+[ext_resource type="FontFile" uid="uid://bgdi76ycjyl4q" path="res://assets/GlitchGoblin-2O87v.ttf" id="2_mdc6a"]
 
 [sub_resource type="Animation" id="Animation_f0vjx"]
 length = 0.001
@@ -57,7 +57,7 @@ _data = {
 "fade_out": SubResource("Animation_qf2ce")
 }
 
-[node name="LevelSelectionNode" type="Control"]
+[node name="OptionsNode" type="Control"]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -67,7 +67,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 4
-script = ExtResource("1_4bqtl")
+script = ExtResource("1_bs7ts")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -76,15 +76,49 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 347.0
+offset_left = 513.0
 offset_top = -466.0
-offset_right = 881.0
+offset_right = 838.0
 offset_bottom = -392.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_nscxd")
+theme_override_fonts/font = ExtResource("2_mdc6a")
 theme_override_font_sizes/font_size = 64
-text = "Level Selection"
+text = "Options"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -221.0
+offset_top = -285.0
+offset_right = 237.0
+offset_bottom = -211.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_mdc6a")
+theme_override_font_sizes/font_size = 64
+text = "MUSIC VOLUME"
+
+[node name="Label2" type="Label" parent="Label2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.0
+offset_top = 169.0
+offset_right = 193.0
+offset_bottom = 243.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_mdc6a")
+theme_override_font_sizes/font_size = 64
+text = "SFX VOLUME"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -98,32 +132,10 @@ offset_bottom = 466.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Level00Button" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-focus_neighbor_top = NodePath("../ReturnButton")
-focus_neighbor_bottom = NodePath("../Level01Button")
-theme_override_fonts/font = ExtResource("3_nscxd")
-theme_override_font_sizes/font_size = 64
-text = "Tutorial
-"
-icon_alignment = 1
-
-[node name="Level01Button" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-focus_neighbor_top = NodePath("../Level00Button")
-focus_neighbor_bottom = NodePath("../ReturnButton")
-theme_override_fonts/font = ExtResource("3_nscxd")
-theme_override_font_sizes/font_size = 64
-text = "Level 01
-"
-icon_alignment = 1
-
 [node name="ReturnButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
-focus_neighbor_top = NodePath("../Level01Button")
-focus_neighbor_bottom = NodePath("../Level00Button")
-theme_override_fonts/font = ExtResource("3_nscxd")
+theme_override_fonts/font = ExtResource("2_mdc6a")
 theme_override_font_sizes/font_size = 64
 text = "Return
 "
@@ -143,6 +155,27 @@ libraries = {
 "": SubResource("AnimationLibrary_rd1u2")
 }
 
-[connection signal="pressed" from="VBoxContainer/Level00Button" to="." method="_on_level_00_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/Level01Button" to="." method="_on_level_01_button_pressed"]
+[node name="HSlider_sfx" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = -314.0
+offset_top = 82.0
+offset_right = 310.0
+offset_bottom = 98.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="HSlider_music" type="HSlider" parent="."]
+offset_left = -328.0
+offset_top = -162.0
+offset_right = 296.0
+offset_bottom = -146.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
 [connection signal="pressed" from="VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="mouse_exited" from="HSlider_sfx" to="." method="_on_h_slider_sfx_mouse_exited"]
+[connection signal="value_changed" from="HSlider_sfx" to="." method="_on_h_slider_sfx_value_changed"]
+[connection signal="mouse_exited" from="HSlider_music" to="." method="_on_h_slider_music_mouse_exited"]
+[connection signal="value_changed" from="HSlider_music" to="." method="_on_h_slider_music_value_changed"]

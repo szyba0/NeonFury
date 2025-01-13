@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://qkgs7o5njh8a"]
+[gd_scene load_steps=42 format=4 uid="uid://qkgs7o5njh8a"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6ts33"]
 [ext_resource type="Texture2D" uid="uid://dtjw37syj8vug" path="res://assets/tileset4.png" id="2_4e08f"]
@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://cr60nuj8byboy" path="res://scenes/furniture/table_flower.tscn" id="22_yljm8"]
 [ext_resource type="PackedScene" uid="uid://b7vthqbbc2hl6" path="res://scenes/furniture/table_small.tscn" id="24_1rh02"]
 [ext_resource type="AudioStream" uid="uid://bq6q67ia6iek6" path="res://assets/music/level1.mp3" id="29_j8ym7"]
+[ext_resource type="PackedScene" uid="uid://bf6hk33cyqqae" path="res://scenes/Enemy01.tscn" id="30_jsboi"]
 
 [sub_resource type="Gradient" id="Gradient_m753o"]
 offsets = PackedFloat32Array(0.00649351, 1)
@@ -481,5 +482,8 @@ stream = ExtResource("29_j8ym7")
 autoplay = true
 bus = &"Music"
 parameters/looping = true
+
+[node name="Enemy01" parent="." instance=ExtResource("30_jsboi")]
+position = Vector2(36, 243)
 
 [connection signal="change_scene_signal" from="." to="." method="_on_change_scene_signal"]

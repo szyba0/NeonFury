@@ -12,13 +12,16 @@ func _process(delta: float) -> void:
 
 
 func _on_start_button_pressed() -> void:
-	$AnimationPlayer.play("fade_in")
-	await $AnimationPlayer.animation_finished
-	get_tree().change_scene_to_file("res://scenes/levels/level_selection_node.tscn")
+	#$AnimationPlayer.play("fade_in")
+	#await $AnimationPlayer.animation_finished
+	self.visible = false
+	self.get_parent().get_node("LevelSelectionNode").visible = true
+	#get_tree().change_scene_to_file("res://scenes/levels/level_selection_node.tscn")
 
 
 func _on_options_button_pressed() -> void:
-	pass # Replace with function body.
+	self.visible = false
+	self.get_parent().get_node("OptionsNode").visible = true
 
 
 func _on_quit_button_pressed() -> void:
