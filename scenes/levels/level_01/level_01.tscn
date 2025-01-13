@@ -31,13 +31,14 @@
 
 [sub_resource type="Gradient" id="Gradient_m753o"]
 offsets = PackedFloat32Array(0.00649351, 1)
-colors = PackedColorArray(0.605525, 0.485187, 0.993398, 1, 0.0120963, 0.0750687, 0.124752, 1)
+colors = PackedColorArray(0.788208, 0.529752, 0, 1, 0.442451, 0.621759, 0.330969, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_m4uo0"]
 gradient = SubResource("Gradient_m753o")
 width = 1024
 height = 1024
-fill_from = Vector2(0, 1)
+fill_from = Vector2(1, 1)
+fill_to = Vector2(0, 0)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_er1vi"]
 texture = ExtResource("2_4e08f")
