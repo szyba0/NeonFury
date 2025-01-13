@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtywm3p4nm3hw"]
+
+[ext_resource type="Texture2D" uid="uid://dm8kbtndmb8et" path="res://assets/furniture/toaleta.png" id="1_wc517"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crl8n"]
+size = Vector2(23, 28)
+
+[node name="Toilet" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 128
+collision_mask = 31
+
+[node name="Toaleta" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("1_wc517")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_crl8n")

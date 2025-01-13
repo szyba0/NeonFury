@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ci3tdojfo2rko"]
+
+[ext_resource type="Texture2D" uid="uid://820drd4etrnl" path="res://assets/furniture/basen_i_guess.png" id="1_5dilm"]
+
+[node name="Pool" type="Node2D"]
+
+[node name="BasenIGuess" type="Sprite2D" parent="."]
+texture = ExtResource("1_5dilm")

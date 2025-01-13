@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dg6v83ktvr7gx"]
+
+[ext_resource type="Texture2D" uid="uid://chsorktmn638x" path="res://assets/furniture/gaming chair.png" id="1_tym2u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tul08"]
+size = Vector2(30, 28)
+
+[node name="GamingChair" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 64
+collision_mask = 31
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_tul08")
+
+[node name="GamingChair" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("1_tym2u")

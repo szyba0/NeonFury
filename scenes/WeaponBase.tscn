@@ -110,12 +110,15 @@ libraries = {
 }
 
 [node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
 
 [node name="PickupSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_b1ins")
+bus = &"SFX"
 
 [node name="ThrowSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_nikic")
+bus = &"SFX"
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(6, 15)

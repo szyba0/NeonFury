@@ -97,6 +97,8 @@ PAUSE={
 2d_physics/layer_4="Bullets"
 2d_physics/layer_5="Weapons"
 2d_physics/layer_6="door"
+2d_physics/layer_7="furniture hard"
+2d_physics/layer_8="furniture soft"
 
 [rendering]
 

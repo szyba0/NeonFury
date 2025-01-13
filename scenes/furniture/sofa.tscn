@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://sts6k77i32a4"]
+
+[ext_resource type="Texture2D" uid="uid://cmxk3fb0bltvo" path="res://assets/furniture/kanapa.png" id="1_a2yoe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crl8n"]
+size = Vector2(40, 97)
+
+[node name="Sofa" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 128
+collision_mask = 31
+
+[node name="Kanapa" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("1_a2yoe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_crl8n")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dulxbfu0famfe"]
+
+[ext_resource type="Texture2D" uid="uid://b2g6s0c47q4m1" path="res://assets/furniture/umywalka.png" id="1_smk5b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crl8n"]
+size = Vector2(23, 35)
+
+[node name="Sink" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 128
+collision_mask = 31
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_crl8n")
+
+[node name="Umywalka" type="Sprite2D" parent="."]
+texture = ExtResource("1_smk5b")

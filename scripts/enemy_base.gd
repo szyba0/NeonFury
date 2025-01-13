@@ -10,6 +10,7 @@ extends CharacterBody2D
 @export var knockdown_duration: float = 3.0
 @export var damage_threshold: int = 10    # Próg obrażeń dla knockdownu
 @export var is_patroling: bool = false
+@export var points: int
 
 @export var normal_head_sprite: Texture
 @export var injured_head_sprite: Texture
@@ -36,6 +37,8 @@ var player = null
 var is_chasing = false
 var current_patrol_path: PathFollow2D = null
 var is_attacking = false
+
+signal died(pts)
 
 var patrol_paths: Array[Path2D] = []
 var current_patrol_index: int = 0
@@ -177,6 +180,8 @@ func take_damage(damage: int):
 
 func die():
 	is_dead = true
+	print("signal emitted")
+	emit_signal("died",points)
 	velocity = Vector2.ZERO
 	#animation_player.play("Dead")
 	collision_shape.set_deferred("disabled",true)
