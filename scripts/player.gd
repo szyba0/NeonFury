@@ -39,7 +39,9 @@ var weapon_type = null
 
 var points: int = 0
 var combo_count: int = 0
+var max_combo: int = 0
 var combo_points_multiplier = 1
+var kills:int = 0
 
 var current_weapon : Area2D = null
 
@@ -224,6 +226,9 @@ func combo(pts):
 	update_points()
 	combo_count += 1
 	combo_points_multiplier += 1
+	if combo_count> max_combo:
+		max_combo = combo_count
+	kills += 1
 	update_combo()
 	print(combo_counter)
 
@@ -235,3 +240,10 @@ func _on_combo_timer_timeout() -> void:
 	update_combo()
 	
 	
+func display_points_screen():
+	$PointScreenUI/PointScreen/points.text = str(points)
+	$PointScreenUI/PointScreen/kills.text = str(kills)
+	$PointScreenUI/PointScreen/combo.text = str(max_combo)
+	$TimerUI/Panel.stop()
+	$PointScreenUI/PointScreen/time.text = $TimerUI/Panel/Minutes.text +$TimerUI/Panel/Seconds.text+$TimerUI/Panel/Msecs.text
+	$PointScreenUI/PointScreen.visible = true

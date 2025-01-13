@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://6d7wahx3n4ke"]
+[gd_scene load_steps=13 format=3 uid="uid://6d7wahx3n4ke"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_jnw0g"]
 [ext_resource type="Texture2D" uid="uid://ca8rr0xtr4uuw" path="res://assets/player/player.png" id="1_xauq6"]
@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://bgdi76ycjyl4q" path="res://assets/GlitchGoblin-2O87v.ttf" id="8_451qe"]
 [ext_resource type="Script" path="res://scenes/LevelTimer.gd" id="9_67lky"]
 [ext_resource type="PackedScene" uid="uid://05nfevs3nst" path="res://scenes/pause_menu.tscn" id="10_py4w4"]
+[ext_resource type="PackedScene" uid="uid://bya1uuh7h7xd1" path="res://scenes/point_screen.tscn" id="10_umrs7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w538h"]
 size = Vector2(16, 30)
@@ -186,7 +187,14 @@ text = "00
 "
 horizontal_alignment = 2
 
+[node name="PointScreenUI" type="CanvasLayer" parent="CharacterBody2D"]
+
+[node name="PointScreen" parent="CharacterBody2D/PointScreenUI" instance=ExtResource("10_umrs7")]
+visible = false
+
 [connection signal="timeout" from="CharacterBody2D/GhostTimer" to="CharacterBody2D" method="_on_ghost_timer_timeout"]
 [connection signal="timeout" from="CharacterBody2D/DashTimer" to="CharacterBody2D" method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="CharacterBody2D/DashCooldown" to="CharacterBody2D" method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="CharacterBody2D/ComboTimer" to="CharacterBody2D" method="_on_combo_timer_timeout"]
+
+[editable path="CharacterBody2D/PointScreenUI/PointScreen"]

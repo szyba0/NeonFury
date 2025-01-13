@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://qkgs7o5njh8a"]
+[gd_scene load_steps=44 format=4 uid="uid://qkgs7o5njh8a"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6ts33"]
 [ext_resource type="Texture2D" uid="uid://dtjw37syj8vug" path="res://assets/tileset4.png" id="2_4e08f"]
@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://b7vthqbbc2hl6" path="res://scenes/furniture/table_small.tscn" id="24_1rh02"]
 [ext_resource type="AudioStream" uid="uid://bq6q67ia6iek6" path="res://assets/music/level1.mp3" id="29_j8ym7"]
 [ext_resource type="PackedScene" uid="uid://cebku4djcjc8f" path="res://scenes/FastEnemy.tscn" id="30_7uuxs"]
+[ext_resource type="FontFile" uid="uid://bgdi76ycjyl4q" path="res://assets/GlitchGoblin-2O87v.ttf" id="31_xo651"]
 
 [sub_resource type="Gradient" id="Gradient_m753o"]
 offsets = PackedFloat32Array(0.00649351, 1)
@@ -293,6 +294,9 @@ _data = {
 "fade_out": SubResource("Animation_qf2ce")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vmir4"]
+size = Vector2(55.25, 33)
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_6ts33")
 
@@ -495,4 +499,21 @@ position = Vector2(-23, 341)
 [node name="FastEnemy4" parent="." instance=ExtResource("30_7uuxs")]
 position = Vector2(81, 276)
 
+[node name="Label" type="Label" parent="."]
+offset_left = 8.0
+offset_top = -186.0
+offset_right = 48.0
+offset_bottom = -163.0
+theme_override_fonts/font = ExtResource("31_xo651")
+text = "GET BACK TO THE CAR
+WHEN YOU KILL THEM ALL"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-37.375, -128.5)
+shape = SubResource("RectangleShape2D_vmir4")
+
 [connection signal="change_scene_signal" from="." to="." method="_on_change_scene_signal"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
