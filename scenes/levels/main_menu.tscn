@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://b2sx8t1jq4lg"]
+[gd_scene load_steps=76 format=3 uid="uid://b2sx8t1jq4lg"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_yyewm"]
 [ext_resource type="Texture2D" uid="uid://pjrvo1essof5" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0000.png" id="2_b8ljh"]
@@ -69,6 +69,7 @@
 [ext_resource type="Texture2D" uid="uid://be1txy3ctj2gd" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0063.png" id="65_xq5es"]
 [ext_resource type="Texture2D" uid="uid://cowwkhq6mxgum" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0064.png" id="66_pxk8a"]
 [ext_resource type="Texture2D" uid="uid://73qfqoyyjdem" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0065.png" id="67_sxw8v"]
+[ext_resource type="AudioStream" uid="uid://6a7qd1vwjl6o" path="res://assets/music/muzyczka_menu.mp3" id="70_fmhtd"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_huqyk"]
 animations = [{
@@ -416,6 +417,12 @@ color = Color(0, 0, 0, 0)
 libraries = {
 "": SubResource("AnimationLibrary_rd1u2")
 }
+
+[node name="MainMenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("70_fmhtd")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]

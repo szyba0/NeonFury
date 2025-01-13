@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6ry3qq48yoa1"]
+[gd_scene load_steps=3 format=3 uid="uid://b6ry3qq48yoa1"]
 
 [ext_resource type="PackedScene" uid="uid://b2sx8t1jq4lg" path="res://scenes/levels/main_menu.tscn" id="2_v0ipj"]
+[ext_resource type="FontFile" uid="uid://bgdi76ycjyl4q" path="res://assets/GlitchGoblin-2O87v.ttf" id="2_wx6p6"]
 
 [node name="Main" type="Node2D"]
 
@@ -11,6 +12,30 @@ offset_right = 960.0
 offset_bottom = 540.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
+
+[node name="VBoxContainer" parent="MainMenuNode" index="2"]
+offset_left = -226.0
+offset_top = 235.0
+offset_right = 185.0
+offset_bottom = 519.0
+
+[node name="ContinueButton" type="Button" parent="MainMenuNode/VBoxContainer" index="0"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../OptionsButton")
+theme_override_fonts/font = ExtResource("2_wx6p6")
+theme_override_font_sizes/font_size = 52
+text = "Continue"
+icon_alignment = 1
+
+[node name="StartButton" parent="MainMenuNode/VBoxContainer" index="1"]
+theme_override_font_sizes/font_size = 52
+
+[node name="OptionsButton" parent="MainMenuNode/VBoxContainer" index="2"]
+theme_override_font_sizes/font_size = 52
+
+[node name="QuitButton" parent="MainMenuNode/VBoxContainer" index="3"]
+theme_override_font_sizes/font_size = 52
 
 [node name="Overlay" parent="MainMenuNode" index="3"]
 layout_mode = 1
@@ -25,5 +50,7 @@ offset_right = 1046.5
 offset_bottom = 622.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[connection signal="pressed" from="MainMenuNode/VBoxContainer/ContinueButton" to="MainMenuNode" method="_on_continue_button_pressed"]
 
 [editable path="MainMenuNode"]

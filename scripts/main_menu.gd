@@ -25,3 +25,7 @@ func _on_quit_button_pressed() -> void:
 	$AnimationPlayer.play("fade_in")
 	await $AnimationPlayer.animation_finished
 	get_tree().quit()
+
+
+func _on_continue_button_pressed() -> void:
+	pass # Replace with function body.
