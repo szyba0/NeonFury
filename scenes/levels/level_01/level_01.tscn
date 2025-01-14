@@ -503,15 +503,19 @@ parameters/looping = true
 
 [node name="FastEnemy" parent="." instance=ExtResource("29_s5186")]
 position = Vector2(25, 254)
+collision_mask = 11
 
 [node name="FastEnemy2" parent="." instance=ExtResource("29_s5186")]
 position = Vector2(40, 325)
+collision_mask = 11
 
 [node name="FastEnemy3" parent="." instance=ExtResource("29_s5186")]
 position = Vector2(-23, 341)
+collision_mask = 11
 
 [node name="FastEnemy4" parent="." instance=ExtResource("29_s5186")]
 position = Vector2(81, 276)
+collision_mask = 11
 
 [node name="Label" type="Label" parent="."]
 offset_left = -4.0
@@ -533,15 +537,18 @@ shape = SubResource("RectangleShape2D_vmir4")
 
 [node name="FastEnemy01" parent="Enemy" instance=ExtResource("29_s5186")]
 position = Vector2(-238, -59)
+collision_mask = 11
 
 [node name="TankEnemy" parent="Enemy" instance=ExtResource("30_rkwpl")]
 position = Vector2(31, 208)
+collision_mask = 11
 
 [node name="Enemy01" parent="Enemy" instance=ExtResource("31_gvdl5")]
 position = Vector2(208, 194)
 
 [node name="FastEnemy" parent="Enemy" instance=ExtResource("29_s5186")]
 position = Vector2(148, -9)
+collision_mask = 11
 
 [node name="Path2D" type="Path2D" parent="Enemy"]
 position = Vector2(-304, -120)

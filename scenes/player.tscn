@@ -359,6 +359,7 @@ color = Color(1, 0, 0, 0.313726)
 
 [node name="ComboTimer" type="Timer" parent="CharacterBody2D"]
 wait_time = 3.0
+one_shot = true
 
 [node name="PointsUI" type="CanvasLayer" parent="CharacterBody2D"]
 

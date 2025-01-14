@@ -171,7 +171,7 @@ func move_towards(target_position: Vector2, speed: float):
 		#stop_walk_animation()
 
 func attack_player():
-	print("Enemy atakuje")
+	#print("Enemy atakuje")
 	attack_with_weapon()
 # Funkcje ataku
 func attack_melee():
@@ -295,7 +295,7 @@ func check_player_visibility_fov():
 	var max_angle = deg_to_rad(30)  # Możesz zmienić na inny kąt
 	if angle_to_player > max_angle:
 		is_chasing = false  # Przeciwnik ignoruje gracza, jeśli ten jest za plecami
-		print("Gracz jest za plecami przeciwnika!")
+		#print("Gracz jest za plecami przeciwnika!")
 		return
 	# RayCast sprawdza pozycję gracza względem przeciwnika
 	raycast.target_position = player.global_position - global_position  # Ustaw cel na gracza
