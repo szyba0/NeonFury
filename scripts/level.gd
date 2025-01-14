@@ -18,7 +18,9 @@ func _ready():
 	save()
 	randomize()  # Ustaw losowy seed dla generatora liczb losowych
 	# Dodaj wszystkie ścieżki patrolowe do tablicy ręcznie lub automatycznie
-	
+	for path in get_tree().current_scene.get_children():
+		if path is Path2D:
+			patrol_paths.append(path)
 	# Przekaż ścieżki patrolowe do każdego przeciwnika w poziomie
 	for enemy in get_tree().get_nodes_in_group("Enemies"):
 		enemy.connect("died",enemy_died)
