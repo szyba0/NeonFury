@@ -35,12 +35,11 @@
 [ext_resource type="PackedScene" uid="uid://bf6hk33cyqqae" path="res://scenes/Enemy01.tscn" id="31_gvdl5"]
 [ext_resource type="FontFile" uid="uid://bgdi76ycjyl4q" path="res://assets/GlitchGoblin-2O87v.ttf" id="31_xo651"]
 
-[sub_resource type="Gradient" id="Gradient_m753o"]
-offsets = PackedFloat32Array(0.00649351, 1)
-colors = PackedColorArray(0.605525, 0.485187, 0.993398, 1, 0.0120963, 0.0750687, 0.124752, 1)
+[sub_resource type="Gradient" id="Gradient_hoajq"]
+colors = PackedColorArray(0.808006, 0.403613, 0.711951, 1, 0.451577, 0.793074, 1, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_m4uo0"]
-gradient = SubResource("Gradient_m753o")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ef21t"]
+gradient = SubResource("Gradient_hoajq")
 width = 1024
 height = 1024
 fill_from = Vector2(0, 1)
@@ -326,7 +325,7 @@ offset_right = 2198.0
 offset_bottom = 1898.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture2D_m4uo0")
+texture = SubResource("GradientTexture2D_ef21t")
 metadata/_edit_use_anchors_ = true
 
 [node name="CanvasGroup" type="CanvasGroup" parent="Layout"]
@@ -398,7 +397,7 @@ position = Vector2(101, -49)
 [node name="BillardTable" parent="Layout/Furniture" instance=ExtResource("12_8ptj0")]
 position = Vector2(363, -14)
 
-[node name="Auto" parent="Layout/Furniture" instance=ExtResource("13_n2wa7")]
+[node name="KitchenTable" parent="Layout/Furniture" instance=ExtResource("13_n2wa7")]
 position = Vector2(19, 271)
 
 [node name="Matress" parent="Layout/Furniture" instance=ExtResource("14_nb1le")]
