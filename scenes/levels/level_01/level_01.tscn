@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://qkgs7o5njh8a"]
+[gd_scene load_steps=45 format=4 uid="uid://qkgs7o5njh8a"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6ts33"]
 [ext_resource type="Texture2D" uid="uid://dtjw37syj8vug" path="res://assets/tileset4.png" id="2_4e08f"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cglk32d0q3peg" path="res://scenes/furniture/table_gaming.tscn" id="7_rawmn"]
 [ext_resource type="PackedScene" uid="uid://duoe0r1bfv8fw" path="res://scenes/furniture/auto.tscn" id="8_3a1sn"]
 [ext_resource type="PackedScene" uid="uid://dkapftgq67obf" path="res://scenes/furniture/pong_01.tscn" id="8_o76kk"]
+[ext_resource type="PackedScene" uid="uid://c6bl7s386fkip" path="res://scenes/Knife.tscn" id="8_o342j"]
 [ext_resource type="PackedScene" uid="uid://tsgqdkjgxtoe" path="res://scenes/furniture/plant_2.tscn" id="9_wtdwd"]
 [ext_resource type="PackedScene" uid="uid://dg6v83ktvr7gx" path="res://scenes/furniture/gaming_chair.tscn" id="10_k8gcs"]
 [ext_resource type="PackedScene" uid="uid://brcv5ugdu0kid" path="res://scenes/furniture/carpet_01.tscn" id="11_g0f00"]
@@ -31,6 +32,9 @@
 [ext_resource type="AudioStream" uid="uid://bq6q67ia6iek6" path="res://assets/music/level1.mp3" id="29_j8ym7"]
 [ext_resource type="PackedScene" uid="uid://cebku4djcjc8f" path="res://scenes/FastEnemy.tscn" id="30_7uuxs"]
 [ext_resource type="FontFile" uid="uid://bgdi76ycjyl4q" path="res://assets/GlitchGoblin-2O87v.ttf" id="31_xo651"]
+[ext_resource type="PackedScene" uid="uid://cebku4djcjc8f" path="res://scenes/FastEnemy.tscn" id="29_s5186"]
+[ext_resource type="PackedScene" uid="uid://cda8yil5bkqaj" path="res://scenes/TankEnemy.tscn" id="30_rkwpl"]
+[ext_resource type="PackedScene" uid="uid://bf6hk33cyqqae" path="res://scenes/Enemy01.tscn" id="31_gvdl5"]
 
 [sub_resource type="Gradient" id="Gradient_m753o"]
 offsets = PackedFloat32Array(0.00649351, 1)
@@ -296,6 +300,11 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vmir4"]
 size = Vector2(55.25, 33)
+[sub_resource type="Curve2D" id="Curve2D_l266u"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 3, -25, 0, 0, 0, 0, -19, -4, 0, 0, 0, 0, 3, 12, 0, 0, 0, 0, 70, 16, 0, 0, 0, 0, 53, -2, 0, 0, 0, 0, 92, -31, 0, 0, 0, 0, 52, -84, 0, 0, 0, 0, -28, -67, 0, 0, 0, 0, 3, -31)
+}
+point_count = 9
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_6ts33")
@@ -311,10 +320,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1504.0
-offset_top = -1057.0
-offset_right = 2103.0
-offset_bottom = 1692.0
+offset_left = -1409.0
+offset_top = -851.0
+offset_right = 2198.0
+offset_bottom = 1898.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_m4uo0")
@@ -331,7 +340,11 @@ tile_set = SubResource("TileSet_teod8")
 position = Vector2(-18, 543)
 
 [node name="M16" parent="Layout/Weapons" instance=ExtResource("7_c4khd")]
-position = Vector2(70, -659)
+position = Vector2(100, -705)
+collision_mask = 6
+
+[node name="Knife" parent="Layout/Weapons" instance=ExtResource("8_o342j")]
+position = Vector2(194, -644)
 
 [node name="Furniture" type="Node2D" parent="Layout"]
 position = Vector2(-132, 80)
@@ -466,10 +479,11 @@ position = Vector2(-149, 84)
 rotation = 1.5708
 
 [node name="Overlay" type="ColorRect" parent="."]
-offset_left = -4938.0
-offset_top = -3897.0
-offset_right = 5944.0
-offset_bottom = 4805.0
+visible = false
+offset_left = -4872.0
+offset_top = -3900.0
+offset_right = 6010.0
+offset_bottom = 4802.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
@@ -514,6 +528,23 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-37.375, -128.5)
 shape = SubResource("RectangleShape2D_vmir4")
+[node name="Enemy" type="Node2D" parent="."]
+
+[node name="FastEnemy01" parent="Enemy" instance=ExtResource("29_s5186")]
+position = Vector2(-238, -59)
+
+[node name="TankEnemy" parent="Enemy" instance=ExtResource("30_rkwpl")]
+position = Vector2(31, 208)
+
+[node name="Enemy01" parent="Enemy" instance=ExtResource("31_gvdl5")]
+position = Vector2(208, 194)
+
+[node name="FastEnemy" parent="Enemy" instance=ExtResource("29_s5186")]
+position = Vector2(148, -9)
+
+[node name="Path2D" type="Path2D" parent="Enemy"]
+position = Vector2(-304, -120)
+curve = SubResource("Curve2D_l266u")
 
 [connection signal="change_scene_signal" from="." to="." method="_on_change_scene_signal"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

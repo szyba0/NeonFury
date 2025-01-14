@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var chase_speed: float = 150.0
 @export var hearing_range: float = 300.0
 @export var vision_range: float = 400.0
-@export var attack_range: float = 50.0
+@export var attack_range: float = 150.0
 @export var knockdown_duration: float = 3.0
 @export var damage_threshold: int = 10    # Próg obrażeń dla knockdownu
 @export var is_patroling: bool = false
@@ -27,6 +27,8 @@ extends CharacterBody2D
 @onready var hearing_area = $HearingArea  # Odwołanie do Area2D dla słyszenia
 @onready var hearing_shape = $HearingArea/CollisionShape2D  # Odwołanie do CollisionShape2D wewnątrz HearingArea
 @onready var raycast = $RayCast2D
+@onready var legs = $LegsSprite
+
 
 var current_health: int
 var is_dead: bool = false
@@ -44,23 +46,43 @@ var patrol_paths: Array[Path2D] = []
 var current_patrol_index: int = 0
 var current_path_curve: Curve2D = null  # Krzywa aktualnej ścieżki
 
+var is_moving = false
+
 func _ready():
 	velocity = Vector2.ZERO
-	#hearing_shape.shape.radius = hearing_range
+	hearing_shape.shape.radius = hearing_range
 	hearing_area.connect("body_entered", Callable(self, "_on_hearing_area_body_entered"))
+	hearing_area.connect("body_exited", Callable(self, "_on_hearing_area_body_exited"))
+	raycast.enabled = false  # RayCast jest wyłączony do momentu wejścia gracza w `HearingArea`
 	head_sprite.texture = normal_head_sprite
 	current_health = max_health
 	#choose_nearest_path()
+
 
 func _process(delta):
 	if is_dead:
 		return
 
+	if player and not is_chasing and not is_knocked_down and not is_injured:
+		check_player_visibility_fov()
 	if is_chasing and player and not is_knocked_down and not is_injured:
-		chase_player(delta)
+		look_at(player.global_position)
+		if global_position.distance_to(player.global_position) > attack_range:
+			move_towards(player.global_position, chase_speed)
+			# Odtwarzanie animacji chodzenia
+			is_moving = true
+		else:
+			is_moving = false
+			if not player.is_dead:
+				attack_player()  # Wykonuje atak, jeśli jest w zasięgu
+		#chase_player(delta)
 	elif current_patrol_path and not is_knocked_down and not is_injured:
 		patrol_path(delta)
-
+	if is_moving:
+		legs.play("walk")  
+	else:
+		legs.stop()
+		legs.frame = 0
 	#check_player_visibility()
 	#update_animation()
 
@@ -89,8 +111,6 @@ func patrol_path(delta):
 				choose_random_path()
 				current_patrol_path.progress_ratio = 0.0  # Resetujemy na początek
 
-
-
 func choose_nearest_path():
 	var shortest_distance = INF
 	var nearest_path = null
@@ -113,7 +133,6 @@ func choose_random_path():
 			
 		# Ustaw nową ścieżkę
 		set_patrol_path(new_path)
-
 
 func set_patrol_paths(paths: Array[Path2D]):
 	patrol_paths = paths
@@ -138,8 +157,12 @@ func chase_player(delta):
 
 func move_towards(target_position: Vector2, speed: float):
 	var direction = (target_position - global_position).normalized()
+
+	# Ustawienie prędkości
 	velocity = direction * speed
 	move_and_slide()
+
+	
 
 	# Jeśli się porusza, uruchamiamy animację chodzenia
 	#if velocity.length() > 0.1:  # Tylko jeśli ma wyraźną prędkość
@@ -147,7 +170,9 @@ func move_towards(target_position: Vector2, speed: float):
 	#else:
 		#stop_walk_animation()
 
-
+func attack_player():
+	print("Enemy atakuje")
+	attack_with_weapon()
 # Funkcje ataku
 func attack_melee():
 	if not is_attacking:
@@ -159,10 +184,14 @@ func attack_melee():
 func attack_with_weapon():
 	if not is_attacking:
 		is_attacking = true
-		animation_player.play("RangedAttack")
-		if weapon_holder.has_node("WeaponAnimationPlayer"):
-			weapon_holder.get_node("WeaponAnimationPlayer").play("WeaponShoot")
-		await animation_player.wait_for_animation("RangedAttack")
+		if not weapon_holder.get_child(0):
+			is_attacking = false
+			return
+		weapon_holder.get_child(0).attack()
+		#animation_player.play("RangedAttack")
+		#if weapon_holder.has_node("WeaponAnimationPlayer"):
+			#weapon_holder.get_node("WeaponAnimationPlayer").play("WeaponShoot")
+		#await animation_player.wait_for_animation("RangedAttack")
 		is_attacking = false
 
 # Reakcja na obrażenia
@@ -186,6 +215,14 @@ func die():
 	#animation_player.play("Dead")
 	collision_shape.set_deferred("disabled",true)
 	head_sprite.texture = dead_sprite
+	var weapon = weapon_holder.get_child(0)
+	var dropped_weapon = load(weapon.scene_path).instantiate()
+	dropped_weapon.rotation = rotation  # Ustawienie rotacji zgodnej z rotacją gracza
+	dropped_weapon.current_ammo = weapon.current_ammo
+	remove_child(weapon)
+	dropped_weapon.position = global_position
+	dropped_weapon.target_position = get_global_mouse_position()
+	get_tree().current_scene.add_child(dropped_weapon)
 
 func knock_down():
 	is_knocked_down = true
@@ -203,19 +240,111 @@ func stand_up():
 	is_knocked_down = false
 	animation_player.play("StandUp")
 
-# Wykrywanie gracza
+# Obsługa wejścia gracza do `HearingArea`
 func _on_hearing_area_body_entered(body):
-	if body.name == "SoundSource" and body.is_playing():
-		is_chasing = true
-		player = body.get_parent()
-		print("Przeciwnik usłyszał strzał!")
+	if body.get_parent().name == "Player":
+		player = body  # Przypisanie referencji do gracza
+		raycast.enabled = true  # Włącz `RayCast2D`
+		print("Gracz jest blisko – przeciwnik aktywuje wzrok.")
+		# Sprawdzenie, czy `Player` ma 16 węzłów (czyli posiada broń)
+		if player.get_child_count() == 16:
+			# Pobranie ostatniego dziecka
+			var last_child = player.get_child(player.get_child_count() - 1)
+			if last_child and last_child is Area2D and last_child.has_signal("sound_emitted"):
+				if not last_child.is_connected("sound_emitted", Callable(self, "_on_weapon_sound_emitted")):
+					last_child.connect("sound_emitted", Callable(self, "_on_weapon_sound_emitted"))
+					print("Przeciwnik nasłuchuje dźwięku z broni.")
+		else:
+			print("Player nie posiada broni.")
+func _on_weapon_sound_emitted(sound_range: float):
+	if not player:
+		return  # Nie reaguje, jeśli `Player` nie jest w `HearingArea`
 
+	# Sprawdzenie, czy przeciwnik jest w zasięgu dźwięku
+	if global_position.distance_to(player.global_position) <= sound_range:
+		print("Przeciwnik usłyszał dźwięk!")
+		check_player_visibility()  # Sprawdzenie, czy przeciwnik widzi gracza
+# Obsługa wyjścia gracza z `HearingArea`
+func _on_hearing_area_body_exited(body):
+	if body == player:
+		is_chasing = false  # Przeciwnik przestaje gonić gracza
+		raycast.enabled = false  # Wyłącz `RayCast2D`
+		player = null  # Przeciwnik zapomina o graczu
+		print("Gracz opuścił obszar – przeciwnik przestaje widzieć.")
+		is_moving = false
+		# Sprawdzenie, czy `Player` miał broń i odpięcie sygnału
+		if body.get_child_count() == 16:
+			var last_child = body.get_child(body.get_child_count() - 1)
+			if last_child and last_child.is_connected("sound_emitted", Callable(self, "_on_weapon_sound_emitted")):
+				last_child.disconnect("sound_emitted", Callable(self, "_on_weapon_sound_emitted"))
+				print("Odłączono nasłuchiwanie dźwięku broni.")
+
+func check_player_visibility_fov():
+	if not player:
+		return
+	# Obliczenie różnicy pozycji między przeciwnikiem a graczem
+	var direction_to_player = (player.global_position - global_position).normalized()
+	# Sprawdzenie, czy gracz jest w zasięgu wzroku
+	if direction_to_player.length() > vision_range:
+		is_chasing = false
+		print("Gracz jest za daleko, przeciwnik go nie widzi!")
+		return
+	# Obliczenie kąta między kierunkiem patrzenia przeciwnika a graczem
+	var angle_to_player = abs(rotation - direction_to_player.angle())
+	# Maksymalny kąt widzenia przeciwnika (np. 120 stopni -> 2.09 radiana)
+	var max_angle = deg_to_rad(30)  # Możesz zmienić na inny kąt
+	if angle_to_player > max_angle:
+		is_chasing = false  # Przeciwnik ignoruje gracza, jeśli ten jest za plecami
+		print("Gracz jest za plecami przeciwnika!")
+		return
+	# RayCast sprawdza pozycję gracza względem przeciwnika
+	raycast.target_position = player.global_position - global_position  # Ustaw cel na gracza
+	raycast.force_raycast_update()
+	if raycast.is_colliding() and raycast.get_collider() == player:
+		is_chasing = true  # Przeciwnik widzi gracza
+		print("Przeciwnik widzi gracza!")
+	else:
+		is_chasing = false  # Przeciwnik nie widzi gracza
+
+
+# Sprawdzanie widoczności gracza
 func check_player_visibility():
-	if player:
-		raycast.cast_to = (player.global_position - global_position).normalized() * vision_range
-		if raycast.is_colliding() and raycast.get_collider() == player:
-			is_chasing = true
-			print("Przeciwnik widzi gracza!")
+	if not player:
+		return
+
+	# Obliczenie różnicy pozycji między przeciwnikiem a graczem
+	var direction_to_player = player.global_position - global_position
+
+	# Sprawdzenie, czy gracz jest w zasięgu wzroku
+	if direction_to_player.length() > vision_range:
+		is_chasing = false
+		print("Gracz jest za daleko, przeciwnik go nie widzi!")
+		return
+
+	# RayCast sprawdza pozycję gracza względem przeciwnika
+	raycast.target_position = direction_to_player
+	raycast.force_raycast_update()
+
+	if raycast.is_colliding() and raycast.get_collider() == player:
+		is_chasing = true  # Przeciwnik widzi gracza
+		print("Przeciwnik widzi gracza!")
+	else:
+		is_chasing = false  # Przeciwnik nie widzi gracza
+		#print("Przeciwnik szuka gracza...")
+
+# Wykrywanie gracza
+#func _on_hearing_area_body_entered(body):
+	#if body.name == "SoundSource" and body.is_playing():
+		#is_chasing = true
+		#player = body.get_parent()
+		#print("Przeciwnik usłyszał strzał!")
+#
+#func check_player_visibility():
+	#if player:
+		#raycast.cast_to = (player.global_position - global_position).normalized() * vision_range
+		#if raycast.is_colliding() and raycast.get_collider() == player:
+			#is_chasing = true
+			#print("Przeciwnik widzi gracza!")
 
 func _on_KnockdownTimer_timeout():
 	if not is_dead:

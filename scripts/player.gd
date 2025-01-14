@@ -2,8 +2,11 @@ extends CharacterBody2D
 
 @onready var bullet = load("res://scenes/Bullet02.tscn")
 @onready var ammo_bar = $AmmoUI/Control/AmmoBar
+
 @onready var points_counter = $PointsUI/Control/PointsCounter
 @onready var combo_counter = $ComboUI/Control/ComboCounter
+@onready var legs = $Legs
+@onready var shoulders = $Shoulders
 
 @export var ghost_node: PackedScene
 @onready var ghost_timer = $GhostTimer
@@ -86,6 +89,14 @@ func _physics_process(_delta):
 		return  # Jeśli gracz jest martwy, nie aktualizujemy fizyki
 	read_input()
 	move_and_slide()
+	if velocity.length() > 0:
+		legs.play("walk")  
+		shoulders.play("walk")
+	else:
+		legs.stop()
+		legs.frame = 0
+		shoulders.stop()
+		shoulders.frame = 0
 
 func pickup_weapon(weapon):
 	has_weapon = true
@@ -123,7 +134,8 @@ func throw_weapon(weapon):
 	print("Broń została upuszczona:", dropped_weapon.get_parent().name)
 	update_ammo_bar()
 	
-
+func take_damage(damage: int):
+	die()
 # Funkcja wywoływana przy śmierci gracza
 func die():
 	if dashing:
@@ -137,8 +149,15 @@ func die():
 		if death_sprite:
 			$Sprite2D.texture = death_sprite
 		death_label.text = death_text
+		$DeathUI.visible = true
 		death_label.visible = true  # Wyświetlamy ekran śmierci
 		death_overlay.visible = true  # Wyświetlamy czerwony overlay
+		legs.stop()
+		legs.frame = 0
+		shoulders.stop()
+		shoulders.frame = 0
+		shoulders.visible = false
+
 
 # Funkcja do sprawdzenia przytrzymania `R` oraz resetu po śmierci
 func _process(_delta):
