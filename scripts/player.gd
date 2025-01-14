@@ -9,7 +9,6 @@ extends CharacterBody2D
 @onready var ghost_timer = $GhostTimer
 @onready var dash_timer = $DashTimer
 @onready var dash_cooldown = $DashCooldown
-
 @export var speed = 400
 @export var sprite_no_weapon: Texture  # Sprite gracza bez broni
 @export var sprite_2h: Texture
@@ -18,6 +17,7 @@ extends CharacterBody2D
 @export var reset_hold_time: float = 1.0  # Czas przytrzymania `R` w sekundach, aby zresetować poziom podczas gry
 @export var death_sprite: Texture  # Tekstura używana po śmierci gracza
 
+var is_paused = false
 var is_dead = false
 @onready var death_label = $DeathUI/DeathLabel
 @onready var death_overlay = $DeathUI/DeathOverlay
@@ -59,7 +59,7 @@ func read_input():
 		look_at(get_global_mouse_position())
 
 func _input(_event):
-	if is_dead:
+	if is_dead or is_paused:
 		return 
 	if current_weapon:
 		if Input.is_action_pressed("LMB") and current_weapon.is_throwable and not current_weapon.is_melee and has_weapon:

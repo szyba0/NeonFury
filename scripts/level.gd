@@ -3,6 +3,7 @@ extends Node2D
 var save_path = "res://last_level.save"
 var last_level
 var target_scene = "res://scenes/levels/level_01/level_01.tscn"
+var mouse_state = false
 
 @export var patrol_paths: Array[Path2D]  # Tablica referencji do ścieżek patrolowych
 @onready var pause_menu = $Player/CharacterBody2D/PauseUI/PauseMenu
@@ -36,7 +37,6 @@ func toggle_pause():
 		get_tree().paused = true
 		pause_menu.show()
 
-
 func enemy_died(pts):
 	$Player.get_child(0).combo(pts)
 
@@ -52,6 +52,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			$AnimationPlayer.play("fade_in")
 			await $AnimationPlayer.animation_finished
 			body.display_points_screen()
-			
+			body.is_paused = true
 			await pressedSpace
+			body.is_paused = false
 			get_tree().change_scene_to_file(target_scene)
