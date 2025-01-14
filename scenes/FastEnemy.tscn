@@ -13,13 +13,8 @@ is_patroling = true
 normal_head_sprite = ExtResource("2_8a8pb")
 dead_sprite = ExtResource("3_ix2w5")
 
-[node name="LegsSprite" parent="." index="1"]
-visible = false
-
-[node name="ArmsSprite" parent="." index="2"]
-visible = false
-
 [node name="HeadSprite" parent="." index="3"]
 texture = ExtResource("2_8a8pb")
 
 [node name="M16" parent="WeaponHolder" index="0" instance=ExtResource("4_2jl02")]
+collision_mask = 6

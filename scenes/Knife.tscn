@@ -171,7 +171,6 @@ _data = {
 }
 
 [node name="Knife" instance=ExtResource("1_tngw6")]
-collision_layer = 9
 script = ExtResource("2_s4fi8")
 is_melee = true
 is_throwable = true
@@ -209,6 +208,7 @@ stream = ExtResource("5_cwsp1")
 [node name="RayCast2D" parent="." index="6"]
 position = Vector2(15, 9)
 target_position = Vector2(0, 7)
+collision_mask = 7
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

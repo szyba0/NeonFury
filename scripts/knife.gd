@@ -30,5 +30,6 @@ func _on_body_entered(body: Node2D) -> void:
 		body.near_weapon = self  # Ustawia broń jako `near_weapon` w `Player.gd`
 		print("Gracz w pobliżu broni:")
 	else:
+		print("kosa")
 		if body.has_method("take_damage"):
 			body.take_damage(damage)

@@ -44,6 +44,7 @@ func _process(delta: float) -> void:
 		var enemy = get_parent().get_parent()
 		global_position = enemy.global_position
 		self.rotation = enemy.rotation
+		$CollisionShape2D.set_deferred("disabled",true)
 		
 
 func _physics_process(delta):

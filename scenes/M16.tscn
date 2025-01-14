@@ -10,7 +10,6 @@
 radius = 16.0
 
 [node name="M16" instance=ExtResource("1_bdqqj")]
-collision_layer = 9
 script = ExtResource("2_s58os")
 is_ranged = true
 damage = 10

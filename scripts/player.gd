@@ -132,7 +132,8 @@ func throw_weapon(weapon):
 	print("Broń została upuszczona:", dropped_weapon.get_parent().name)
 	update_ammo_bar()
 	
-
+func take_damage(damage: int):
+	die()
 # Funkcja wywoływana przy śmierci gracza
 func die():
 	if dashing:
@@ -146,8 +147,15 @@ func die():
 		if death_sprite:
 			$Sprite2D.texture = death_sprite
 		death_label.text = death_text
+		$DeathUI.visible = true
 		death_label.visible = true  # Wyświetlamy ekran śmierci
 		death_overlay.visible = true  # Wyświetlamy czerwony overlay
+		legs.stop()
+		legs.frame = 0
+		shoulders.stop()
+		shoulders.frame = 0
+		shoulders.visible = false
+
 
 # Funkcja do sprawdzenia przytrzymania `R` oraz resetu po śmierci
 func _process(_delta):
