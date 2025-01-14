@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://qkgs7o5njh8a"]
+[gd_scene load_steps=49 format=4 uid="uid://qkgs7o5njh8a"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6ts33"]
 [ext_resource type="Texture2D" uid="uid://dtjw37syj8vug" path="res://assets/tileset4.png" id="2_4e08f"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cglk32d0q3peg" path="res://scenes/furniture/table_gaming.tscn" id="7_rawmn"]
 [ext_resource type="PackedScene" uid="uid://duoe0r1bfv8fw" path="res://scenes/furniture/auto.tscn" id="8_3a1sn"]
 [ext_resource type="PackedScene" uid="uid://dkapftgq67obf" path="res://scenes/furniture/pong_01.tscn" id="8_o76kk"]
+[ext_resource type="PackedScene" uid="uid://c6bl7s386fkip" path="res://scenes/Knife.tscn" id="8_o342j"]
 [ext_resource type="PackedScene" uid="uid://tsgqdkjgxtoe" path="res://scenes/furniture/plant_2.tscn" id="9_wtdwd"]
 [ext_resource type="PackedScene" uid="uid://dg6v83ktvr7gx" path="res://scenes/furniture/gaming_chair.tscn" id="10_k8gcs"]
 [ext_resource type="PackedScene" uid="uid://brcv5ugdu0kid" path="res://scenes/furniture/carpet_01.tscn" id="11_g0f00"]
@@ -29,14 +30,15 @@
 [ext_resource type="PackedScene" uid="uid://cr60nuj8byboy" path="res://scenes/furniture/table_flower.tscn" id="22_yljm8"]
 [ext_resource type="PackedScene" uid="uid://b7vthqbbc2hl6" path="res://scenes/furniture/table_small.tscn" id="24_1rh02"]
 [ext_resource type="AudioStream" uid="uid://bq6q67ia6iek6" path="res://assets/music/level1.mp3" id="29_j8ym7"]
-[ext_resource type="PackedScene" uid="uid://cebku4djcjc8f" path="res://scenes/FastEnemy.tscn" id="30_7uuxs"]
+[ext_resource type="PackedScene" uid="uid://cebku4djcjc8f" path="res://scenes/FastEnemy.tscn" id="29_s5186"]
+[ext_resource type="PackedScene" uid="uid://cda8yil5bkqaj" path="res://scenes/TankEnemy.tscn" id="30_rkwpl"]
+[ext_resource type="FontFile" uid="uid://bgdi76ycjyl4q" path="res://assets/GlitchGoblin-2O87v.ttf" id="31_xo651"]
 
-[sub_resource type="Gradient" id="Gradient_m753o"]
-offsets = PackedFloat32Array(0.00649351, 1)
-colors = PackedColorArray(0.605525, 0.485187, 0.993398, 1, 0.0120963, 0.0750687, 0.124752, 1)
+[sub_resource type="Gradient" id="Gradient_hoajq"]
+colors = PackedColorArray(0.808006, 0.403613, 0.711951, 1, 0.451577, 0.793074, 1, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_m4uo0"]
-gradient = SubResource("Gradient_m753o")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ef21t"]
+gradient = SubResource("Gradient_hoajq")
 width = 1024
 height = 1024
 fill_from = Vector2(0, 1)
@@ -293,6 +295,27 @@ _data = {
 "fade_out": SubResource("Animation_qf2ce")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_l1va7"]
+radius = 60.0083
+
+[sub_resource type="Curve2D" id="Curve2D_4i6ln"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -15, -48, 0, 0, 0, 0, -73, -42, 0, 0, 0, 0, -113, -4, 0, 0, 0, 0, -111, 49, 0, 0, 0, 0, -64, 71, 0, 0, 0, 0, -8, 51, 0, 0, 0, 0, 32, 8, 0, 0, 0, 0, -9, -39)
+}
+point_count = 8
+
+[sub_resource type="Curve2D" id="Curve2D_7n6k5"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 8, -57, 0, 0, 0, 0, 63, -47, 0, 0, 0, 0, 99, 5, 0, 0, 0, 0, 84, 79, 0, 0, 0, 0, 20, 118, 0, 0, 0, 0, -37, 80, 0, 0, 0, 0, -49.1355, -5.01013, 0, 0, 0, 0, -61, -21, 0, 0, 0, 0, -61, -44, 0, 0, 0, 0, -21, -51)
+}
+point_count = 10
+
+[sub_resource type="Curve2D" id="Curve2D_dt8tj"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 111, 5, 0, 0, 0, 0, 70, -25, 0, 0, 0, 0, 5, -32, 0, 0, 0, 0, -22, 0, 0, 0, 0, 0, 64, -2)
+}
+point_count = 5
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_6ts33")
 
@@ -302,18 +325,19 @@ position = Vector2(117, -80)
 [node name="Layout" type="Node2D" parent="."]
 
 [node name="TextureRect" type="TextureRect" parent="Layout"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1504.0
-offset_top = -1057.0
-offset_right = 2103.0
-offset_bottom = 1692.0
+offset_left = -1427.0
+offset_top = -746.0
+offset_right = 2180.0
+offset_bottom = 2003.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture2D_m4uo0")
+texture = SubResource("GradientTexture2D_ef21t")
 metadata/_edit_use_anchors_ = true
 
 [node name="CanvasGroup" type="CanvasGroup" parent="Layout"]
@@ -327,7 +351,11 @@ tile_set = SubResource("TileSet_teod8")
 position = Vector2(-18, 543)
 
 [node name="M16" parent="Layout/Weapons" instance=ExtResource("7_c4khd")]
-position = Vector2(70, -659)
+position = Vector2(56, -630)
+collision_mask = 6
+
+[node name="Knife" parent="Layout/Weapons" instance=ExtResource("8_o342j")]
+position = Vector2(194, -644)
 
 [node name="Furniture" type="Node2D" parent="Layout"]
 position = Vector2(-132, 80)
@@ -381,7 +409,7 @@ position = Vector2(101, -49)
 [node name="BillardTable" parent="Layout/Furniture" instance=ExtResource("12_8ptj0")]
 position = Vector2(363, -14)
 
-[node name="Auto" parent="Layout/Furniture" instance=ExtResource("13_n2wa7")]
+[node name="KitchenTable" parent="Layout/Furniture" instance=ExtResource("13_n2wa7")]
 position = Vector2(19, 271)
 
 [node name="Matress" parent="Layout/Furniture" instance=ExtResource("14_nb1le")]
@@ -462,10 +490,11 @@ position = Vector2(-149, 84)
 rotation = 1.5708
 
 [node name="Overlay" type="ColorRect" parent="."]
-offset_left = -4938.0
-offset_top = -3897.0
-offset_right = 5944.0
-offset_bottom = 4805.0
+visible = false
+offset_left = -4872.0
+offset_top = -3900.0
+offset_right = 6010.0
+offset_bottom = 4802.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
@@ -483,16 +512,93 @@ autoplay = true
 bus = &"Music"
 parameters/looping = true
 
-[node name="FastEnemy" parent="." instance=ExtResource("30_7uuxs")]
-position = Vector2(25, 254)
+[node name="FastEnemy" parent="." instance=ExtResource("29_s5186")]
+position = Vector2(405, 62)
+collision_mask = 11
+is_patroling = false
 
-[node name="FastEnemy2" parent="." instance=ExtResource("30_7uuxs")]
-position = Vector2(40, 325)
+[node name="FastEnemy2" parent="." instance=ExtResource("29_s5186")]
+position = Vector2(470, 216)
+collision_mask = 11
+is_patroling = false
 
-[node name="FastEnemy3" parent="." instance=ExtResource("30_7uuxs")]
-position = Vector2(-23, 341)
+[node name="FastEnemy3" parent="." instance=ExtResource("29_s5186")]
+position = Vector2(644, 504)
+collision_mask = 11
 
-[node name="FastEnemy4" parent="." instance=ExtResource("30_7uuxs")]
-position = Vector2(81, 276)
+[node name="FastEnemy4" parent="." instance=ExtResource("29_s5186")]
+position = Vector2(272, 276)
+rotation = 2.03156
+collision_mask = 11
+is_patroling = false
+
+[node name="Label" type="Label" parent="."]
+offset_left = -4.0
+offset_top = -189.0
+offset_right = 188.0
+offset_bottom = -148.0
+theme_override_fonts/font = ExtResource("31_xo651")
+text = "GET BACK TO THE CAR
+WHEN YOU KILL THEM ALL"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-58, -166)
+shape = SubResource("CircleShape2D_l1va7")
+
+[node name="Enemy" type="Node2D" parent="."]
+
+[node name="FastEnemy01" parent="Enemy" instance=ExtResource("29_s5186")]
+position = Vector2(-91, 589)
+collision_mask = 11
+is_patroling = false
+
+[node name="TankEnemy" parent="Enemy" instance=ExtResource("30_rkwpl")]
+position = Vector2(90, 298)
+collision_mask = 11
+
+[node name="FastEnemy" parent="Enemy" instance=ExtResource("29_s5186")]
+position = Vector2(-174, 181)
+rotation = 1.64934
+collision_mask = 11
+is_patroling = false
+
+[node name="TankEnemy" parent="." instance=ExtResource("30_rkwpl")]
+position = Vector2(-45, 799)
+rotation = -3.0456
+
+[node name="FastEnemy5" parent="." instance=ExtResource("29_s5186")]
+position = Vector2(288, 564)
+rotation = -1.14319
+is_patroling = false
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(84, 243)
+curve = SubResource("Curve2D_4i6ln")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-15, -48)
+rotation = 3.03851
+
+[node name="Path2D2" type="Path2D" parent="."]
+position = Vector2(-6, 810)
+curve = SubResource("Curve2D_7n6k5")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D2"]
+position = Vector2(8, -57)
+rotation = 0.179854
+
+[node name="Path2D3" type="Path2D" parent="."]
+position = Vector2(600, 499)
+curve = SubResource("Curve2D_dt8tj")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D3"]
+position = Vector2(111, 5)
+rotation = -2.5099
 
 [connection signal="change_scene_signal" from="." to="." method="_on_change_scene_signal"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+
+[editable path="Auto"]

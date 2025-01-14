@@ -2,10 +2,10 @@ extends Node2D
 
 var save_path = "res://last_level.save"
 var last_level
-var target_scene = "res://scenes/levels/level_02/level_02.tscn"
+var target_scene = "res://scenes/levels/level_01/level_01.tscn"
+var mouse_state = false
 
 var enemy_count = 0
-
 
 @export var patrol_paths: Array[Path2D]  # Tablica referencji do ścieżek patrolowych
 @onready var pause_menu = $Player/CharacterBody2D/PauseUI/PauseMenu
@@ -20,9 +20,7 @@ func _ready():
 	save()
 	randomize()  # Ustaw losowy seed dla generatora liczb losowych
 	# Dodaj wszystkie ścieżki patrolowe do tablicy ręcznie lub automatycznie
-	for path in get_tree().current_scene.get_children():
-		if path is Path2D:
-			patrol_paths.append(path)
+	
 	# Przekaż ścieżki patrolowe do każdego przeciwnika w poziomie
 	for enemy in get_tree().get_nodes_in_group("Enemies"):
 		enemy.connect("died",enemy_died)
@@ -47,7 +45,7 @@ func enemy_died(pts):
 
 func save():
 	var file = FileAccess.open(save_path,FileAccess.WRITE)
-	last_level = "res://scenes/levels/level_01/level_01.tscn"
+	last_level = "res://scenes/levels/level_00/level_00.tscn"
 	file.store_var(last_level)
 
 

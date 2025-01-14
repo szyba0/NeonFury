@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://d1q1qe0o3y5di"]
+[gd_scene load_steps=11 format=3 uid="uid://d1q1qe0o3y5di"]
 
 [ext_resource type="Script" path="res://scripts/door.gd" id="1_e6l1i"]
 [ext_resource type="Texture2D" uid="uid://cgtugo8fcqg3i" path="res://assets/door/door_anim.png" id="2_rqih7"]
+[ext_resource type="AudioStream" uid="uid://cn7ppdfmwnsha" path="res://assets/audio/SubwayDoor.wav" id="3_iqyba"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sl3ok"]
 size = Vector2(48, 64)
@@ -169,6 +170,10 @@ root_node = NodePath("../Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_omy50")
 }
+
+[node name="AudioStreamPlayerOpen" type="AudioStreamPlayer2D" parent="StaticBody2D"]
+stream = ExtResource("3_iqyba")
+bus = &"SFX"
 
 [connection signal="body_entered" from="OpenRange" to="." method="_on_open_range_body_entered"]
 [connection signal="body_exited" from="OpenRange" to="." method="_on_open_range_body_exited"]

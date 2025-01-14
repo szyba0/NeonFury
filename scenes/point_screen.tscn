@@ -1,0 +1,96 @@
+[gd_scene load_steps=3 format=3 uid="uid://bya1uuh7h7xd1"]
+
+[ext_resource type="Texture2D" uid="uid://choy10esfucvq" path="res://assets/points.png" id="1_62d4h"]
+[ext_resource type="FontFile" uid="uid://bgdi76ycjyl4q" path="res://assets/GlitchGoblin-2O87v.ttf" id="2_2fewu"]
+
+[node name="PointScreen" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_62d4h")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 142.0
+offset_top = 194.0
+offset_right = 481.0
+offset_bottom = 309.0
+theme_override_fonts/font = ExtResource("2_2fewu")
+theme_override_font_sizes/font_size = 100
+text = "Points"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 140.0
+offset_top = 342.0
+offset_right = 392.0
+offset_bottom = 457.0
+theme_override_fonts/font = ExtResource("2_2fewu")
+theme_override_font_sizes/font_size = 100
+text = "Kills"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 137.0
+offset_top = 668.0
+offset_right = 898.0
+offset_bottom = 783.0
+theme_override_fonts/font = ExtResource("2_2fewu")
+theme_override_font_sizes/font_size = 100
+text = "Highest combo"
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 126.0
+offset_top = 504.0
+offset_right = 343.0
+offset_bottom = 619.0
+theme_override_fonts/font = ExtResource("2_2fewu")
+theme_override_font_sizes/font_size = 100
+text = "Time"
+
+[node name="points" type="Label" parent="."]
+offset_left = 1555.0
+offset_top = 202.0
+offset_right = 1850.0
+offset_bottom = 317.0
+theme_override_fonts/font = ExtResource("2_2fewu")
+theme_override_font_sizes/font_size = 100
+text = "0"
+horizontal_alignment = 2
+
+[node name="kills" type="Label" parent="."]
+offset_left = 1594.0
+offset_top = 347.0
+offset_right = 1846.0
+offset_bottom = 462.0
+theme_override_fonts/font = ExtResource("2_2fewu")
+theme_override_font_sizes/font_size = 100
+text = "0"
+horizontal_alignment = 2
+
+[node name="combo" type="Label" parent="."]
+offset_left = 1635.0
+offset_top = 677.0
+offset_right = 1845.0
+offset_bottom = 792.0
+theme_override_fonts/font = ExtResource("2_2fewu")
+theme_override_font_sizes/font_size = 100
+text = "0"
+horizontal_alignment = 2
+
+[node name="time" type="Label" parent="."]
+offset_left = 1560.0
+offset_top = 522.0
+offset_right = 1845.0
+offset_bottom = 637.0
+theme_override_fonts/font = ExtResource("2_2fewu")
+theme_override_font_sizes/font_size = 100
+text = "00:00
+"
+horizontal_alignment = 2
+
+[node name="Label5" type="Label" parent="."]
+offset_left = 292.0
+offset_top = 909.0
+offset_right = 1691.0
+offset_bottom = 1024.0
+theme_override_fonts/font = ExtResource("2_2fewu")
+theme_override_font_sizes/font_size = 100
+text = "PRESS SPACE TO CONTINUE"

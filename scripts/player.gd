@@ -2,14 +2,16 @@ extends CharacterBody2D
 
 @onready var bullet = load("res://scenes/Bullet02.tscn")
 @onready var ammo_bar = $AmmoUI/Control/AmmoBar
+
 @onready var points_counter = $PointsUI/Control/PointsCounter
 @onready var combo_counter = $ComboUI/Control/ComboCounter
+@onready var legs = $Legs
+@onready var shoulders = $Shoulders
 
 @export var ghost_node: PackedScene
 @onready var ghost_timer = $GhostTimer
 @onready var dash_timer = $DashTimer
 @onready var dash_cooldown = $DashCooldown
-
 @export var speed = 400
 @export var sprite_no_weapon: Texture  # Sprite gracza bez broni
 @export var sprite_2h: Texture
@@ -18,6 +20,7 @@ extends CharacterBody2D
 @export var reset_hold_time: float = 1.0  # Czas przytrzymania `R` w sekundach, aby zresetować poziom podczas gry
 @export var death_sprite: Texture  # Tekstura używana po śmierci gracza
 
+var is_paused = false
 var is_dead = false
 @onready var death_label = $DeathUI/DeathLabel
 @onready var death_overlay = $DeathUI/DeathOverlay
@@ -39,7 +42,9 @@ var weapon_type = null
 
 var points: int = 0
 var combo_count: int = 0
+var max_combo: int = 0
 var combo_points_multiplier = 1
+var kills:int = 0
 
 var current_weapon : Area2D = null
 
@@ -57,7 +62,7 @@ func read_input():
 		look_at(get_global_mouse_position())
 
 func _input(_event):
-	if is_dead:
+	if is_dead or is_paused:
 		return 
 	if current_weapon:
 		if Input.is_action_pressed("LMB") and current_weapon.is_throwable and not current_weapon.is_melee and has_weapon:
@@ -84,6 +89,14 @@ func _physics_process(_delta):
 		return  # Jeśli gracz jest martwy, nie aktualizujemy fizyki
 	read_input()
 	move_and_slide()
+	if velocity.length() > 0:
+		legs.play("walk")  
+		shoulders.play("walk")
+	else:
+		legs.stop()
+		legs.frame = 0
+		shoulders.stop()
+		shoulders.frame = 0
 
 func pickup_weapon(weapon):
 	has_weapon = true
@@ -121,7 +134,8 @@ func throw_weapon(weapon):
 	print("Broń została upuszczona:", dropped_weapon.get_parent().name)
 	update_ammo_bar()
 	
-
+func take_damage(damage: int):
+	die()
 # Funkcja wywoływana przy śmierci gracza
 func die():
 	if dashing:
@@ -135,8 +149,15 @@ func die():
 		if death_sprite:
 			$Sprite2D.texture = death_sprite
 		death_label.text = death_text
+		$DeathUI.visible = true
 		death_label.visible = true  # Wyświetlamy ekran śmierci
 		death_overlay.visible = true  # Wyświetlamy czerwony overlay
+		legs.stop()
+		legs.frame = 0
+		shoulders.stop()
+		shoulders.frame = 0
+		shoulders.visible = false
+
 
 # Funkcja do sprawdzenia przytrzymania `R` oraz resetu po śmierci
 func _process(_delta):
@@ -204,7 +225,7 @@ func dash():
 
 func _on_dash_timer_timeout() -> void:
 	velocity = velocity/1.2
-	collision_mask = 5
+	collision_mask = 213
 	dashing = false
 	ghost_timer.stop()
 
@@ -224,6 +245,9 @@ func combo(pts):
 	update_points()
 	combo_count += 1
 	combo_points_multiplier += 1
+	if combo_count> max_combo:
+		max_combo = combo_count
+	kills += 1
 	update_combo()
 	print(combo_counter)
 
@@ -235,3 +259,10 @@ func _on_combo_timer_timeout() -> void:
 	update_combo()
 	
 	
+func display_points_screen():
+	$PointScreenUI/PointScreen/points.text = str(points)
+	$PointScreenUI/PointScreen/kills.text = str(kills)
+	$PointScreenUI/PointScreen/combo.text = str(max_combo)
+	$TimerUI/Panel.stop()
+	$PointScreenUI/PointScreen/time.text = $TimerUI/Panel/Minutes.text +$TimerUI/Panel/Seconds.text+$TimerUI/Panel/Msecs.text
+	$PointScreenUI/PointScreen.visible = true

@@ -1,15 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://cda8yil5bkqaj"]
+[gd_scene load_steps=7 format=3 uid="uid://cda8yil5bkqaj"]
 
 [ext_resource type="PackedScene" uid="uid://bbulvbn3kus8n" path="res://scenes/EnemyBase.tscn" id="1_ha63a"]
 [ext_resource type="Texture2D" uid="uid://vs6dt70mcxa7" path="res://assets/enemy/tank/tank_top.png" id="2_aorh5"]
 [ext_resource type="Texture2D" uid="uid://d4mxjbpt7v4vg" path="res://assets/enemy/tank/tank_injured.png" id="3_odspt"]
 [ext_resource type="Texture2D" uid="uid://dfhrxq4asv0oe" path="res://assets/enemy/tank/tank_knocked.png" id="4_xqvb5"]
 [ext_resource type="Texture2D" uid="uid://c1na45p7op1c0" path="res://assets/enemy/tank/tank_dead.png" id="5_f81qm"]
+[ext_resource type="PackedScene" uid="uid://bxrl0rg8fmene" path="res://scenes/Shotgun.tscn" id="6_mvurd"]
 
 [node name="TankEnemy" instance=ExtResource("1_ha63a")]
 max_health = 20
 patrol_speed = 70.0
 chase_speed = 110.0
+attack_range = 110.0
 is_patroling = true
 points = 100
 normal_head_sprite = ExtResource("2_aorh5")
@@ -19,3 +21,8 @@ dead_sprite = ExtResource("5_f81qm")
 
 [node name="HeadSprite" parent="." index="3"]
 texture = ExtResource("2_aorh5")
+
+[node name="Shotgun" parent="WeaponHolder" index="0" instance=ExtResource("6_mvurd")]
+
+[node name="RayCast2D" parent="." index="7"]
+target_position = Vector2(62, 0)

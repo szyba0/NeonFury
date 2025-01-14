@@ -45,4 +45,4 @@ func load_data():
 		last_level = file.get_var()
 	else:
 		print("No data saved")
-		last_level = "res://scenes/levels/level_01/level_01.tscn"
+		last_level = "res://scenes/levels/level_00/level_00.tscn"

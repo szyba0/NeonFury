@@ -118,6 +118,16 @@ text = "Level 01
 "
 icon_alignment = 1
 
+[node name="Level02Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Level00Button")
+focus_neighbor_bottom = NodePath("../ReturnButton")
+theme_override_fonts/font = ExtResource("3_nscxd")
+theme_override_font_sizes/font_size = 64
+text = "Level 02
+"
+icon_alignment = 1
+
 [node name="ReturnButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
@@ -145,4 +155,5 @@ libraries = {
 
 [connection signal="pressed" from="VBoxContainer/Level00Button" to="." method="_on_level_00_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Level01Button" to="." method="_on_level_01_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Level02Button" to="." method="_on_level_02_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
