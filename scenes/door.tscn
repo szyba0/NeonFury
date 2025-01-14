@@ -173,6 +173,7 @@ libraries = {
 
 [node name="AudioStreamPlayerOpen" type="AudioStreamPlayer2D" parent="StaticBody2D"]
 stream = ExtResource("3_iqyba")
+bus = &"SFX"
 
 [connection signal="body_entered" from="OpenRange" to="." method="_on_open_range_body_entered"]
 [connection signal="body_exited" from="OpenRange" to="." method="_on_open_range_body_exited"]

@@ -225,7 +225,7 @@ func dash():
 
 func _on_dash_timer_timeout() -> void:
 	velocity = velocity/1.2
-	collision_mask = 5
+	collision_mask = 213
 	dashing = false
 	ghost_timer.stop()
 

@@ -48,7 +48,7 @@ func save():
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D and body.get_parent().name == "Player":
-		if body.kills == 4:
+		if body.kills == 7:
 			$AnimationPlayer.play("fade_in")
 			await $AnimationPlayer.animation_finished
 			body.display_points_screen()
