@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://pklqq82ntf8g"]
+[gd_scene load_steps=40 format=4 uid="uid://pklqq82ntf8g"]
 
 [ext_resource type="Script" path="res://scenes/levels/level_02/level_02.gd" id="1_pbpkx"]
 [ext_resource type="PackedScene" uid="uid://6d7wahx3n4ke" path="res://scenes/player.tscn" id="2_lrqu8"]
@@ -294,6 +294,7 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_huubk"]
 radius = 61.0082
+
 [sub_resource type="Curve2D" id="Curve2D_83cmv"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 1, -37, 0, 0, 0, 0, -1, -123, 0, 0, 0, 0, 0, -163, 0, 0, 0, 0, 31, -167, 0, 0, 0, 0, 78, -169, 0, 0, 0, 0, 105, -151, 0, 0, 0, 0, 101, -95, 0, 0, 0, 0, 94, -56, 0, 0, 0, 0, 96, 2, 0, 0, 0, 0, 94, 24, 0, 0, 0, 0, 54, 30, 0, 0, 0, 0, 12, 26, 0, 0, 0, 0, -9, 15, 0, 0, 0, 0, 1, -25)
@@ -512,14 +513,15 @@ WHEN YOU KILL THEM ALL"
 
 [node name="TankEnemy" parent="." instance=ExtResource("20_o2ooe")]
 position = Vector2(-463, 116)
+is_patroling = false
 
 [node name="FastEnemy" parent="." instance=ExtResource("19_yuib0")]
 position = Vector2(779, 184)
 rotation = 1.90415
 
 [node name="TankEnemy2" parent="." instance=ExtResource("20_o2ooe")]
-position = Vector2(678, -67)
-rotation = 2.53945
+position = Vector2(699, -86)
+rotation = 1.55334
 is_patroling = false
 
 [node name="FastEnemy2" parent="." instance=ExtResource("19_yuib0")]

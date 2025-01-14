@@ -3,7 +3,9 @@ extends Node2D
 var save_path = "res://last_level.save"
 var last_level
 var target_scene = "res://scenes/levels/level_02/level_02.tscn"
-var mouse_state = false
+
+var enemy_count = 0
+
 
 @export var patrol_paths: Array[Path2D]  # Tablica referencji do ścieżek patrolowych
 @onready var pause_menu = $Player/CharacterBody2D/PauseUI/PauseMenu
@@ -24,6 +26,7 @@ func _ready():
 	# Przekaż ścieżki patrolowe do każdego przeciwnika w poziomie
 	for enemy in get_tree().get_nodes_in_group("Enemies"):
 		enemy.connect("died",enemy_died)
+		enemy_count +=1
 		enemy.set_patrol_paths(patrol_paths)
 
 	
@@ -50,7 +53,7 @@ func save():
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D and body.get_parent().name == "Player":
-		if body.kills == 7:
+		if body.kills == enemy_count:
 			$AnimationPlayer.play("fade_in")
 			await $AnimationPlayer.animation_finished
 			body.display_points_screen()

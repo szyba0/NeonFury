@@ -23,3 +23,6 @@ dead_sprite = ExtResource("5_f81qm")
 texture = ExtResource("2_aorh5")
 
 [node name="Shotgun" parent="WeaponHolder" index="0" instance=ExtResource("6_mvurd")]
+
+[node name="RayCast2D" parent="." index="7"]
+target_position = Vector2(62, 0)
