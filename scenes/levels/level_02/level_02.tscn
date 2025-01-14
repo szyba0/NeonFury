@@ -294,6 +294,23 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_huubk"]
 radius = 61.0082
+[sub_resource type="Curve2D" id="Curve2D_83cmv"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1, -37, 0, 0, 0, 0, -1, -123, 0, 0, 0, 0, 0, -163, 0, 0, 0, 0, 31, -167, 0, 0, 0, 0, 78, -169, 0, 0, 0, 0, 105, -151, 0, 0, 0, 0, 101, -95, 0, 0, 0, 0, 94, -56, 0, 0, 0, 0, 96, 2, 0, 0, 0, 0, 94, 24, 0, 0, 0, 0, 54, 30, 0, 0, 0, 0, 12, 26, 0, 0, 0, 0, -9, 15, 0, 0, 0, 0, 1, -25)
+}
+point_count = 14
+
+[sub_resource type="Curve2D" id="Curve2D_y8x0r"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 74, 1, 0, 0, 0, 0, 136, 0, 0, 0, 0, 0, 205, 7, 0, 0, 0, 0, 261, 5, 0, 0, 0, 0, 252, -10, 0, 0, 0, 0, 188, -5, 0, 0, 0, 0, 147, -9, 0, 0, 0, 0, 100, -9, 0, 0, 0, 0, 58, -9, 0, 0, 0, 0, 19, -8, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 33, 11, 0, 0, 0, 0, 56, 6)
+}
+point_count = 13
+
+[sub_resource type="Curve2D" id="Curve2D_q2hgj"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -58, -15, 0, 0, 0, 0, -119, -11, 0, 0, 0, 0, -174, -13, 0, 0, 0, 0, -185, -30, 0, 0, 0, 0, -162, -30, 0, 0, 0, 0, -127, -29, 0, 0, 0, 0, -92, -27, 0, 0, 0, 0, -58, -29, 0, 0, 0, 0, -45, -25)
+}
+point_count = 9
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_pbpkx")
@@ -503,6 +520,7 @@ rotation = 1.90415
 [node name="TankEnemy2" parent="." instance=ExtResource("20_o2ooe")]
 position = Vector2(678, -67)
 rotation = 2.53945
+is_patroling = false
 
 [node name="FastEnemy2" parent="." instance=ExtResource("19_yuib0")]
 position = Vector2(-441, 343)
@@ -511,15 +529,42 @@ rotation = -0.760964
 [node name="FastEnemy3" parent="." instance=ExtResource("19_yuib0")]
 position = Vector2(-340, 208)
 rotation = -2.53945
+is_patroling = false
 
 [node name="FastEnemy4" parent="." instance=ExtResource("19_yuib0")]
 position = Vector2(-504, 132)
+is_patroling = false
 
 [node name="TankEnemy3" parent="." instance=ExtResource("20_o2ooe")]
 position = Vector2(-523, 19)
+is_patroling = false
 
 [node name="FastEnemy5" parent="." instance=ExtResource("19_yuib0")]
 position = Vector2(382, -139)
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(380, -44)
+curve = SubResource("Curve2D_83cmv")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(1, -37)
+rotation = -1.59405
+
+[node name="Path2D2" type="Path2D" parent="."]
+position = Vector2(510, 167)
+curve = SubResource("Curve2D_y8x0r")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D2"]
+position = Vector2(74, 1)
+rotation = -0.0161276
+
+[node name="Path2D3" type="Path2D" parent="."]
+position = Vector2(-358, 368)
+curve = SubResource("Curve2D_q2hgj")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D3"]
+position = Vector2(-58, -15)
+rotation = 3.07611
 
 [connection signal="change_scene_signal" from="." to="." method="_on_change_scene_signal"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
