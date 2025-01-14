@@ -247,7 +247,7 @@ func _on_hearing_area_body_entered(body):
 		raycast.enabled = true  # Włącz `RayCast2D`
 		print("Gracz jest blisko – przeciwnik aktywuje wzrok.")
 		# Sprawdzenie, czy `Player` ma 16 węzłów (czyli posiada broń)
-		if player.get_child_count() == 16:
+		if player.get_child_count() == 17:
 			# Pobranie ostatniego dziecka
 			var last_child = player.get_child(player.get_child_count() - 1)
 			if last_child and last_child is Area2D and last_child.has_signal("sound_emitted"):
@@ -273,7 +273,7 @@ func _on_hearing_area_body_exited(body):
 		print("Gracz opuścił obszar – przeciwnik przestaje widzieć.")
 		is_moving = false
 		# Sprawdzenie, czy `Player` miał broń i odpięcie sygnału
-		if body.get_child_count() == 16:
+		if body.get_child_count() == 17:
 			var last_child = body.get_child(body.get_child_count() - 1)
 			if last_child and last_child.is_connected("sound_emitted", Callable(self, "_on_weapon_sound_emitted")):
 				last_child.disconnect("sound_emitted", Callable(self, "_on_weapon_sound_emitted"))

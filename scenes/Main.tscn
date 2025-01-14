@@ -70,7 +70,7 @@
 [ext_resource type="Texture2D" uid="uid://cowwkhq6mxgum" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0064.png" id="65_e50kt"]
 [ext_resource type="Texture2D" uid="uid://73qfqoyyjdem" path="res://assets/MainMenu/Menu Główne Animacja/Budynki_0065.png" id="66_3a8ik"]
 [ext_resource type="PackedScene" uid="uid://48f1kg3i181n" path="res://scenes/levels/level_selection_node.tscn" id="70_licy3"]
-[ext_resource type="PackedScene" uid="uid://cfr7vhfrxo8lk" path="res://scenes/levels/options_node.tscn" id="71_3lgr0"]
+[ext_resource type="PackedScene" path="res://scenes/levels/options_node.tscn" id="71_3lgr0"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tpwr2"]
 animations = [{
