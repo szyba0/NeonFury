@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dfaiy5k4pb5so" path="res://assets/player/ShouldersGIF.png" id="8_dntir"]
 [ext_resource type="Script" path="res://scenes/LevelTimer.gd" id="9_67lky"]
 [ext_resource type="PackedScene" uid="uid://05nfevs3nst" path="res://scenes/pause_menu.tscn" id="10_py4w4"]
-[ext_resource type="PackedScene" path="res://scenes/point_screen.tscn" id="10_umrs7"]
+[ext_resource type="PackedScene" uid="uid://bya1uuh7h7xd1" path="res://scenes/point_screen.tscn" id="10_umrs7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dskeb"]
 atlas = ExtResource("7_fwsjq")
