@@ -296,8 +296,8 @@ _data = {
 "fade_out": SubResource("Animation_qf2ce")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vmir4"]
-size = Vector2(55.25, 33)
+[sub_resource type="CircleShape2D" id="CircleShape2D_l1va7"]
+radius = 60.0083
 
 [sub_resource type="Curve2D" id="Curve2D_l266u"]
 _data = {
@@ -529,8 +529,8 @@ WHEN YOU KILL THEM ALL"
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-37.375, -128.5)
-shape = SubResource("RectangleShape2D_vmir4")
+position = Vector2(-58, -166)
+shape = SubResource("CircleShape2D_l1va7")
 
 [node name="Enemy" type="Node2D" parent="."]
 
@@ -555,3 +555,5 @@ curve = SubResource("Curve2D_l266u")
 
 [connection signal="change_scene_signal" from="." to="." method="_on_change_scene_signal"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+
+[editable path="Auto"]

@@ -1,21 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://duoe0r1bfv8fw"]
+[gd_scene load_steps=3 format=3 uid="uid://duoe0r1bfv8fw"]
 
 [ext_resource type="Texture2D" uid="uid://bb055ikq32u7e" path="res://assets/furniture/auto.png" id="1_36sin"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_iqfuy"]
-radius = 86.0523
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_crl8n"]
 size = Vector2(97, 47)
 
 [node name="Auto" type="Node2D"]
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 32
-collision_mask = 2
-
-[node name="ExitRange" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_iqfuy")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_layer = 64
@@ -27,5 +17,3 @@ texture = ExtResource("1_36sin")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_crl8n")
-
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

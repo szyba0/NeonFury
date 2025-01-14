@@ -14,7 +14,9 @@ func _process(delta: float) -> void:
 
 
 func _on_level_00_button_pressed() -> void:
-	pass # Replace with function body.
+	$AnimationPlayer.play("fade_in")
+	await $AnimationPlayer.animation_finished
+	get_tree().change_scene_to_file("res://scenes/levels/level_00/level_00.tscn")
 
 
 func _on_level_01_button_pressed() -> void:
@@ -22,6 +24,10 @@ func _on_level_01_button_pressed() -> void:
 	await $AnimationPlayer.animation_finished
 	get_tree().change_scene_to_file("res://scenes/levels/level_01/level_01.tscn")
 
+func _on_level_02_button_pressed() -> void:
+	$AnimationPlayer.play("fade_in")
+	await $AnimationPlayer.animation_finished
+	get_tree().change_scene_to_file("res://scenes/levels/level_02/level_02.tscn")
 
 func _on_return_button_pressed() -> void:
 	self.visible = false

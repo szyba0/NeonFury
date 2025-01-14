@@ -1,6 +1,6 @@
-[gd_scene load_steps=23 format=4 uid="uid://dqg1dutwxfca1"]
+[gd_scene load_steps=25 format=4 uid="uid://dqg1dutwxfca1"]
 
-[ext_resource type="Script" path="res://scripts/level.gd" id="1_264nw"]
+[ext_resource type="Script" path="res://scenes/levels/level_00/level_00.gd" id="1_u1lym"]
 [ext_resource type="PackedScene" uid="uid://6d7wahx3n4ke" path="res://scenes/player.tscn" id="2_2fyt5"]
 [ext_resource type="Texture2D" uid="uid://dtjw37syj8vug" path="res://assets/tileset4.png" id="3_rd4mp"]
 [ext_resource type="Texture2D" uid="uid://cj13x64j7me4w" path="res://assets/window.png" id="4_fy3be"]
@@ -8,7 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://cq4un3a8l2oka" path="res://assets/Tileset NeonFury.png" id="6_qekr4"]
 [ext_resource type="PackedScene" uid="uid://cwe8vstcq4smo" path="res://scenes/M16.tscn" id="7_ium7l"]
 [ext_resource type="FontFile" uid="uid://bgdi76ycjyl4q" path="res://assets/GlitchGoblin-2O87v.ttf" id="8_urixh"]
-[ext_resource type="Script" path="res://scripts/auto_00.gd" id="11_l68cq"]
+[ext_resource type="AudioStream" uid="uid://bq6q67ia6iek6" path="res://assets/music/level1.mp3" id="11_0ysin"]
+[ext_resource type="PackedScene" uid="uid://cda8yil5bkqaj" path="res://scenes/TankEnemy.tscn" id="12_ve01d"]
 [ext_resource type="PackedScene" uid="uid://d1q1qe0o3y5di" path="res://scenes/door.tscn" id="27_gj2wy"]
 [ext_resource type="PackedScene" uid="uid://duoe0r1bfv8fw" path="res://scenes/furniture/auto.tscn" id="28_mt4vd"]
 
@@ -275,8 +276,11 @@ _data = {
 "fade_out": SubResource("Animation_qf2ce")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_730f3"]
+radius = 60.0083
+
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_264nw")
+script = ExtResource("1_u1lym")
 
 [node name="Player" parent="." instance=ExtResource("2_2fyt5")]
 position = Vector2(0, 367)
@@ -289,10 +293,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1796.0
-offset_top = -1674.0
-offset_right = 1811.0
-offset_bottom = 1075.0
+offset_left = -1758.0
+offset_top = -1569.0
+offset_right = 1849.0
+offset_bottom = 1180.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_m4uo0")
@@ -392,9 +396,24 @@ libraries = {
 
 [node name="Auto" parent="." instance=ExtResource("28_mt4vd")]
 position = Vector2(2, -706)
-script = ExtResource("11_l68cq")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-2, -703)
+shape = SubResource("CircleShape2D_730f3")
+
+[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_0ysin")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[node name="TankEnemy" parent="." instance=ExtResource("12_ve01d")]
+position = Vector2(-6, -442)
 
 [connection signal="change_scene_signal" from="." to="." method="_on_change_scene_signal"]
-[connection signal="body_entered" from="Auto/Area2D" to="Auto" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 
 [editable path="Auto"]

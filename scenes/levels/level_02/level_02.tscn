@@ -1,6 +1,6 @@
-[gd_scene load_steps=32 format=4 uid="uid://pklqq82ntf8g"]
+[gd_scene load_steps=36 format=4 uid="uid://pklqq82ntf8g"]
 
-[ext_resource type="Script" path="res://scripts/level.gd" id="1_yiu3p"]
+[ext_resource type="Script" path="res://scenes/levels/level_02/level_02.gd" id="1_pbpkx"]
 [ext_resource type="PackedScene" uid="uid://6d7wahx3n4ke" path="res://scenes/player.tscn" id="2_lrqu8"]
 [ext_resource type="Texture2D" uid="uid://dtjw37syj8vug" path="res://assets/tileset4.png" id="3_wt1xc"]
 [ext_resource type="Texture2D" uid="uid://cj13x64j7me4w" path="res://assets/window.png" id="4_adwth"]
@@ -12,6 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://co8jcrypw8jw0" path="res://scenes/furniture/table_shop.tscn" id="13_xjq3q"]
 [ext_resource type="PackedScene" uid="uid://dg6v83ktvr7gx" path="res://scenes/furniture/gaming_chair.tscn" id="15_5c81u"]
 [ext_resource type="PackedScene" uid="uid://dp0vrk88q0xwu" path="res://scenes/furniture/kitchen.tscn" id="18_khsg3"]
+[ext_resource type="AudioStream" uid="uid://bq6q67ia6iek6" path="res://assets/music/level1.mp3" id="19_xgtuf"]
+[ext_resource type="FontFile" uid="uid://bgdi76ycjyl4q" path="res://assets/GlitchGoblin-2O87v.ttf" id="20_hqj3a"]
+[ext_resource type="PackedScene" uid="uid://cda8yil5bkqaj" path="res://scenes/TankEnemy.tscn" id="21_a827v"]
 [ext_resource type="PackedScene" uid="uid://dulxbfu0famfe" path="res://scenes/furniture/sink.tscn" id="22_4w11n"]
 [ext_resource type="PackedScene" uid="uid://dwl1lcs1gdf2x" path="res://scenes/furniture/sofa_short.tscn" id="23_oebfw"]
 [ext_resource type="PackedScene" uid="uid://cr60nuj8byboy" path="res://scenes/furniture/table_flower.tscn" id="25_iewhm"]
@@ -288,8 +291,11 @@ _data = {
 "fade_out": SubResource("Animation_qf2ce")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_huubk"]
+radius = 61.0082
+
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_yiu3p")
+script = ExtResource("1_pbpkx")
 
 [node name="Player" parent="." instance=ExtResource("2_lrqu8")]
 position = Vector2(218, 289)
@@ -463,4 +469,31 @@ libraries = {
 [node name="Auto" parent="." instance=ExtResource("28_5ss4x")]
 position = Vector2(328, 350)
 
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(328, 351)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_huubk")
+
+[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_xgtuf")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = 384.0
+offset_top = 329.0
+offset_right = 576.0
+offset_bottom = 370.0
+theme_override_fonts/font = ExtResource("20_hqj3a")
+text = "GET BACK TO THE CAR
+WHEN YOU KILL THEM ALL"
+
+[node name="TankEnemy" parent="." instance=ExtResource("21_a827v")]
+position = Vector2(-463, 116)
+
 [connection signal="change_scene_signal" from="." to="." method="_on_change_scene_signal"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

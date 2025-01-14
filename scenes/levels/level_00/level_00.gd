@@ -2,7 +2,7 @@ extends Node2D
 
 var save_path = "res://last_level.save"
 var last_level
-var target_scene = "res://scenes/levels/level_02/level_02.tscn"
+var target_scene = "res://scenes/levels/level_01/level_01.tscn"
 var mouse_state = false
 
 @export var patrol_paths: Array[Path2D]  # Tablica referencji do ścieżek patrolowych
@@ -42,13 +42,13 @@ func enemy_died(pts):
 
 func save():
 	var file = FileAccess.open(save_path,FileAccess.WRITE)
-	last_level = "res://scenes/levels/level_01/level_01.tscn"
+	last_level = "res://scenes/levels/level_00/level_00.tscn"
 	file.store_var(last_level)
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D and body.get_parent().name == "Player":
-		if body.kills == 7:
+		if body.kills == 1:
 			$AnimationPlayer.play("fade_in")
 			await $AnimationPlayer.animation_finished
 			body.display_points_screen()
