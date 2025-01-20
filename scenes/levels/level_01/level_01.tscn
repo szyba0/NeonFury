@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=4 uid="uid://qkgs7o5njh8a"]
+[gd_scene load_steps=53 format=4 uid="uid://qkgs7o5njh8a"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6ts33"]
 [ext_resource type="Texture2D" uid="uid://dtjw37syj8vug" path="res://assets/tileset4.png" id="2_4e08f"]
@@ -30,9 +30,13 @@
 [ext_resource type="PackedScene" uid="uid://cr60nuj8byboy" path="res://scenes/furniture/table_flower.tscn" id="22_yljm8"]
 [ext_resource type="PackedScene" uid="uid://b7vthqbbc2hl6" path="res://scenes/furniture/table_small.tscn" id="24_1rh02"]
 [ext_resource type="AudioStream" uid="uid://bq6q67ia6iek6" path="res://assets/music/level1.mp3" id="29_j8ym7"]
+[ext_resource type="PackedScene" uid="uid://c0femxc68jr18" path="res://scenes/Mug.tscn" id="29_n7xgk"]
 [ext_resource type="PackedScene" uid="uid://cebku4djcjc8f" path="res://scenes/FastEnemy.tscn" id="29_s5186"]
+[ext_resource type="PackedScene" uid="uid://bdb78gi61nbqp" path="res://scenes/Rifle.tscn" id="30_l3qpy"]
 [ext_resource type="PackedScene" uid="uid://cda8yil5bkqaj" path="res://scenes/TankEnemy.tscn" id="30_rkwpl"]
+[ext_resource type="PackedScene" uid="uid://bxrl0rg8fmene" path="res://scenes/Shotgun.tscn" id="31_146ds"]
 [ext_resource type="FontFile" uid="uid://bgdi76ycjyl4q" path="res://assets/GlitchGoblin-2O87v.ttf" id="31_xo651"]
+[ext_resource type="PackedScene" uid="uid://cp6631h72nexy" path="res://scenes/Bat2.tscn" id="32_04iuo"]
 
 [sub_resource type="Gradient" id="Gradient_hoajq"]
 colors = PackedColorArray(0.808006, 0.403613, 0.711951, 1, 0.451577, 0.793074, 1, 1)
@@ -488,6 +492,21 @@ position = Vector2(-249, 288)
 [node name="Door10" parent="Layout/Doors" instance=ExtResource("6_lc021")]
 position = Vector2(-149, 84)
 rotation = 1.5708
+
+[node name="Mug" parent="Layout" instance=ExtResource("29_n7xgk")]
+position = Vector2(-85, 378)
+
+[node name="Mug2" parent="Layout" instance=ExtResource("29_n7xgk")]
+position = Vector2(-72, 406)
+
+[node name="Rifle" parent="Layout" instance=ExtResource("30_l3qpy")]
+position = Vector2(196, 239)
+
+[node name="Shotgun" parent="Layout" instance=ExtResource("31_146ds")]
+position = Vector2(450, 321)
+
+[node name="Bat" parent="Layout" instance=ExtResource("32_04iuo")]
+position = Vector2(282, 34)
 
 [node name="Overlay" type="ColorRect" parent="."]
 visible = false
