@@ -64,31 +64,33 @@ func read_input():
 func _input(_event):
 	if is_dead or is_paused:
 		return 
-	if current_weapon:
-		if Input.is_action_pressed("LMB") and current_weapon.is_throwable and not current_weapon.is_melee and has_weapon:
-			throw_weapon(current_weapon)
-		elif Input.is_action_pressed("LMB") and has_weapon: 
-			current_weapon.attack()
-			update_ammo_bar()
-	 
-	
+
 	if Input.is_action_just_pressed("SPACE"):
 		dash()
-		
-	if Input.is_action_just_pressed("RMB") and near_weapon and not has_weapon and near_weapon.can_pickup:
-		pickup_weapon(near_weapon)
-	elif Input.is_action_just_pressed("RMB") and near_weapon and has_weapon and near_weapon.can_pickup:
-		throw_weapon(current_weapon)
-		pickup_weapon(near_weapon)
-	elif Input.is_action_just_pressed("RMB") and not near_weapon and has_weapon:
-		throw_weapon(current_weapon)
-
+	if _event.is_action("RMB") and Input.is_action_just_pressed("RMB", true) and not _event.is_echo():
+		if near_weapon and not has_weapon and near_weapon.can_pickup:
+			pickup_weapon(near_weapon)
+		elif near_weapon and has_weapon and near_weapon.can_pickup:
+			throw_weapon(current_weapon)
+			pickup_weapon(near_weapon)
+			get_viewport().set_input_as_handled()
+		elif not near_weapon and has_weapon:
+			throw_weapon(current_weapon)
+			get_viewport().set_input_as_handled()
 
 func _physics_process(_delta):
 	if is_dead:
 		return  # Jeśli gracz jest martwy, nie aktualizujemy fizyki
 	read_input()
 	move_and_slide()
+	
+	if current_weapon:
+		if Input.is_action_pressed("LMB") and current_weapon.is_throwable and not current_weapon.is_melee and has_weapon:
+			throw_weapon(current_weapon)
+		elif Input.is_action_pressed("LMB") and has_weapon: 
+			current_weapon.attack()
+			update_ammo_bar()
+	
 	if velocity.length() > 0:
 		legs.play("walk")  
 		shoulders.play("walk")
@@ -119,6 +121,7 @@ func pickup_weapon(weapon):
 	
 func throw_weapon(weapon):
 	# Wczytaj scenę broni i stwórz jej instancję
+	has_weapon = false
 	var dropped_weapon = load(weapon.scene_path).instantiate()
 	dropped_weapon.rotation = rotation  # Ustawienie rotacji zgodnej z rotacją gracza
 	dropped_weapon.current_ammo = weapon.current_ammo
@@ -130,8 +133,9 @@ func throw_weapon(weapon):
 	$Sprite2D.texture = sprite_no_weapon  # Reset na domyślny sprite bez broni
 	dropped_weapon.throw_sound.play()
 	current_weapon = null
-	has_weapon = false
+	
 	print("Broń została upuszczona:", dropped_weapon.get_parent().name)
+
 	update_ammo_bar()
 	
 func take_damage(damage: int):
