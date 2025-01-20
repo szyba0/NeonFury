@@ -17,7 +17,8 @@ func attack():
 			# Strzał w kierunku, w który patrzy przeciwnik
 			instance.target_position = global_position + Vector2(cos(rotation), sin(rotation)) * 1000  # Duża odległość
 		else:
-			instance.position = global_position 
+			var offset_position = global_position + Vector2(30, 7).rotated(global_rotation)
+			instance.position = offset_position  # Pocisk nie startuje w pozycji przeciwnika, aby unikną
 			instance.target_position = get_global_mouse_position()  # Strzał do myszy dla Player
 			emit_signal("sound_emitted", 300.0)
 			
