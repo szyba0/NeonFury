@@ -34,7 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://cda8yil5bkqaj" path="res://scenes/TankEnemy.tscn" id="30_rkwpl"]
 [ext_resource type="FontFile" uid="uid://bgdi76ycjyl4q" path="res://assets/GlitchGoblin-2O87v.ttf" id="31_xo651"]
 [ext_resource type="PackedScene" uid="uid://c0femxc68jr18" path="res://scenes/Mug.tscn" id="34_wo0ku"]
-[ext_resource type="PackedScene" uid="uid://cp6631h72nexy" path="res://scenes/Bat2.tscn" id="35_sngqf"]
+[ext_resource type="PackedScene" uid="uid://bvt8l0cq5dr1v" path="res://scenes/Bat.tscn" id="35_iryra"]
 
 [sub_resource type="Gradient" id="Gradient_hoajq"]
 colors = PackedColorArray(0.808006, 0.403613, 0.711951, 1, 0.451577, 0.793074, 1, 1)
@@ -610,13 +610,13 @@ position = Vector2(111, 5)
 rotation = -1.6182
 
 [node name="Mug" parent="." instance=ExtResource("34_wo0ku")]
-position = Vector2(177, 314)
+position = Vector2(145, 316)
 
 [node name="Mug2" parent="." instance=ExtResource("34_wo0ku")]
 position = Vector2(550, 212)
 
-[node name="Bat" parent="." instance=ExtResource("35_sngqf")]
-position = Vector2(-77, 336)
+[node name="Bat" parent="." instance=ExtResource("35_iryra")]
+position = Vector2(-85, 373)
 
 [connection signal="change_scene_signal" from="." to="." method="_on_change_scene_signal"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

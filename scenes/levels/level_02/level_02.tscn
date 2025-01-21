@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cwe8vstcq4smo" path="res://scenes/M16.tscn" id="7_hyjaq"]
 [ext_resource type="PackedScene" uid="uid://cglk32d0q3peg" path="res://scenes/furniture/table_gaming.tscn" id="9_nw7tw"]
 [ext_resource type="PackedScene" uid="uid://sts6k77i32a4" path="res://scenes/furniture/sofa.tscn" id="11_6y65u"]
-[ext_resource type="PackedScene" path="res://scenes/furniture/table_shop.tscn" id="13_xjq3q"]
+[ext_resource type="PackedScene" uid="uid://co8jcrypw8jw0" path="res://scenes/furniture/table_shop.tscn" id="13_xjq3q"]
 [ext_resource type="PackedScene" uid="uid://dg6v83ktvr7gx" path="res://scenes/furniture/gaming_chair.tscn" id="15_5c81u"]
 [ext_resource type="PackedScene" uid="uid://dp0vrk88q0xwu" path="res://scenes/furniture/kitchen.tscn" id="18_khsg3"]
 [ext_resource type="AudioStream" uid="uid://bq6q67ia6iek6" path="res://assets/music/level1.mp3" id="19_xgtuf"]
@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dulxbfu0famfe" path="res://scenes/furniture/sink.tscn" id="22_4w11n"]
 [ext_resource type="PackedScene" uid="uid://dwl1lcs1gdf2x" path="res://scenes/furniture/sofa_short.tscn" id="23_oebfw"]
 [ext_resource type="PackedScene" uid="uid://c0femxc68jr18" path="res://scenes/Mug.tscn" id="23_qgnfw"]
-[ext_resource type="PackedScene" uid="uid://cp6631h72nexy" path="res://scenes/Bat2.tscn" id="24_grje8"]
+[ext_resource type="PackedScene" uid="uid://bvt8l0cq5dr1v" path="res://scenes/Bat.tscn" id="24_a620o"]
 [ext_resource type="PackedScene" uid="uid://cr60nuj8byboy" path="res://scenes/furniture/table_flower.tscn" id="25_iewhm"]
 [ext_resource type="PackedScene" uid="uid://b7vthqbbc2hl6" path="res://scenes/furniture/table_small.tscn" id="26_2in1m"]
 [ext_resource type="PackedScene" uid="uid://d1q1qe0o3y5di" path="res://scenes/door.tscn" id="27_wk23r"]
@@ -585,8 +585,8 @@ position = Vector2(680, -52)
 [node name="Mug2" parent="." instance=ExtResource("23_qgnfw")]
 position = Vector2(-423, 199)
 
-[node name="Bat" parent="." instance=ExtResource("24_grje8")]
-position = Vector2(-257, -74)
+[node name="Bat" parent="." instance=ExtResource("24_a620o")]
+position = Vector2(-277, -63)
 
 [connection signal="change_scene_signal" from="." to="." method="_on_change_scene_signal"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
