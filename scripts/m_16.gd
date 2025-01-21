@@ -20,7 +20,7 @@ func attack():
 			var offset_position = global_position + Vector2(30, 7).rotated(global_rotation)
 			instance.position = offset_position  # Pocisk nie startuje w pozycji przeciwnika, aby unikną
 			instance.target_position = get_global_mouse_position()  # Strzał do myszy dla Player
-			emit_signal("sound_emitted", 300.0)
+			emit_signal("sound_emitted", 600.0)
 			
 
 		instance.damage = damage

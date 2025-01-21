@@ -129,8 +129,9 @@ animations = [{
 
 [node name="EnemyBase" type="CharacterBody2D" groups=["Enemies"]]
 collision_layer = 4
-collision_mask = 27
+collision_mask = 11
 script = ExtResource("1_xgg0x")
+vision_range = 700.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_8manq")
@@ -160,7 +161,7 @@ shape = SubResource("CircleShape2D_i63cw")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(100, 0)
-collision_mask = 99
+collision_mask = 67
 
 [node name="VisionArea" type="Area2D" parent="."]
 collision_layer = 0

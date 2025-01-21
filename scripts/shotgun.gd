@@ -25,7 +25,7 @@ func attack():
 				var offset_position = global_position + Vector2(30, 7).rotated(global_rotation)
 				instance.position = offset_position
 				instance.target_position = get_global_mouse_position()  + Vector2(x_rand,y_rand)# Strzał do myszy dla Player
-				emit_signal("sound_emitted", 300.0)
+				emit_signal("sound_emitted", 600.0)
 
 			instance.damage = damage
 			get_tree().current_scene.add_child(instance)

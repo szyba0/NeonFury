@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=4 uid="uid://qkgs7o5njh8a"]
+[gd_scene load_steps=51 format=4 uid="uid://qkgs7o5njh8a"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6ts33"]
 [ext_resource type="Texture2D" uid="uid://dtjw37syj8vug" path="res://assets/tileset4.png" id="2_4e08f"]
@@ -33,6 +33,8 @@
 [ext_resource type="PackedScene" uid="uid://cebku4djcjc8f" path="res://scenes/FastEnemy.tscn" id="29_s5186"]
 [ext_resource type="PackedScene" uid="uid://cda8yil5bkqaj" path="res://scenes/TankEnemy.tscn" id="30_rkwpl"]
 [ext_resource type="FontFile" uid="uid://bgdi76ycjyl4q" path="res://assets/GlitchGoblin-2O87v.ttf" id="31_xo651"]
+[ext_resource type="PackedScene" uid="uid://c0femxc68jr18" path="res://scenes/Mug.tscn" id="34_wo0ku"]
+[ext_resource type="PackedScene" uid="uid://cp6631h72nexy" path="res://scenes/Bat2.tscn" id="35_sngqf"]
 
 [sub_resource type="Gradient" id="Gradient_hoajq"]
 colors = PackedColorArray(0.808006, 0.403613, 0.711951, 1, 0.451577, 0.793074, 1, 1)
@@ -304,17 +306,17 @@ _data = {
 }
 point_count = 8
 
+[sub_resource type="Curve2D" id="Curve2D_dt8tj"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 111, 5, 0, 0, 0, 0, 105, -121.488, 0, 0, 0, 0, 76, -112.023, 0, 0, 0, 0, 55, -87.9302, 0, 0, 0, 0, 53, -6.18604, 0, 0, 0, 0, 95, 1.55817)
+}
+point_count = 6
+
 [sub_resource type="Curve2D" id="Curve2D_7n6k5"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 8, -57, 0, 0, 0, 0, 63, -47, 0, 0, 0, 0, 99, 5, 0, 0, 0, 0, 84, 79, 0, 0, 0, 0, 20, 118, 0, 0, 0, 0, -37, 80, 0, 0, 0, 0, -49.1355, -5.01013, 0, 0, 0, 0, -61, -21, 0, 0, 0, 0, -61, -44, 0, 0, 0, 0, -21, -51)
 }
 point_count = 10
-
-[sub_resource type="Curve2D" id="Curve2D_dt8tj"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 111, 5, 0, 0, 0, 0, 70, -25, 0, 0, 0, 0, 5, -32, 0, 0, 0, 0, -22, 0, 0, 0, 0, 0, 64, -2)
-}
-point_count = 5
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_6ts33")
@@ -513,23 +515,20 @@ bus = &"Music"
 parameters/looping = true
 
 [node name="FastEnemy" parent="." instance=ExtResource("29_s5186")]
-position = Vector2(405, 62)
-collision_mask = 11
+position = Vector2(433, 67)
 is_patroling = false
 
 [node name="FastEnemy2" parent="." instance=ExtResource("29_s5186")]
 position = Vector2(470, 216)
-collision_mask = 11
 is_patroling = false
 
 [node name="FastEnemy3" parent="." instance=ExtResource("29_s5186")]
-position = Vector2(644, 504)
-collision_mask = 11
+position = Vector2(748, 321)
+chase_speed = 100.0
 
 [node name="FastEnemy4" parent="." instance=ExtResource("29_s5186")]
 position = Vector2(272, 276)
 rotation = 2.03156
-collision_mask = 11
 is_patroling = false
 
 [node name="Label" type="Label" parent="."]
@@ -552,27 +551,29 @@ shape = SubResource("CircleShape2D_l1va7")
 
 [node name="FastEnemy01" parent="Enemy" instance=ExtResource("29_s5186")]
 position = Vector2(-91, 589)
-collision_mask = 11
 is_patroling = false
 
 [node name="TankEnemy" parent="Enemy" instance=ExtResource("30_rkwpl")]
 position = Vector2(90, 298)
-collision_mask = 11
 
 [node name="FastEnemy" parent="Enemy" instance=ExtResource("29_s5186")]
-position = Vector2(-174, 181)
-rotation = 1.64934
-collision_mask = 11
+position = Vector2(-178, 163)
+rotation = 1.02974
 is_patroling = false
 
 [node name="TankEnemy" parent="." instance=ExtResource("30_rkwpl")]
 position = Vector2(-45, 799)
 rotation = -3.0456
+collision_mask = 27
 
 [node name="FastEnemy5" parent="." instance=ExtResource("29_s5186")]
 position = Vector2(288, 564)
 rotation = -1.14319
+collision_mask = 27
 is_patroling = false
+
+[node name="TankEnemy2" parent="." instance=ExtResource("30_rkwpl")]
+position = Vector2(576, 914)
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(84, 243)
@@ -581,6 +582,15 @@ curve = SubResource("Curve2D_4i6ln")
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 position = Vector2(-15, -48)
 rotation = 3.03851
+
+[node name="Path2D4" type="Path2D" parent="."]
+position = Vector2(432, 928.948)
+scale = Vector2(1, 1.35062)
+curve = SubResource("Curve2D_dt8tj")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D4"]
+position = Vector2(111, 5)
+rotation = -1.6182
 
 [node name="Path2D2" type="Path2D" parent="."]
 position = Vector2(-6, 810)
@@ -591,12 +601,22 @@ position = Vector2(8, -57)
 rotation = 0.179854
 
 [node name="Path2D3" type="Path2D" parent="."]
-position = Vector2(600, 499)
+position = Vector2(672, 361.189)
+scale = Vector2(1, 1.16216)
 curve = SubResource("Curve2D_dt8tj")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D3"]
 position = Vector2(111, 5)
-rotation = -2.5099
+rotation = -1.6182
+
+[node name="Mug" parent="." instance=ExtResource("34_wo0ku")]
+position = Vector2(177, 314)
+
+[node name="Mug2" parent="." instance=ExtResource("34_wo0ku")]
+position = Vector2(550, 212)
+
+[node name="Bat" parent="." instance=ExtResource("35_sngqf")]
+position = Vector2(-77, 336)
 
 [connection signal="change_scene_signal" from="." to="." method="_on_change_scene_signal"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://dqg1dutwxfca1"]
+[gd_scene load_steps=26 format=4 uid="uid://dqg1dutwxfca1"]
 
 [ext_resource type="Script" path="res://scenes/levels/level_00/level_00.gd" id="1_u1lym"]
 [ext_resource type="PackedScene" uid="uid://6d7wahx3n4ke" path="res://scenes/player.tscn" id="2_2fyt5"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cq4un3a8l2oka" path="res://assets/Tileset NeonFury.png" id="6_qekr4"]
 [ext_resource type="PackedScene" uid="uid://cwe8vstcq4smo" path="res://scenes/M16.tscn" id="7_ium7l"]
 [ext_resource type="FontFile" uid="uid://bgdi76ycjyl4q" path="res://assets/GlitchGoblin-2O87v.ttf" id="8_urixh"]
+[ext_resource type="PackedScene" uid="uid://sts6k77i32a4" path="res://scenes/furniture/sofa.tscn" id="9_r0l37"]
 [ext_resource type="AudioStream" uid="uid://bq6q67ia6iek6" path="res://assets/music/level1.mp3" id="11_0ysin"]
 [ext_resource type="PackedScene" uid="uid://cda8yil5bkqaj" path="res://scenes/TankEnemy.tscn" id="12_ve01d"]
 [ext_resource type="PackedScene" uid="uid://d1q1qe0o3y5di" path="res://scenes/door.tscn" id="27_gj2wy"]
@@ -330,23 +331,25 @@ up the weapon"
 horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="Layout/Furniture"]
-offset_left = 71.0
-offset_top = -230.0
-offset_right = 194.0
-offset_bottom = -189.0
+offset_left = 70.0
+offset_top = -380.0
+offset_right = 193.0
+offset_bottom = -339.0
 theme_override_fonts/font = ExtResource("8_urixh")
 theme_override_font_sizes/font_size = 16
 text = "LMB to shoot"
 horizontal_alignment = 1
 
 [node name="Label4" type="Label" parent="Layout/Furniture"]
-offset_left = 71.0
-offset_top = -395.0
-offset_right = 194.0
-offset_bottom = -354.0
+offset_left = 59.0
+offset_top = -228.0
+offset_right = 202.0
+offset_bottom = -165.0
 theme_override_fonts/font = ExtResource("8_urixh")
 theme_override_font_sizes/font_size = 16
-text = "Kill them all
+text = "Space to dash 
+through objects
+
 "
 horizontal_alignment = 1
 
@@ -361,6 +364,21 @@ text = "WSAD
 to move"
 horizontal_alignment = 1
 
+[node name="Label5" type="Label" parent="Layout/Furniture"]
+offset_left = 71.0
+offset_top = -460.0
+offset_right = 194.0
+offset_bottom = -419.0
+theme_override_fonts/font = ExtResource("8_urixh")
+theme_override_font_sizes/font_size = 16
+text = "Kill them all
+"
+horizontal_alignment = 1
+
+[node name="Sofa" parent="Layout/Furniture" instance=ExtResource("9_r0l37")]
+position = Vector2(134, -157)
+rotation = 1.43641
+
 [node name="Doors" type="Node2D" parent="Layout"]
 position = Vector2(117, -80)
 
@@ -369,6 +387,7 @@ position = Vector2(-117, 244)
 rotation = 1.5708
 
 [node name="Door3" parent="Layout/Doors" instance=ExtResource("27_gj2wy")]
+visible = false
 position = Vector2(-117, -244)
 rotation = 1.5708
 
@@ -411,7 +430,8 @@ bus = &"Music"
 parameters/looping = true
 
 [node name="TankEnemy" parent="." instance=ExtResource("12_ve01d")]
-position = Vector2(-6, -442)
+position = Vector2(-5, -510)
+collision_mask = 27
 
 [connection signal="change_scene_signal" from="." to="." method="_on_change_scene_signal"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

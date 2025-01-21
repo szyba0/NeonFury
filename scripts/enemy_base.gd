@@ -4,7 +4,7 @@ extends CharacterBody2D
 #@export var is_knockable: bool = true
 @export var patrol_speed: float = 100.0
 @export var chase_speed: float = 150.0
-@export var hearing_range: float = 300.0
+@export var hearing_range: float = 500.0
 @export var vision_range: float = 400.0
 @export var attack_range: float = 150.0
 @export var knockdown_duration: float = 3.0
@@ -66,6 +66,7 @@ func _process(delta):
 	if player and not is_chasing and not is_knocked_down and not is_injured:
 		check_player_visibility_fov()
 	if is_chasing and player and not is_knocked_down and not is_injured:
+		print("atakuje")
 		look_at(player.global_position)
 		if global_position.distance_to(player.global_position) > attack_range:
 			move_towards(player.global_position, chase_speed)
@@ -246,7 +247,7 @@ func _on_hearing_area_body_entered(body):
 		player = body  # Przypisanie referencji do gracza
 		raycast.enabled = true  # Włącz `RayCast2D`
 		print("Gracz jest blisko – przeciwnik aktywuje wzrok.")
-		# Sprawdzenie, czy `Player` ma 16 węzłów (czyli posiada broń)
+		# Sprawdzenie, czy `Player` ma 17 węzłów (czyli posiada broń)
 		if player.get_child_count() == 17:
 			# Pobranie ostatniego dziecka
 			var last_child = player.get_child(player.get_child_count() - 1)
@@ -292,13 +293,13 @@ func check_player_visibility_fov():
 	# Obliczenie kąta między kierunkiem patrzenia przeciwnika a graczem
 	var angle_to_player = abs(rotation - direction_to_player.angle())
 	# Maksymalny kąt widzenia przeciwnika (np. 120 stopni -> 2.09 radiana)
-	var max_angle = deg_to_rad(30)  # Możesz zmienić na inny kąt
+	var max_angle = deg_to_rad(70)  # Możesz zmienić na inny kąt
 	if angle_to_player > max_angle:
 		is_chasing = false  # Przeciwnik ignoruje gracza, jeśli ten jest za plecami
 		#print("Gracz jest za plecami przeciwnika!")
 		return
 	# RayCast sprawdza pozycję gracza względem przeciwnika
-	raycast.target_position = player.global_position - global_position  # Ustaw cel na gracza
+	raycast.target_position = (player.global_position - global_position).rotated(-rotation)  # Ustaw cel na gracza
 	raycast.force_raycast_update()
 	if raycast.is_colliding() and raycast.get_collider() == player:
 		is_chasing = true  # Przeciwnik widzi gracza
@@ -311,23 +312,23 @@ func check_player_visibility_fov():
 func check_player_visibility():
 	if not player:
 		return
-
 	# Obliczenie różnicy pozycji między przeciwnikiem a graczem
-	var direction_to_player = player.global_position - global_position
-
+	#var direction_to_player = (player.global_position - global_position).rotated(-rotation)
+	var direction_to_player = (player.global_position - global_position).normalized()
 	# Sprawdzenie, czy gracz jest w zasięgu wzroku
-	if direction_to_player.length() > vision_range:
+	if direction_to_player.length() > hearing_range:
 		is_chasing = false
 		print("Gracz jest za daleko, przeciwnik go nie widzi!")
 		return
 
 	# RayCast sprawdza pozycję gracza względem przeciwnika
-	raycast.target_position = direction_to_player
+	raycast.target_position = (player.global_position - global_position).rotated(-rotation)
 	raycast.force_raycast_update()
 
 	if raycast.is_colliding() and raycast.get_collider() == player:
 		is_chasing = true  # Przeciwnik widzi gracza
-		print("Przeciwnik widzi gracza!")
+		print("Przeciwnik chce atakowac gracza!")
+		is_patroling = false
 	else:
 		is_chasing = false  # Przeciwnik nie widzi gracza
 		#print("Przeciwnik szuka gracza...")
