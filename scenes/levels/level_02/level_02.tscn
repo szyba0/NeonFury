@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://pklqq82ntf8g"]
+[gd_scene load_steps=43 format=4 uid="uid://pklqq82ntf8g"]
 
 [ext_resource type="Script" path="res://scenes/levels/level_02/level_02.gd" id="1_pbpkx"]
 [ext_resource type="PackedScene" uid="uid://6d7wahx3n4ke" path="res://scenes/player.tscn" id="2_lrqu8"]
@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cwe8vstcq4smo" path="res://scenes/M16.tscn" id="7_hyjaq"]
 [ext_resource type="PackedScene" uid="uid://cglk32d0q3peg" path="res://scenes/furniture/table_gaming.tscn" id="9_nw7tw"]
 [ext_resource type="PackedScene" uid="uid://sts6k77i32a4" path="res://scenes/furniture/sofa.tscn" id="11_6y65u"]
-[ext_resource type="PackedScene" uid="uid://co8jcrypw8jw0" path="res://scenes/furniture/table_shop.tscn" id="13_xjq3q"]
+[ext_resource type="PackedScene" path="res://scenes/furniture/table_shop.tscn" id="13_xjq3q"]
 [ext_resource type="PackedScene" uid="uid://dg6v83ktvr7gx" path="res://scenes/furniture/gaming_chair.tscn" id="15_5c81u"]
 [ext_resource type="PackedScene" uid="uid://dp0vrk88q0xwu" path="res://scenes/furniture/kitchen.tscn" id="18_khsg3"]
 [ext_resource type="AudioStream" uid="uid://bq6q67ia6iek6" path="res://assets/music/level1.mp3" id="19_xgtuf"]
@@ -17,6 +17,7 @@
 [ext_resource type="FontFile" uid="uid://bgdi76ycjyl4q" path="res://assets/GlitchGoblin-2O87v.ttf" id="20_hqj3a"]
 [ext_resource type="PackedScene" uid="uid://cda8yil5bkqaj" path="res://scenes/TankEnemy.tscn" id="20_o2ooe"]
 [ext_resource type="PackedScene" uid="uid://dulxbfu0famfe" path="res://scenes/furniture/sink.tscn" id="22_4w11n"]
+[ext_resource type="PackedScene" uid="uid://c6bl7s386fkip" path="res://scenes/Knife.tscn" id="23_1j2oo"]
 [ext_resource type="PackedScene" uid="uid://dwl1lcs1gdf2x" path="res://scenes/furniture/sofa_short.tscn" id="23_oebfw"]
 [ext_resource type="PackedScene" uid="uid://c0femxc68jr18" path="res://scenes/Mug.tscn" id="23_qgnfw"]
 [ext_resource type="PackedScene" uid="uid://bvt8l0cq5dr1v" path="res://scenes/Bat.tscn" id="24_a620o"]
@@ -514,44 +515,58 @@ text = "GET BACK TO THE CAR
 WHEN YOU KILL THEM ALL"
 
 [node name="TankEnemy" parent="." instance=ExtResource("20_o2ooe")]
+z_index = 0
 position = Vector2(-463, 116)
 collision_mask = 27
 vision_range = 400.0
 is_patroling = false
 
 [node name="FastEnemy" parent="." instance=ExtResource("19_yuib0")]
+z_index = 0
 position = Vector2(779, 184)
 rotation = 1.90415
 collision_mask = 27
 
 [node name="TankEnemy2" parent="." instance=ExtResource("20_o2ooe")]
+z_index = 0
 position = Vector2(699, -86)
 rotation = 1.55334
 collision_mask = 27
 is_patroling = false
 
 [node name="FastEnemy2" parent="." instance=ExtResource("19_yuib0")]
+z_index = 0
 position = Vector2(-441, 343)
 rotation = -0.760964
 collision_mask = 27
 
 [node name="FastEnemy3" parent="." instance=ExtResource("19_yuib0")]
+z_index = 0
 position = Vector2(-340, 208)
 rotation = -2.53945
 collision_mask = 27
 is_patroling = false
 
 [node name="FastEnemy4" parent="." instance=ExtResource("19_yuib0")]
-position = Vector2(-504, 132)
+z_index = 0
+position = Vector2(-506, 12)
 collision_mask = 27
+attack_range = 30.0
 is_patroling = false
 
+[node name="Knife" parent="FastEnemy4/WeaponHolder" index="0" instance=ExtResource("23_1j2oo")]
+
+[node name="M16" parent="FastEnemy4/WeaponHolder" index="1"]
+visible = false
+
 [node name="TankEnemy3" parent="." instance=ExtResource("20_o2ooe")]
-position = Vector2(-523, 19)
+z_index = 0
+position = Vector2(-383, 227)
 collision_mask = 27
 is_patroling = false
 
 [node name="FastEnemy5" parent="." instance=ExtResource("19_yuib0")]
+z_index = 0
 position = Vector2(382, -139)
 collision_mask = 27
 
@@ -590,3 +605,5 @@ position = Vector2(-277, -63)
 
 [connection signal="change_scene_signal" from="." to="." method="_on_change_scene_signal"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+
+[editable path="FastEnemy4"]

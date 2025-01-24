@@ -9,7 +9,7 @@ size = Vector2(22, 23)
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_layer = 128
-collision_mask = 31
+collision_mask = 0
 
 [node name="Stolik" type="Sprite2D" parent="CharacterBody2D"]
 texture = ExtResource("1_g2q1a")

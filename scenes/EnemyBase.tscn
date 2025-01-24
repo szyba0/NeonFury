@@ -126,8 +126,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i63cw"]
+radius = 623.95
 
 [node name="EnemyBase" type="CharacterBody2D" groups=["Enemies"]]
+z_index = 1
 collision_layer = 4
 collision_mask = 11
 script = ExtResource("1_xgg0x")

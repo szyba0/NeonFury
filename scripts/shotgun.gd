@@ -2,9 +2,9 @@ extends "res://scripts/weapon_base.gd"
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	if self.get_parent().name == "WeaponHolder":
-		$Sprite2D.texture = held_weapon_sprite
+#func _ready() -> void:
+	#if self.get_parent().name == "WeaponHolder":
+		#$Sprite2D.texture = held_weapon_sprite
 
 func attack():
 	if can_attack and current_ammo > 0:

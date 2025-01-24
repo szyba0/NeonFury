@@ -161,6 +161,7 @@ func die():
 		shoulders.stop()
 		shoulders.frame = 0
 		shoulders.visible = false
+		self.z_index = 0
 
 
 # Funkcja do sprawdzenia przytrzymania `R` oraz resetu po śmierci

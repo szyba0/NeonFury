@@ -3,11 +3,14 @@ extends "res://scripts/weapon_base.gd"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	if self.get_parent().name == "WeaponHolder":
+		$CollisionShape2D.set_deferred("disabled",true)
+		collision_mask &= ~(1 << 2)
+		
 
 func attack():
 	if can_attack:
-		print(get_parent().name)
+		print(get_parent().name, "attack")
 		attack_sound.play()
 		$CollisionShape2D.set_deferred("disabled",false)
 		#$AnimationPlayer.speed_scale = 1 
@@ -27,11 +30,15 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	# Sprawdza, czy ciało kolidujące jest `CharacterBody2D` i ma nadrzędny węzeł `Player`
-	print(body.get_parent())
-	if body is CharacterBody2D and body.get_parent().name == "Player":
-		body.near_weapon = self  # Ustawia broń jako `near_weapon` w `Player.gd`
-		print("Gracz w pobliżu broni:")
-	else:
-		print("kosa")
+	print(body.get_parent(), "entered")
+	if self.get_parent().name == "WeaponHolder":
 		if body.has_method("take_damage"):
 			body.take_damage(damage)
+	else:
+		if body is CharacterBody2D and body.get_parent().name == "Player":
+			body.near_weapon = self  # Ustawia broń jako `near_weapon` w `Player.gd`
+			print("Gracz w pobliżu broni:")
+		else:
+			print("kosa")
+			if body.has_method("take_damage"):
+				body.take_damage(damage)

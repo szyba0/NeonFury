@@ -430,6 +430,7 @@ bus = &"Music"
 parameters/looping = true
 
 [node name="TankEnemy" parent="." instance=ExtResource("12_ve01d")]
+z_index = 0
 position = Vector2(-5, -510)
 collision_mask = 27
 

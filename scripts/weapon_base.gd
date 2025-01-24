@@ -31,6 +31,7 @@ signal sound_emitted(position: Vector2, range: float)
 func _ready() -> void:
 	if self.get_parent().name == "WeaponHolder":
 		$Sprite2D.texture = held_weapon_sprite
+		$CollisionShape2D.set_deferred("disabled",true)
 func on_pickup():
 	$CollisionShape2D.disabled = true
 	queue_free()  # Usuń broń z ziemi po podniesieniu
@@ -44,8 +45,6 @@ func _process(delta: float) -> void:
 		var enemy = get_parent().get_parent()
 		global_position = enemy.global_position
 		self.rotation = enemy.rotation
-		$CollisionShape2D.set_deferred("disabled",true)
-		
 
 func _physics_process(delta):
 	if can_harm:
@@ -67,28 +66,32 @@ func _physics_process(delta):
 	# Sprawdź, czy `RayCast2D` wykrywa kolizję
 		
 
-func attack():
-	attack_sound.play()
-	emit_signal("sound_emitted", global_position, sound_range)  # Emituj sygnał z pozycją i zasięgiem dźwięku
+#func attack():
+	#attack_sound.play()
+	#emit_signal("sound_emitted", global_position, sound_range)  # Emituj sygnał z pozycją i zasięgiem dźwięku
 
 
 func _on_WeaponBase_body_entered(body):
 	# Sprawdza, czy ciało kolidujące jest `CharacterBody2D` i ma nadrzędny węzeł `Player`
-	if body is CharacterBody2D and body.get_parent().name == "Player":
-		body.near_weapon = self  # Ustawia broń jako `near_weapon` w `Player.gd`
-	print("Gracz w pobliżu broni:")
-	if can_harm and not body.get_parent().name == "Player":
-		print(body.get_parent().name)
-		can_harm = false
+	if self.get_parent().name == "WeaponHolder":
 		if body.has_method("take_damage"):
+			body.take_damage(damage)
+	else:
+		if body is CharacterBody2D and body.get_parent().name == "Player":
+			body.near_weapon = self  # Ustawia broń jako `near_weapon` w `Player.gd`
+		print("Gracz w pobliżu broni:")
+		if can_harm and not body.get_parent().name == "Player":
+			print(body.get_parent().name)
+			can_harm = false
+			if body.has_method("take_damage"):
+				if is_throwable:
+					body.take_damage(damage)
+				else:
+					body.take_damage(damage/2)
 			if is_throwable:
-				body.take_damage(damage)
-			else:
-				body.take_damage(damage/2)
-		if is_throwable:
-			queue_free()
-		
-		print("hit")
+				queue_free()
+			
+			print("hit")
 			
 func _on_WeaponBase_body_exited(body):
 	if body is CharacterBody2D and body.get_parent().name == "Player":

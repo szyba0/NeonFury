@@ -515,18 +515,28 @@ bus = &"Music"
 parameters/looping = true
 
 [node name="FastEnemy" parent="." instance=ExtResource("29_s5186")]
+z_index = 0
 position = Vector2(433, 67)
 is_patroling = false
 
 [node name="FastEnemy2" parent="." instance=ExtResource("29_s5186")]
+z_index = 0
 position = Vector2(470, 216)
 is_patroling = false
 
 [node name="FastEnemy3" parent="." instance=ExtResource("29_s5186")]
+z_index = 0
 position = Vector2(748, 321)
 chase_speed = 100.0
+attack_range = 30.0
+
+[node name="Knife" parent="FastEnemy3/WeaponHolder" index="0" instance=ExtResource("8_o342j")]
+
+[node name="M16" parent="FastEnemy3/WeaponHolder" index="1"]
+visible = false
 
 [node name="FastEnemy4" parent="." instance=ExtResource("29_s5186")]
+z_index = 0
 position = Vector2(272, 276)
 rotation = 2.03156
 is_patroling = false
@@ -554,25 +564,35 @@ position = Vector2(-91, 589)
 is_patroling = false
 
 [node name="TankEnemy" parent="Enemy" instance=ExtResource("30_rkwpl")]
+z_index = 0
 position = Vector2(90, 298)
 
 [node name="FastEnemy" parent="Enemy" instance=ExtResource("29_s5186")]
-position = Vector2(-178, 163)
+z_index = 0
+position = Vector2(265, 602)
 rotation = 1.02974
 is_patroling = false
 
 [node name="TankEnemy" parent="." instance=ExtResource("30_rkwpl")]
+z_index = 0
 position = Vector2(-45, 799)
 rotation = -3.0456
 collision_mask = 27
 
 [node name="FastEnemy5" parent="." instance=ExtResource("29_s5186")]
-position = Vector2(288, 564)
+position = Vector2(-175, 200)
 rotation = -1.14319
 collision_mask = 27
+attack_range = 30.0
 is_patroling = false
 
+[node name="Knife" parent="FastEnemy5/WeaponHolder" index="0" instance=ExtResource("8_o342j")]
+
+[node name="M16" parent="FastEnemy5/WeaponHolder" index="1"]
+visible = false
+
 [node name="TankEnemy2" parent="." instance=ExtResource("30_rkwpl")]
+z_index = 0
 position = Vector2(576, 914)
 
 [node name="Path2D" type="Path2D" parent="."]
@@ -622,3 +642,5 @@ position = Vector2(-85, 373)
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 
 [editable path="Auto"]
+[editable path="FastEnemy3"]
+[editable path="FastEnemy5"]
